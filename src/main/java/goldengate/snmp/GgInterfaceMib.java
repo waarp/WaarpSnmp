@@ -22,6 +22,7 @@ package goldengate.snmp;
 
 import org.snmp4j.agent.MOGroup;
 import org.snmp4j.agent.MOScope;
+import org.snmp4j.agent.NotificationOriginator;
 import org.snmp4j.agent.mo.snmp.SNMPv2MIB;
 import org.snmp4j.smi.OID;
 
@@ -48,6 +49,14 @@ public interface GgInterfaceMib extends MOGroup {
      * @return the SNMPv2MIB associated with this MIB
      */
     public abstract SNMPv2MIB getSNMPv2MIB();
+    /**
+     * @param notificationOriginator
+     * @param element
+     * @param message
+     * @param number
+     */
+    public abstract void notify(NotificationOriginator notificationOriginator, 
+            OID oid, String message, int number);
     /**
      * Update the row for these services
      * 

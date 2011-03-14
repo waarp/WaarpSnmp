@@ -5,6 +5,8 @@
 	<nbthread>4</nbthread>
 	<filtered>False</filtered>
 	<usetrap>True</usetrap>
+	<trapinformstartstop>True</trapinformstartstop>
+	<trapinformalert>True</trapinformalert>
 </config>
 <targets>
 	<target>

@@ -20,8 +20,7 @@
 package goldengate.snmp;
 
 import goldengate.common.logging.GgSlf4JLoggerFactory;
-import goldengate.snmp.GgSnmpAgent.NotificationElements;
-import goldengate.snmp.GgSnmpAgent.NotificationElementsTest;
+import goldengate.snmp.GgPrivateMib.NotificationElements;
 
 import java.io.File;
 import java.io.IOException;
@@ -66,7 +65,7 @@ public class GgTestSnmpClientAgent {
         GgPrivateMonitor monitor = new GgPrivateMonitor();
         // Create a Mib
         test = new GgImplPrivateMib("GoldenGate Test SNMP", 6666, 66666, 66, "F. Bregier",
-                "GoldenGate Test SNMP", "Paris, France", 72);
+                "GoldenGate Test SNMP V1.0", "Paris, France", 72);
         // Create the agent associated with the monitor and Mib
         agent = new GgSnmpAgent(new File(file), monitor, test);
         agent.start();
@@ -108,7 +107,7 @@ public class GgTestSnmpClientAgent {
         }
     }
     public static void sendNotification() {
-        agent.notify(NotificationElementsTest.TrapWarning, "Une alerte", 1971);
+        test.notify(NotificationElements.TrapWarning, "Une alerte", "une seconde alerte", 1971);
     }
     static class StringResponseListener implements ResponseListener {
 

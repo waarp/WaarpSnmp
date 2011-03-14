@@ -77,6 +77,8 @@ public class GgSnmpAgent extends BaseAgent {
     private int nbThread = 4;
     private boolean isFilterAccessEnabled = false;
     private boolean useTrap = false;
+    public boolean isActivateTrapStartStop = false;
+    public boolean isActivateTrapAlert = false;
     private List<UsmUser> listUsmUser;
     private List<TargetElement> listTargetElements;
     private boolean hasV2 = false;
@@ -88,27 +90,6 @@ public class GgSnmpAgent extends BaseAgent {
     
     public GgInterfaceMib mib;
     
-    public static enum NotificationElements {
-        TrapError(new int[] { 1,3,6,1,6,3,1,1,5,6,6666,1 }),
-        TrapWarning(new int[] { 1,3,6,1,6,3,1,1,5,6,6666,2 }),
-        TrapShutdown(new int[] { 1,3,6,1,6,3,1,1,5,6,6666,3 }),
-        TrapOverloaded(new int[] { 1,3,6,1,6,3,1,1,5,6,6666,4 });
-        //.1.3.6.1.4.1.66666.6.1.1
-        public OID oid;
-        private NotificationElements(int []oids) {
-            this.oid = new OID(oids);
-        }
-    }
-    public static enum NotificationElementsTest {
-        TrapError(new int[] { 1,3,6,1,4,1,66666,6,1,1 }),
-        TrapWarning(new int[] { 1,3,6,1,4,1,66666,6,1,2 }),
-        TrapShutdown(new int[] { 1,3,6,1,4,1,66666,6,1,3 }),
-        TrapOverloaded(new int[] { 1,3,6,1,4,1,66666,6,1,4 });
-        public OID oid;
-        private NotificationElementsTest(int []oids) {
-            this.oid = new OID(oids);
-        }
-    }
     
     /**
      * 
@@ -149,7 +130,9 @@ public class GgSnmpAgent extends BaseAgent {
         this.address = SnmpConfiguration.address;
         this.nbThread = SnmpConfiguration.nbThread;
         this.isFilterAccessEnabled = SnmpConfiguration.isFilterAccessEnabled;
-        this.useTrap= SnmpConfiguration.isUsingTrap;
+        this.useTrap = SnmpConfiguration.isUsingTrap;
+        this.isActivateTrapStartStop = SnmpConfiguration.isActivateTrapStartStop;
+        this.isActivateTrapAlert = SnmpConfiguration.isActivateTrapAlert;
         this.listUsmUser = SnmpConfiguration.listUsmUser;
         this.listTargetElements = SnmpConfiguration.listTargetElements;
         this.hasV2 = SnmpConfiguration.hasV2;
@@ -540,7 +523,8 @@ public class GgSnmpAgent extends BaseAgent {
         getServer().addContext(new OctetString("public"));
         finishInit();
         run();
-        sendColdStartNotification();
+        if (isActivateTrapStartStop)
+            sendColdStartNotification();
     }
 
     /* (non-Javadoc)
@@ -564,15 +548,10 @@ public class GgSnmpAgent extends BaseAgent {
             });
     }
     
-    public void notify(NotificationElementsTest element, String message, int number) {
-        logger.warn("Notify: "+element+":"+message+":"+number);
-        notificationOriginator.notify(
-                new OctetString("public"), element.oid,
-                new VariableBinding[] {
-                    new VariableBinding(mib.getBaseOid(), new OctetString(message)),
-                    new VariableBinding(mib.getBaseOid(), new Integer32(number)),
-                    new VariableBinding(mib.getBaseOid(), new OctetString(element.name()))
-            });
+    public void notify(OID oid, String message, int number) {
+        if (!isActivateTrapAlert)
+            return;
+        mib.notify(notificationOriginator, oid, message, number);
     }
     /*
      * (non-Javadoc)
@@ -583,7 +562,8 @@ public class GgSnmpAgent extends BaseAgent {
     public void stop() {
         logger.warn("Stopping SNMP support");
         SNMPv2MIB snmpv2 = this.mib.getSNMPv2MIB();
-        notificationOriginator.notify(
+        if (isActivateTrapAlert) {
+            notificationOriginator.notify(
                 new OctetString("public"), SnmpConstants.linkDown,
                 new VariableBinding[] {
                     new VariableBinding(mib.getBaseOid(), new OctetString("Shutdown Service")),
@@ -595,9 +575,10 @@ public class GgSnmpAgent extends BaseAgent {
                     new VariableBinding(mib.getBaseOid(), snmpv2.getLocation()),
                     new VariableBinding(mib.getBaseOid(), snmpv2.getServices())
             });
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+            }
         }
         super.stop();
         try {

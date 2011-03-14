@@ -25,14 +25,17 @@ import goldengate.snmp.MemoryGauge32.MemoryType;
 
 import org.snmp4j.agent.DuplicateRegistrationException;
 import org.snmp4j.agent.MOServer;
+import org.snmp4j.agent.NotificationOriginator;
 import org.snmp4j.agent.mo.MOAccessImpl;
 import org.snmp4j.agent.mo.snmp.SNMPv2MIB;
 import org.snmp4j.agent.mo.snmp.SysUpTime;
+import org.snmp4j.smi.Gauge32;
 import org.snmp4j.smi.Integer32;
 import org.snmp4j.smi.OID;
 import org.snmp4j.smi.OctetString;
 import org.snmp4j.smi.SMIConstants;
 import org.snmp4j.smi.TimeTicks;
+import org.snmp4j.smi.VariableBinding;
 
 /**
  * Private MIB for GoldenGate OpenR66
@@ -252,8 +255,48 @@ public abstract class GgPrivateMib implements GgInterfaceMib {
         }
     }
     
+    public void notify(NotificationElements element, String message, String message2, int number) {
+        if (!agent.isActivateTrapAlert)
+            return;
+        logger.warn("Notify: "+element+":"+message+":"+number);
+        agent.getNotificationOriginator().notify(
+                new OctetString("public"), element.oid,
+                new VariableBinding[] {
+                    new VariableBinding(getBaseOid(), new OctetString(message)),
+                    new VariableBinding(getBaseOid(), new OctetString(message2)),
+                    new VariableBinding(getBaseOid(), new Gauge32(number)),
+                    new VariableBinding(getBaseOid(), new OctetString(element.name()))
+            });
+    }    
+    /* (non-Javadoc)
+     * @see goldengate.snmp.GgInterfaceMib#notify(NotificationOriginator, org.snmp4j.smi.OID, java.lang.String, int)
+     */
+    @Override
+    public void notify(NotificationOriginator notificationOriginator, 
+            OID oid, String message, int number) {
+        if (!agent.isActivateTrapAlert)
+            return;
+        logger.warn("Notify: "+oid+":"+message+":"+number);
+        notificationOriginator.notify(
+                new OctetString("public"), oid,
+                new VariableBinding[] {
+                    new VariableBinding(getBaseOid(), new OctetString(message)),
+                    new VariableBinding(getBaseOid(), new Gauge32(number)),
+                    new VariableBinding(getBaseOid(), new OctetString(oid.toString()))
+            });
+    }
     // From now the MIB definition
-    
+    public static enum NotificationElements {
+        TrapError(new int[] { 1,3,6,1,4,1,66666,6,1,1 }),
+        TrapWarning(new int[] { 1,3,6,1,4,1,66666,6,1,2 }),
+        TrapShutdown(new int[] { 1,3,6,1,4,1,66666,6,1,3 }),
+        TrapOverloaded(new int[] { 1,3,6,1,4,1,66666,6,1,4 });
+        public OID oid;
+        private NotificationElements(int []oids) {
+            this.oid = new OID(oids);
+        }
+    }
+
     public static enum goldenGateDefinitionIndex {
         applName,
         applServerName,
