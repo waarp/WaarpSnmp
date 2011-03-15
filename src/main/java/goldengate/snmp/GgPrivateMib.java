@@ -254,9 +254,15 @@ public abstract class GgPrivateMib implements GgInterfaceMib {
             time.setValue(upTime.get().getValue());
         }
     }
-    
+    /**
+     * Example of trap for All
+     * @param element
+     * @param message
+     * @param message2
+     * @param number
+     */
     public void notify(NotificationElements element, String message, String message2, int number) {
-        if (!agent.isActivateTrapAlert)
+        if (agent.trapLevel < TrapLevel.All.ordinal())
             return;
         logger.warn("Notify: "+element+":"+message+":"+number);
         agent.getNotificationOriginator().notify(
@@ -274,7 +280,7 @@ public abstract class GgPrivateMib implements GgInterfaceMib {
     @Override
     public void notify(NotificationOriginator notificationOriginator, 
             OID oid, String message, int number) {
-        if (!agent.isActivateTrapAlert)
+        if (agent.trapLevel < TrapLevel.Alert.ordinal())
             return;
         logger.warn("Notify: "+oid+":"+message+":"+number);
         notificationOriginator.notify(

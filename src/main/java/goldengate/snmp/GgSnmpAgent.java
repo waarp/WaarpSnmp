@@ -21,6 +21,7 @@ package goldengate.snmp;
 
 import goldengate.common.logging.GgInternalLogger;
 import goldengate.common.logging.GgInternalLoggerFactory;
+import goldengate.snmp.GgInterfaceMib.TrapLevel;
 import goldengate.snmp.SnmpConfiguration.TargetElement;
 
 import java.io.File;
@@ -77,8 +78,7 @@ public class GgSnmpAgent extends BaseAgent {
     private int nbThread = 4;
     private boolean isFilterAccessEnabled = false;
     private boolean useTrap = false;
-    public boolean isActivateTrapStartStop = false;
-    public boolean isActivateTrapAlert = false;
+    public int trapLevel = 0;
     private List<UsmUser> listUsmUser;
     private List<TargetElement> listTargetElements;
     private boolean hasV2 = false;
@@ -131,8 +131,7 @@ public class GgSnmpAgent extends BaseAgent {
         this.nbThread = SnmpConfiguration.nbThread;
         this.isFilterAccessEnabled = SnmpConfiguration.isFilterAccessEnabled;
         this.useTrap = SnmpConfiguration.isUsingTrap;
-        this.isActivateTrapStartStop = SnmpConfiguration.isActivateTrapStartStop;
-        this.isActivateTrapAlert = SnmpConfiguration.isActivateTrapAlert;
+        this.trapLevel = SnmpConfiguration.trapLevel;
         this.listUsmUser = SnmpConfiguration.listUsmUser;
         this.listTargetElements = SnmpConfiguration.listTargetElements;
         this.hasV2 = SnmpConfiguration.hasV2;
@@ -523,7 +522,7 @@ public class GgSnmpAgent extends BaseAgent {
         getServer().addContext(new OctetString("public"));
         finishInit();
         run();
-        if (isActivateTrapStartStop)
+        if (trapLevel > TrapLevel.None.ordinal())
             sendColdStartNotification();
     }
 
@@ -547,23 +546,21 @@ public class GgSnmpAgent extends BaseAgent {
                     new VariableBinding(mib.getBaseOid(), snmpv2.getServices())
             });
     }
-    
+    /**
+     * Use Mib implementation to send the message
+     * 
+     * @param oid
+     * @param message
+     * @param number
+     */
     public void notify(OID oid, String message, int number) {
-        if (!isActivateTrapAlert)
+        if (trapLevel < TrapLevel.Alert.ordinal())
             return;
         mib.notify(notificationOriginator, oid, message, number);
     }
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.snmp4j.agent.BaseAgent#stop()
-     */
-    @Override
-    public void stop() {
-        logger.warn("Stopping SNMP support");
+    protected void sendShutdownNotification() {
         SNMPv2MIB snmpv2 = this.mib.getSNMPv2MIB();
-        if (isActivateTrapAlert) {
-            notificationOriginator.notify(
+        notificationOriginator.notify(
                 new OctetString("public"), SnmpConstants.linkDown,
                 new VariableBinding[] {
                     new VariableBinding(mib.getBaseOid(), new OctetString("Shutdown Service")),
@@ -575,10 +572,21 @@ public class GgSnmpAgent extends BaseAgent {
                     new VariableBinding(mib.getBaseOid(), snmpv2.getLocation()),
                     new VariableBinding(mib.getBaseOid(), snmpv2.getServices())
             });
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-            }
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+        }
+    }
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.snmp4j.agent.BaseAgent#stop()
+     */
+    @Override
+    public void stop() {
+        logger.warn("Stopping SNMP support");
+        if (trapLevel > TrapLevel.None.ordinal()) {
+            sendShutdownNotification();
         }
         super.stop();
         try {

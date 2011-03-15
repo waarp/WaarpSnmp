@@ -72,16 +72,14 @@ public class SnmpConfiguration {
     private static final String SNMP_NBTHREAD = "nbthread";
     private static final String SNMP_FILTERED = "filtered";
     private static final String SNMP_USETRAP = "usetrap";
-    private static final String SNMP_TRAPSTARTSTOP = "trapinformstartstop";
-    private static final String SNMP_TRAPALERT = "trapinformalert";
+    private static final String SNMP_TRAPLEVEL = "trapinformlevel";
     
     private static final XmlDecl [] configConfigDecls = {
         new XmlDecl(SNMP_LOCAL_ADDRESS, XmlType.STRING, SNMP_LOCAL_ADDRESS, true),
         new XmlDecl(XmlType.INTEGER, SNMP_NBTHREAD),
         new XmlDecl(XmlType.BOOLEAN, SNMP_FILTERED),
         new XmlDecl(XmlType.BOOLEAN, SNMP_USETRAP),
-        new XmlDecl(XmlType.BOOLEAN, SNMP_TRAPSTARTSTOP),
-        new XmlDecl(XmlType.BOOLEAN, SNMP_TRAPALERT)
+        new XmlDecl(XmlType.BOOLEAN, SNMP_TRAPLEVEL)
     };
 
     private static final String SNMP_TARGETS = "targets";
@@ -170,8 +168,7 @@ public class SnmpConfiguration {
     public static int nbThread = 4;
     public static boolean isFilterAccessEnabled = false;
     public static boolean isUsingTrap = false;
-    public static boolean isActivateTrapStartStop = false;
-    public static boolean isActivateTrapAlert = false;
+    public static int trapLevel = 0;
     
     public static final String DEFAULTADDRESS = "udp:0.0.0.0/161";
     /**
@@ -223,13 +220,9 @@ public class SnmpConfiguration {
         if (value != null && (!value.isEmpty())) {
             isUsingTrap = value.getBoolean();
         }
-        value = hashConfig.get(SNMP_TRAPSTARTSTOP);
+        value = hashConfig.get(SNMP_TRAPLEVEL);
         if (value != null && (!value.isEmpty())) {
-            isActivateTrapStartStop = value.getBoolean();
-        }
-        value = hashConfig.get(SNMP_TRAPALERT);
-        if (value != null && (!value.isEmpty())) {
-            isActivateTrapAlert = value.getBoolean();
+            trapLevel = value.getInteger();
         }
         return true;
     }

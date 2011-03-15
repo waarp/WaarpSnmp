@@ -34,6 +34,12 @@ import org.snmp4j.smi.OID;
  *
  */
 public interface GgInterfaceMib extends MOGroup {
+    public static enum TrapLevel {
+        None,
+        StartStop,
+        Alert,
+        All
+    }
     /**
      * Set the agent
      * @param agent
