@@ -79,7 +79,7 @@ public class SnmpConfiguration {
         new XmlDecl(XmlType.INTEGER, SNMP_NBTHREAD),
         new XmlDecl(XmlType.BOOLEAN, SNMP_FILTERED),
         new XmlDecl(XmlType.BOOLEAN, SNMP_USETRAP),
-        new XmlDecl(XmlType.BOOLEAN, SNMP_TRAPLEVEL)
+        new XmlDecl(XmlType.INTEGER, SNMP_TRAPLEVEL)
     };
 
     private static final String SNMP_TARGETS = "targets";

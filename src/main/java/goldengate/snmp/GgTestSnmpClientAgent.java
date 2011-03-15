@@ -53,7 +53,7 @@ public class GgTestSnmpClientAgent {
         verifyTableContents();
         Thread.sleep(10000);
         sendNotification();
-        Thread.sleep(300000);
+        Thread.sleep(30000);
         System.out.println("Stopping");
         tearDown();
     }
