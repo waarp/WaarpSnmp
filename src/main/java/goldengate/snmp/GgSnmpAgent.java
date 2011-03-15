@@ -589,6 +589,7 @@ public class GgSnmpAgent extends BaseAgent {
             sendShutdownNotification();
         }
         super.stop();
+        monitor.releaseResources();
         try {
             Thread.sleep(100);
         } catch (InterruptedException e) {
