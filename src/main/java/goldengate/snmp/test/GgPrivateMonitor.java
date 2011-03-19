@@ -17,10 +17,12 @@
  * You should have received a copy of the GNU General Public License along with
  * GoldenGate . If not, see <http://www.gnu.org/licenses/>.
  */
-package goldengate.snmp;
+package goldengate.snmp.test;
 
 import goldengate.common.logging.GgInternalLogger;
 import goldengate.common.logging.GgInternalLoggerFactory;
+import goldengate.snmp.GgSnmpAgent;
+import goldengate.snmp.interf.GgInterfaceMonitor;
 
 /**
  * This implementation show how to support SNMP.
@@ -95,12 +97,6 @@ public class GgPrivateMonitor implements GgInterfaceMonitor {
         lastOutBand = lastChange-100;
 
      */
-    /*
-     * (non-Javadoc)
-     * 
-     * @see goldengate.snmp.GgInterfaceMonitor#generalValuesUpdate()
-     */
-    @Override
     public void generalValuesUpdate() {
         synchronized (agent) {
             // TODO Auto-generated method stub
@@ -109,12 +105,6 @@ public class GgPrivateMonitor implements GgInterfaceMonitor {
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see goldengate.snmp.GgInterfaceMonitor#detailedValuesUpdate()
-     */
-    @Override
     public void detailedValuesUpdate() {
         synchronized (agent) {
             // TODO Auto-generated method stub
@@ -123,12 +113,6 @@ public class GgPrivateMonitor implements GgInterfaceMonitor {
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see goldengate.snmp.GgInterfaceMonitor#errorValuesUpdate()
-     */
-    @Override
     public void errorValuesUpdate() {
         synchronized (agent) {
             // TODO Auto-generated method stub

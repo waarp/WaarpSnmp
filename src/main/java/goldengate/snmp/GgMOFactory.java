@@ -19,6 +19,11 @@
  */
 package goldengate.snmp;
 
+import goldengate.snmp.interf.GgInterfaceVariableFactory;
+import goldengate.snmp.utils.GgDefaultVariableFactory;
+import goldengate.snmp.utils.GgMORow;
+import goldengate.snmp.utils.GgMOScalar;
+
 import org.snmp4j.agent.MOAccess;
 import org.snmp4j.agent.mo.MOAccessImpl;
 import org.snmp4j.smi.Counter32;
@@ -26,7 +31,6 @@ import org.snmp4j.smi.Counter64;
 import org.snmp4j.smi.Gauge32;
 import org.snmp4j.smi.Integer32;
 import org.snmp4j.smi.IpAddress;
-import org.snmp4j.smi.Null;
 import org.snmp4j.smi.OID;
 import org.snmp4j.smi.OctetString;
 import org.snmp4j.smi.Opaque;
@@ -41,16 +45,22 @@ import org.snmp4j.smi.Variable;
  * 
  */
 public class GgMOFactory {
+    public static GgInterfaceVariableFactory factory = null;
+
+    public static GgInterfaceVariableFactory defaultFactory = new GgDefaultVariableFactory();
+
     /**
      * 
      * @param oid
      * @param value
      * @return an MOScalar according to the argument
      */
-    public static GgMOScalar createReadOnlyString(OID oid, Object value, GgMORow row) {
+    public static GgMOScalar createReadOnlyString(OID oid, Object value,
+            GgMORow row) {
         return new GgMOScalar(oid, MOAccessImpl.ACCESS_READ_ONLY,
                 getVariable(value), row);
     }
+
     /**
      * 
      * @param oid
@@ -58,10 +68,12 @@ public class GgMOFactory {
      * @param type
      * @return an MOScalar according to the argument
      */
-    public static GgMOScalar createReadOnly(OID oid, Object value, int type, GgMORow row) {
-        return new GgMOScalar(oid, MOAccessImpl.ACCESS_READ_ONLY,
-                getVariable(value, type), row);
+    public static GgMOScalar createReadOnly(OID oid, Object value, int type,
+            GgMORow row) {
+        return new GgMOScalar(oid, MOAccessImpl.ACCESS_READ_ONLY, getVariable(
+                oid, value, type), row);
     }
+
     /**
      * 
      * @param oid
@@ -69,10 +81,11 @@ public class GgMOFactory {
      * @param access
      * @return an MOScalar according to the argument
      */
-    public static GgMOScalar createString(OID oid, Object value, MOAccess access, GgMORow row) {
-        return new GgMOScalar(oid, access,
-                getVariable(value), row);
+    public static GgMOScalar createString(OID oid, Object value,
+            MOAccess access, GgMORow row) {
+        return new GgMOScalar(oid, access, getVariable(value), row);
     }
+
     /**
      * 
      * @param oid
@@ -81,10 +94,11 @@ public class GgMOFactory {
      * @param access
      * @return an MOScalar according to the argument
      */
-    public static GgMOScalar create(OID oid, Object value, int type, MOAccess access, GgMORow row) {
-        return new GgMOScalar(oid, access,
-                getVariable(value, type), row);
+    public static GgMOScalar create(OID oid, Object value, int type,
+            MOAccess access, GgMORow row) {
+        return new GgMOScalar(oid, access, getVariable(oid, value, type), row);
     }
+
     /**
      * 
      * @param value
@@ -97,91 +111,59 @@ public class GgMOFactory {
         throw new IllegalArgumentException("Unmanaged Type: " +
                 value.getClass());
     }
-    
-    public static Variable getVariable(Object value, int type) {
+
+    public static Variable getVariable(OID oid, Object value, int type) {
         Variable var = null;
-        switch (type) {
-            case SMIConstants.SYNTAX_INTEGER:
-            //case SMIConstants.SYNTAX_INTEGER32:
-                if (value == null) {
-                    var = new Integer32(1);
-                } else {
-                    var = new Integer32((Integer) value);
-                }
-                break;
-            case SMIConstants.SYNTAX_OCTET_STRING:
-            //case SMIConstants.SYNTAX_BITS:
-                if (value == null) {
-                    var = new OctetString("a");
-                } else {
-                    var = new OctetString(value.toString());
-                }
-                break;
-            case SMIConstants.SYNTAX_NULL:
-                if (value == null) {
-                    var = new Null();
-                } else {
-                    var = new Null((Integer) value);
-                }
-                break;
-            case SMIConstants.SYNTAX_OBJECT_IDENTIFIER:
-                if (value == null) {
-                    var = new OID(".1.3.6.1.4.1.66666.2");
-                } else {
-                    var = new OID(value.toString());
-                }
-                break;
-            case SMIConstants.SYNTAX_IPADDRESS:
-                if (value == null) {
-                    var = new IpAddress();
-                } else {
-                    var = new IpAddress(value.toString());
-                }
-                break;
-            case SMIConstants.SYNTAX_COUNTER32:
-                if (value == null) {
-                    var = new Counter32(1);
-                } else {
-                    var = new Counter32((Long) value);
-                }
-                break;
-            case SMIConstants.SYNTAX_GAUGE32:
-            //case SMIConstants.SYNTAX_UNSIGNED_INTEGER32:
-                if (value == null) {
-                    var = new Gauge32(1);
-                } else {
-                    var = new Gauge32((Long) value);
-                }
-                break;
-            case SMIConstants.SYNTAX_TIMETICKS:
-                if (value == null) {
-                    var = new TimeTicks(10000);
-                } else {
+        GgInterfaceVariableFactory vf;
+        if (factory == null) {
+            vf = defaultFactory;
+        } else {
+            vf = factory;
+        }
+        var = vf.getVariable(oid, type);
+        if (value != null) {
+            switch (type) {
+                case SMIConstants.SYNTAX_INTEGER:
+                    // case SMIConstants.SYNTAX_INTEGER32:
+                    ((Integer32) var).setValue((Integer) value);
+                    break;
+                case SMIConstants.SYNTAX_OCTET_STRING:
+                    // case SMIConstants.SYNTAX_BITS:
+                    ((OctetString) var).setValue(value.toString());
+                    break;
+                case SMIConstants.SYNTAX_NULL:
+                    break;
+                case SMIConstants.SYNTAX_OBJECT_IDENTIFIER:
+                    ((OID) var).setValue(value.toString());
+                    break;
+                case SMIConstants.SYNTAX_IPADDRESS:
+                    ((IpAddress) var).setValue(value.toString());
+                    break;
+                case SMIConstants.SYNTAX_COUNTER32:
+                    ((Counter32) var).setValue((Long) value);
+                    break;
+                case SMIConstants.SYNTAX_GAUGE32:
+                    // case SMIConstants.SYNTAX_UNSIGNED_INTEGER32:
+                    ((Gauge32) var).setValue((Long) value);
+                    break;
+                case SMIConstants.SYNTAX_TIMETICKS:
                     if (value instanceof TimeTicks) {
-                        var = new TimeTicks((TimeTicks) value);
+                        ((TimeTicks) var).setValue(((TimeTicks) value)
+                                .toString());
                     } else {
-                        var = new TimeTicks((Long) value);
+                        ((TimeTicks) var).setValue((Long) value);
                     }
-                }
-                break;
-            case SMIConstants.SYNTAX_OPAQUE:
-                if (value == null) {
-                    byte [] test = {'t', 'e', 's', 't'};
-                    var = new Opaque(test);
-                } else {
-                    var = new Opaque((byte [])value);
-                }
-                break;
-            case SMIConstants.SYNTAX_COUNTER64:
-                if (value == null) {
-                    var = new Counter64(1);
-                } else {
-                    var = new Counter64((Long) value);
-                }
-                break;
-            default:
-                throw new IllegalArgumentException("Unmanaged Type: " +
-                        value.getClass());
+                    break;
+                case SMIConstants.SYNTAX_OPAQUE:
+                    ((Opaque) var).setValue((byte[]) value);
+                    break;
+                case SMIConstants.SYNTAX_COUNTER64:
+                    ((Counter64) var).setValue((Long) value);
+                    break;
+                default:
+                    throw new IllegalArgumentException("Unmanaged Type: " +
+                            value.getClass());
+            }
         }
         return var;
     }

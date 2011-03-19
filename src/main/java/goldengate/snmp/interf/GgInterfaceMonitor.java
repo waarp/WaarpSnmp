@@ -17,7 +17,9 @@
  * You should have received a copy of the GNU General Public License along with
  * GoldenGate . If not, see <http://www.gnu.org/licenses/>.
  */
-package goldengate.snmp;
+package goldengate.snmp.interf;
+
+import goldengate.snmp.GgSnmpAgent;
 
 /**
  * This interface defines a Monitor to be used in GoldenGate projects, for HTTP
@@ -43,19 +45,4 @@ public interface GgInterfaceMonitor {
      * call
      */
     public void releaseResources();
-
-    /**
-     * To update general values (low cost updates)
-     */
-    public void generalValuesUpdate();
-
-    /**
-     * To update fine grained values (more cost updates)
-     */
-    public void detailedValuesUpdate();
-
-    /**
-     * To update error values (more cost updates)
-     */
-    public void errorValuesUpdate();
 }

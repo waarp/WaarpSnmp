@@ -21,8 +21,10 @@ package goldengate.snmp;
 
 import goldengate.common.logging.GgInternalLogger;
 import goldengate.common.logging.GgInternalLoggerFactory;
-import goldengate.snmp.GgInterfaceMib.TrapLevel;
 import goldengate.snmp.SnmpConfiguration.TargetElement;
+import goldengate.snmp.interf.GgInterfaceMib;
+import goldengate.snmp.interf.GgInterfaceMonitor;
+import goldengate.snmp.interf.GgInterfaceMib.TrapLevel;
 
 import java.io.File;
 import java.io.IOException;
@@ -531,46 +533,31 @@ public class GgSnmpAgent extends BaseAgent {
      */
     @Override
     protected void sendColdStartNotification() {
-        logger.warn("ColdStartNotification: {}",mib.getBaseOid());
+        logger.warn("ColdStartNotification: {}",mib.getBaseOidStartOrShutdown());
         SNMPv2MIB snmpv2 = this.mib.getSNMPv2MIB();
         notificationOriginator.notify(
                 new OctetString("public"), SnmpConstants.coldStart,
                 new VariableBinding[] {
-                    new VariableBinding(mib.getBaseOid(), new OctetString("Startup Service")),
-                    new VariableBinding(mib.getBaseOid(), snmpv2.getDescr()),
-                    new VariableBinding(mib.getBaseOid(), snmpv2.getObjectID()),
-                    new VariableBinding(mib.getBaseOid(), snmpv2.getUpTime()),
-                    new VariableBinding(mib.getBaseOid(), snmpv2.getContact()),
-                    new VariableBinding(mib.getBaseOid(), snmpv2.getName()),
-                    new VariableBinding(mib.getBaseOid(), snmpv2.getLocation()),
-                    new VariableBinding(mib.getBaseOid(), snmpv2.getServices())
+                    new VariableBinding(mib.getBaseOidStartOrShutdown(), new OctetString("Startup Service")),
+                    new VariableBinding(SnmpConstants.sysDescr, snmpv2.getDescr()),
+                    new VariableBinding(SnmpConstants.sysObjectID, snmpv2.getObjectID()),
+                    new VariableBinding(SnmpConstants.sysContact, snmpv2.getContact()),
+                    new VariableBinding(SnmpConstants.sysName, snmpv2.getName()),
+                    new VariableBinding(SnmpConstants.sysLocation, snmpv2.getLocation())
             });
     }
-    /**
-     * Use Mib implementation to send the message
-     * 
-     * @param oid
-     * @param message
-     * @param number
-     */
-    public void notify(OID oid, String message, int number) {
-        if (trapLevel < TrapLevel.Alert.ordinal())
-            return;
-        mib.notify(notificationOriginator, oid, message, number);
-    }
+    
     protected void sendShutdownNotification() {
         SNMPv2MIB snmpv2 = this.mib.getSNMPv2MIB();
         notificationOriginator.notify(
                 new OctetString("public"), SnmpConstants.linkDown,
                 new VariableBinding[] {
-                    new VariableBinding(mib.getBaseOid(), new OctetString("Shutdown Service")),
-                    new VariableBinding(mib.getBaseOid(), snmpv2.getDescr()),
-                    new VariableBinding(mib.getBaseOid(), snmpv2.getObjectID()),
-                    new VariableBinding(mib.getBaseOid(), snmpv2.getUpTime()),
-                    new VariableBinding(mib.getBaseOid(), snmpv2.getContact()),
-                    new VariableBinding(mib.getBaseOid(), snmpv2.getName()),
-                    new VariableBinding(mib.getBaseOid(), snmpv2.getLocation()),
-                    new VariableBinding(mib.getBaseOid(), snmpv2.getServices())
+                    new VariableBinding(mib.getBaseOidStartOrShutdown(), new OctetString("Shutdown Service")),
+                    new VariableBinding(SnmpConstants.sysDescr, snmpv2.getDescr()),
+                    new VariableBinding(SnmpConstants.sysObjectID, snmpv2.getObjectID()),
+                    new VariableBinding(SnmpConstants.sysContact, snmpv2.getContact()),
+                    new VariableBinding(SnmpConstants.sysName, snmpv2.getName()),
+                    new VariableBinding(SnmpConstants.sysLocation, snmpv2.getLocation())
             });
         try {
             Thread.sleep(100);

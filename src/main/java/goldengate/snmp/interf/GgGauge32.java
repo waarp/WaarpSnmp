@@ -18,50 +18,35 @@
    You should have received a copy of the GNU General Public License
    along with GoldenGate .  If not, see <http://www.gnu.org/licenses/>.
  */
-package goldengate.snmp;
+package goldengate.snmp.interf;
 
 import org.snmp4j.smi.Gauge32;
 
 /**
- * Specific Value for Gauge32 for Memory usage
+ * Generic Gauge32 with update possibility for GoldenGate
  * 
  * @author Frederic Bregier
  *
  */
 @SuppressWarnings("serial")
-public class MemoryGauge32 extends Gauge32 {
-    public static enum MemoryType {
-        TotalMemory,
-        FreeMemory,
-        UsedMemory
-    }
-    // Runtime for Memory
-    protected Runtime runtime = Runtime.getRuntime();
-    protected MemoryType type;
-    
-    private void setInternalValue() {
-        long mem;
-        switch (type) {
-            case TotalMemory:
-                mem = runtime.totalMemory();
-                setValue(mem>>10);
-                return;
-            case FreeMemory:
-                mem = runtime.freeMemory();
-                setValue(mem>>10);
-                return;
-            case UsedMemory:
-                mem = runtime.totalMemory() - runtime.freeMemory();
-                setValue(mem>>10);
-                return;
-        }
-    }
+public abstract class GgGauge32 extends Gauge32 {
     /**
-     * 
+     * Function to set the data before it is accessed by SNMP4J.
+     * This function MUST call setValue(long)
      */
-    public MemoryGauge32(MemoryType type) {
-        this.type = type;
+    protected abstract void setInternalValue();
+    /**
+     * Function to set the data before it is accessed by SNMP4J.
+     * This function MUST call setValue(long)
+     */
+    protected abstract void setInternalValue(long value);
+
+    public GgGauge32() {
         setInternalValue();
+    }
+
+    public GgGauge32(long value) {
+        setInternalValue(value);
     }
 
     /* (non-Javadoc)

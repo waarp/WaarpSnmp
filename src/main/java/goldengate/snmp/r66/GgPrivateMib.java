@@ -17,25 +17,28 @@
  * You should have received a copy of the GNU General Public License along with
  * GoldenGate . If not, see <http://www.gnu.org/licenses/>.
  */
-package goldengate.snmp;
+package goldengate.snmp.r66;
 
 import goldengate.common.logging.GgInternalLogger;
 import goldengate.common.logging.GgInternalLoggerFactory;
-import goldengate.snmp.MemoryGauge32.MemoryType;
+import goldengate.snmp.GgSnmpAgent;
+import goldengate.snmp.interf.GgInterfaceMib;
+import goldengate.snmp.utils.GgEntry;
+import goldengate.snmp.utils.GgMORow;
+import goldengate.snmp.utils.GgMOScalar;
+import goldengate.snmp.utils.MemoryGauge32;
+import goldengate.snmp.utils.MemoryGauge32.MemoryType;
 
 import org.snmp4j.agent.DuplicateRegistrationException;
 import org.snmp4j.agent.MOServer;
-import org.snmp4j.agent.NotificationOriginator;
 import org.snmp4j.agent.mo.MOAccessImpl;
 import org.snmp4j.agent.mo.snmp.SNMPv2MIB;
 import org.snmp4j.agent.mo.snmp.SysUpTime;
-import org.snmp4j.smi.Gauge32;
 import org.snmp4j.smi.Integer32;
 import org.snmp4j.smi.OID;
 import org.snmp4j.smi.OctetString;
 import org.snmp4j.smi.SMIConstants;
 import org.snmp4j.smi.TimeTicks;
-import org.snmp4j.smi.VariableBinding;
 
 /**
  * Private MIB for GoldenGate OpenR66
@@ -49,8 +52,6 @@ public abstract class GgPrivateMib implements GgInterfaceMib {
      */
     private static GgInternalLogger logger = GgInternalLoggerFactory
             .getLogger(GgPrivateMib.class);
-    // Private Root
-    public final String rootGoldenGate = ".1.3.6.1.4.1.";
 
     // These are both standard in RFC-1213
     //SnmpConstants.sysDescr
@@ -69,7 +70,7 @@ public abstract class GgPrivateMib implements GgInterfaceMib {
     public SysUpTime upTime = null;
     
     // need to add ".port" like "6666" Only in TCP (no UDP supported for GoldenGate)
-    // example: ".1.3.6.1.4.1."+"66666"+".1.1.4.";
+    // example: rootEnterpriseMib+"66666"+".1.1.4.";
     public String applicationProtocolBase = null; 
     // will be = new OID(applicationProtocolBase+port);
     public OID applicationProtocol = null;
@@ -79,9 +80,12 @@ public abstract class GgPrivateMib implements GgInterfaceMib {
     // identification of GoldenGate module
     public int smiTypeGoldengate = 66; // default = 66 = R66
     
+    public String srootOIDGoldenGate;
     public OID rootOIDGoldenGate;
     // Used in Notify
-    public OID rootOIDGoldenGate0;
+    public OID rootOIDGoldenGateNotif;
+    // Used in Notify Start or Shutdown
+    public OID rootOIDGoldenGateNotifStartOrShutdown;
     // Info static part
     public OID rootOIDGoldenGateInfo;
     public GgMORow rowInfo;
@@ -116,17 +120,19 @@ public abstract class GgPrivateMib implements GgInterfaceMib {
         textualName = stextualName;
         address = saddress;
         service = iservice;
-        applicationProtocolBase = rootGoldenGate+smiPrivateCode+".1.1.4.";
-        ggObjectId = new OID(rootGoldenGate+smiPrivateCode+"."+smiTypeGoldengate);
+        srootOIDGoldenGate = rootEnterpriseMib.toString()+"."+smiPrivateCode;
+        applicationProtocolBase = srootOIDGoldenGate+".1.1.4.";
+        ggObjectId = new OID(srootOIDGoldenGate+"."+smiTypeGoldengate);
         applicationProtocol = new OID(applicationProtocolBase+port);
-        rootOIDGoldenGate = new OID(rootGoldenGate+smiPrivateCode);
-        rootOIDGoldenGate0 = new OID(rootGoldenGate+smiPrivateCode+".0");
-        rootOIDGoldenGateInfo = new OID(rootGoldenGate+smiPrivateCode+".1");
-        rootOIDGoldenGateGeneral = new OID(rootGoldenGate+smiPrivateCode+".2");
+        rootOIDGoldenGate = new OID(srootOIDGoldenGate);
+        rootOIDGoldenGateInfo = new OID(srootOIDGoldenGate+".1");
+        rootOIDGoldenGateGeneral = new OID(srootOIDGoldenGate+".2");
         rootOIDGoldenGateGeneralUptime = new OID(rootOIDGoldenGateGeneral.toString()+"."+
                 goldenGateGlobalValuesIndex.applUptime.getOID()+".0");
-        rootOIDGoldenGateDetailed = new OID(rootGoldenGate+smiPrivateCode+".3");
-        rootOIDGoldenGateError = new OID(rootGoldenGate+smiPrivateCode+".4");
+        rootOIDGoldenGateDetailed = new OID(srootOIDGoldenGate+".3");
+        rootOIDGoldenGateError = new OID(srootOIDGoldenGate+".4");
+        rootOIDGoldenGateNotif = new OID(srootOIDGoldenGate+".5.1");
+        rootOIDGoldenGateNotifStartOrShutdown = new OID(srootOIDGoldenGate+".5.1.1.1");
     }
     
     /* (non-Javadoc)
@@ -139,11 +145,11 @@ public abstract class GgPrivateMib implements GgInterfaceMib {
 
     
     /* (non-Javadoc)
-     * @see goldengate.snmp.GgInterfaceMib#getBaseOid()
+     * @see goldengate.snmp.GgInterfaceMib#getBaseOidStartOrShutdown()
      */
     @Override
-    public OID getBaseOid() {
-        return rootOIDGoldenGate0;
+    public OID getBaseOidStartOrShutdown() {
+        return rootOIDGoldenGateNotifStartOrShutdown;
     }
 
     /* (non-Javadoc)
@@ -186,7 +192,7 @@ public abstract class GgPrivateMib implements GgInterfaceMib {
      * Register this MIB
      * @throws DuplicateRegistrationException
      */
-    protected void agentRegisterGoldenGateMib() throws DuplicateRegistrationException {
+    protected void defaultAgentRegisterGoldenGateMib() throws DuplicateRegistrationException {
         // register Static info
         rowInfo = new GgMORow(this, rootOIDGoldenGateInfo, goldenGateDefinition);
         rowInfo.registerMOs(agent.getServer(), null);
@@ -211,6 +217,11 @@ public abstract class GgPrivateMib implements GgInterfaceMib {
         rowError = new GgMORow(this, rootOIDGoldenGateError, goldenGateErrorValues);
         rowError.registerMOs(agent.getServer(), null);
     }
+    /**
+     * Register this MIB
+     * @throws DuplicateRegistrationException
+     */
+    protected abstract void agentRegisterGoldenGateMib() throws DuplicateRegistrationException;
     /**
      * Unregister this MIB
      */
@@ -254,55 +265,37 @@ public abstract class GgPrivateMib implements GgInterfaceMib {
             time.setValue(upTime.get().getValue());
         }
     }
-    /**
-     * Example of trap for All
-     * @param element
-     * @param message
-     * @param message2
-     * @param number
-     */
-    public void notify(NotificationElements element, String message, String message2, int number) {
-        if (agent.trapLevel < TrapLevel.All.ordinal())
-            return;
-        logger.warn("Notify: "+element+":"+message+":"+number);
-        agent.getNotificationOriginator().notify(
-                new OctetString("public"), element.oid,
-                new VariableBinding[] {
-                    new VariableBinding(getBaseOid(), new OctetString(message)),
-                    new VariableBinding(getBaseOid(), new OctetString(message2)),
-                    new VariableBinding(getBaseOid(), new Gauge32(number)),
-                    new VariableBinding(getBaseOid(), new OctetString(element.name()))
-            });
-    }    
-    /* (non-Javadoc)
-     * @see goldengate.snmp.GgInterfaceMib#notify(NotificationOriginator, org.snmp4j.smi.OID, java.lang.String, int)
-     */
-    @Override
-    public void notify(NotificationOriginator notificationOriginator, 
-            OID oid, String message, int number) {
-        if (agent.trapLevel < TrapLevel.Alert.ordinal())
-            return;
-        logger.warn("Notify: "+oid+":"+message+":"+number);
-        notificationOriginator.notify(
-                new OctetString("public"), oid,
-                new VariableBinding[] {
-                    new VariableBinding(getBaseOid(), new OctetString(message)),
-                    new VariableBinding(getBaseOid(), new Gauge32(number)),
-                    new VariableBinding(getBaseOid(), new OctetString(oid.toString()))
-            });
-    }
+    
     // From now the MIB definition
     public static enum NotificationElements {
-        TrapError(new int[] { 1,3,6,1,4,1,66666,6,1,1 }),
-        TrapWarning(new int[] { 1,3,6,1,4,1,66666,6,1,2 }),
-        TrapShutdown(new int[] { 1,3,6,1,4,1,66666,6,1,3 }),
-        TrapOverloaded(new int[] { 1,3,6,1,4,1,66666,6,1,4 });
-        public OID oid;
-        private NotificationElements(int []oids) {
-            this.oid = new OID(oids);
+        TrapShutdown(1),
+        TrapError(2),
+        TrapWarning(3),
+        TrapOverloaded(4),
+        InfoTask(5);
+        
+        public int []oid;
+        private NotificationElements(int oid) {
+            this.oid = new int[]{oid};
+        }
+        public OID getOID(OID oidBase) {
+            return new OID(oidBase.getValue(), this.oid);
+        }
+        public OID getOID(OID oidBase, int rank) {
+            int []ids = new int[] { this.oid[0], rank };
+            return new OID(oidBase.getValue(), ids);
         }
     }
 
+    public static enum NotificationTasks {
+        globalStepInfo, stepInfo, rankFileInfo, stepStatusInfo, filenameInfo, 
+        originalNameInfo, idRuleInfo, modeTransInfo, retrieveModeInfo, startTransInfo, 
+        infoStatusInfo, requesterInfo, requestedInfo, specialIdInfo;
+        
+        public int getOID() {
+            return this.ordinal()+1;
+        }
+    }
     public static enum goldenGateDefinitionIndex {
         applName,
         applServerName,

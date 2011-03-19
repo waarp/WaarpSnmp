@@ -18,11 +18,13 @@
    You should have received a copy of the GNU General Public License
    along with GoldenGate .  If not, see <http://www.gnu.org/licenses/>.
  */
-package goldengate.snmp;
+package goldengate.snmp.interf;
+
+import goldengate.snmp.GgSnmpAgent;
+import goldengate.snmp.utils.GgMOScalar;
 
 import org.snmp4j.agent.MOGroup;
 import org.snmp4j.agent.MOScope;
-import org.snmp4j.agent.NotificationOriginator;
 import org.snmp4j.agent.mo.snmp.SNMPv2MIB;
 import org.snmp4j.smi.OID;
 
@@ -34,6 +36,7 @@ import org.snmp4j.smi.OID;
  *
  */
 public interface GgInterfaceMib extends MOGroup {
+    public static OID rootEnterpriseMib = new OID(".1.3.6.1.4.1");
     public static enum TrapLevel {
         None,
         StartStop,
@@ -47,22 +50,15 @@ public interface GgInterfaceMib extends MOGroup {
     public abstract void setAgent(GgSnmpAgent agent);
     /**
      * 
-     * @return the base OID
+     * @return the base OID for trap or notification of Start or Shutdown
      */
-    public abstract OID getBaseOid();
+    public abstract OID getBaseOidStartOrShutdown();
     /**
      * 
      * @return the SNMPv2MIB associated with this MIB
      */
     public abstract SNMPv2MIB getSNMPv2MIB();
-    /**
-     * @param notificationOriginator
-     * @param element
-     * @param message
-     * @param number
-     */
-    public abstract void notify(NotificationOriginator notificationOriginator, 
-            OID oid, String message, int number);
+    
     /**
      * Update the row for these services
      * 

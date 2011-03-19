@@ -18,7 +18,10 @@
    You should have received a copy of the GNU General Public License
    along with GoldenGate .  If not, see <http://www.gnu.org/licenses/>.
  */
-package goldengate.snmp;
+package goldengate.snmp.utils;
+
+import goldengate.snmp.GgMOFactory;
+import goldengate.snmp.interf.GgInterfaceMib;
 
 import org.snmp4j.agent.DuplicateRegistrationException;
 import org.snmp4j.agent.MOGroup;
@@ -66,8 +69,8 @@ public class GgMORow implements MOGroup {
     public void setValue(int index, Object value) throws IllegalArgumentException {
         if (index >= row.length)
             throw new IllegalArgumentException("Index exceed Row size");
-        
-        Variable var = GgMOFactory.getVariable(value, type[index]);
+        OID oid = new OID(row[index].getOid());
+        Variable var = GgMOFactory.getVariable(oid, value, type[index]);
         row[index].setValue(var);
     }
 

@@ -18,24 +18,44 @@
    You should have received a copy of the GNU General Public License
    along with GoldenGate .  If not, see <http://www.gnu.org/licenses/>.
  */
-package goldengate.snmp;
+package goldengate.snmp.test;
 
-import org.snmp4j.agent.MOAccess;
+import org.snmp4j.smi.OID;
+
+import goldengate.snmp.interf.GgGauge32;
 
 /**
- * Entry for MIB definition
+ * Example of GgGauge32 Usage
  * 
  * @author Frederic Bregier
  *
  */
-public class GgEntry {
-    public int smiConstantsType;
+@SuppressWarnings("serial")
+public class ExampleImplGauge32 extends GgGauge32 {
+    public OID oid;
+    long _internalValue = 42;
     
-    public MOAccess access;
-
-    public GgEntry(int smiConstantsType, MOAccess access) {
-        this.smiConstantsType = smiConstantsType;
-        this.access = access;
+    
+    protected void setInternalValue() {
+        _internalValue++;
+        setValue(_internalValue);
     }
-
+    protected void setInternalValue(long value) {
+        _internalValue = value;
+        setValue(_internalValue);
+    }
+    /**
+     * 
+     */
+    public ExampleImplGauge32(OID oid) {
+        super();
+        this.oid = oid;
+    }
+    /**
+     * 
+     */
+    public ExampleImplGauge32(OID oid, long value) {
+        super(value);
+        this.oid = oid;
+    }
 }

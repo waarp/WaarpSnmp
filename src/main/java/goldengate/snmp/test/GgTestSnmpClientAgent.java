@@ -17,10 +17,12 @@
  * You should have received a copy of the GNU General Public License along with
  * GoldenGate . If not, see <http://www.gnu.org/licenses/>.
  */
-package goldengate.snmp;
+package goldengate.snmp.test;
 
 import goldengate.common.logging.GgSlf4JLoggerFactory;
-import goldengate.snmp.GgPrivateMib.NotificationElements;
+import goldengate.snmp.GgMOFactory;
+import goldengate.snmp.GgSnmpAgent;
+import goldengate.snmp.utils.GgMOScalar;
 
 import java.io.File;
 import java.io.IOException;
@@ -66,6 +68,8 @@ public class GgTestSnmpClientAgent {
         // Create a Mib
         test = new GgImplPrivateMib("GoldenGate Test SNMP", 6666, 66666, 66, "F. Bregier",
                 "GoldenGate Test SNMP V1.0", "Paris, France", 72);
+        // Set the default VariableFactory
+        GgMOFactory.factory = new GgTestVariableFactory();
         // Create the agent associated with the monitor and Mib
         agent = new GgSnmpAgent(new File(file), monitor, test);
         agent.start();
@@ -107,7 +111,8 @@ public class GgTestSnmpClientAgent {
         }
     }
     public static void sendNotification() {
-        test.notify(NotificationElements.TrapWarning, "Une alerte", "une seconde alerte", 1971);
+        test.notifyInfo("Une alerte", "un autre texte d'alerte", 1971);
+        test.notifyError("Une seconde alerte", "un second texte d'alerte", 42);
     }
     static class StringResponseListener implements ResponseListener {
 

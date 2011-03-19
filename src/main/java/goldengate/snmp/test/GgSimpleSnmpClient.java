@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License along with
  * GoldenGate . If not, see <http://www.gnu.org/licenses/>.
  */
-package goldengate.snmp;
+package goldengate.snmp.test;
 
 import java.io.IOException;
 import java.util.ArrayList;
