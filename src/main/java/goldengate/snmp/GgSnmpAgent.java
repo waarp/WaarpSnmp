@@ -123,8 +123,8 @@ public class GgSnmpAgent extends BaseAgent {
          * "commandProcessor" - the CommandProcessor instance that handles the
          * SNMP requests.
          */
-        super(new File(configurationFile.getParentFile(),"conf.agent"), 
-                new File(configurationFile.getParentFile(), "bootCounter.agent"),
+        super(new File(configurationFile.getParentFile(),"dummyConf.agent"), 
+                new File(configurationFile.getParentFile(), "dummyBootCounter.agent"),
                 new CommandProcessor(new OctetString(MPv3.createLocalEngineID())));
         if (! SnmpConfiguration.setConfigurationFromXml(configurationFile)) {
             throw new IllegalArgumentException("Cannot load configuration");
