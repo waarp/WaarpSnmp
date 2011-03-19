@@ -1,7 +1,7 @@
 OPENR66-MIB DEFINITIONS ::= BEGIN
 
 IMPORTS
-    NOTIFICATION-GROUP, NOTIFICATION-TYPE, enterprises, OBJECT-TYPE, Counter32, Gauge32, MODULE-IDENTITY, mib-2
+    NOTIFICATION-GROUP, NOTIFICATION-TYPE, enterprises, OBJECT-TYPE, Counter32, Gauge32, Counter64, MODULE-IDENTITY, mib-2
       FROM SNMPv2-SMI
     TimeStamp, TEXTUAL-CONVENTION
       FROM SNMPv2-TC
@@ -60,6 +60,7 @@ applDefinitions OBJECT IDENTIFIER ::= { goldengate 1 }
 applGlobalValues OBJECT IDENTIFIER ::= { goldengate 2 }
 applDetailedValues OBJECT IDENTIFIER ::= { goldengate 3 }
 applErrorValues OBJECT IDENTIFIER ::= { goldengate 4 }
+goldengatetraps  OBJECT IDENTIFIER ::= { goldengate 5 }
 
 
 applName OBJECT-TYPE
@@ -676,21 +677,19 @@ nbStatusUnknown OBJECT-TYPE
     ::= {applErrorValues 24}
 
 -- test notification
- 
-goldengatetraps  OBJECT IDENTIFIER ::= { goldengate 6 }
 
-warningObject OBJECT-TYPE
+startOrShutdownObject OBJECT-TYPE
     SYNTAX      SnmpAdminString
     MAX-ACCESS  accessible-for-notify
     STATUS      current
     DESCRIPTION
-        "A simple string object."
-::= { warningGoldengate 1 }
+        "Start Or Shutdown Extra Information."
+::= { startOrShutdownGoldengate 1 }
 
-warningGoldengate NOTIFICATION-TYPE
-       OBJECTS { warningObject }
+startOrShutdownGoldengate NOTIFICATION-TYPE
+       OBJECTS { startOrShutdownObject }
        STATUS current
-       DESCRIPTION "Warning SMIv2 notification"
+       DESCRIPTION "Start or Shutdown SMIv2 notification"
        ::= { goldengategroup 1 }
  
 errorObject OBJECT-TYPE
@@ -698,7 +697,7 @@ errorObject OBJECT-TYPE
     MAX-ACCESS  accessible-for-notify
     STATUS      current
     DESCRIPTION
-        "A simple string object."
+        "Nature of Error."
 ::= { errorGoldengate 1 }
 
 errorGoldengate NOTIFICATION-TYPE
@@ -707,36 +706,143 @@ errorGoldengate NOTIFICATION-TYPE
        DESCRIPTION "Error SMIv2 notification"
        ::= { goldengategroup 2 }
 
+warningObject OBJECT-TYPE
+    SYNTAX      SnmpAdminString
+    MAX-ACCESS  accessible-for-notify
+    STATUS      current
+    DESCRIPTION
+        "Nature of Warning."
+::= { warningGoldengate 1 }
+
+warningGoldengate NOTIFICATION-TYPE
+       OBJECTS { warningObject }
+       STATUS current
+       DESCRIPTION "Warning SMIv2 notification"
+       ::= { goldengategroup 3 }
+
 overloadedObject OBJECT-TYPE
     SYNTAX      SnmpAdminString
     MAX-ACCESS  accessible-for-notify
     STATUS      current
     DESCRIPTION
-        "A simple string object."
+        "Overloaded Server extra information."
 ::= { overloadedGoldengate 1 }
 
 overloadedGoldengate NOTIFICATION-TYPE
        OBJECTS { overloadedObject }
        STATUS current
        DESCRIPTION "Overloaded SMIv2 notification"
-       ::= { goldengategroup 3 }
+       ::= { goldengategroup 4 }
 
-shutdownObject OBJECT-TYPE
-    SYNTAX      SnmpAdminString
+globalStepInfo OBJECT-TYPE
+    SYNTAX Gauge32
     MAX-ACCESS  accessible-for-notify
     STATUS      current
     DESCRIPTION
-        "A simple string object."
-::= { shutdownGoldengate 1 }
-
-shutdownGoldengate NOTIFICATION-TYPE
-       OBJECTS { shutdownObject }
+        "GlobalStep rank."
+::= { infoGoldengate 1 }
+stepInfo OBJECT-TYPE
+    SYNTAX Gauge32
+    MAX-ACCESS  accessible-for-notify
+    STATUS      current
+    DESCRIPTION
+        "Step in GlobalStep."
+::= { infoGoldengate 2 }
+rankFileInfo OBJECT-TYPE
+    SYNTAX Gauge32
+    MAX-ACCESS  accessible-for-notify
+    STATUS      current
+    DESCRIPTION
+        "File Rank."
+::= { infoGoldengate 3 }
+stepStatusInfo OBJECT-TYPE
+    SYNTAX SnmpAdminString 
+    MAX-ACCESS  accessible-for-notify
+    STATUS      current
+    DESCRIPTION
+        "Status of Step."
+::= { infoGoldengate 4 }
+filenameInfo OBJECT-TYPE
+    SYNTAX SnmpAdminString
+    MAX-ACCESS  accessible-for-notify
+    STATUS      current
+    DESCRIPTION
+        "Current Filename."
+::= { infoGoldengate 5 }
+originalNameInfo OBJECT-TYPE
+    SYNTAX SnmpAdminString
+    MAX-ACCESS  accessible-for-notify
+    STATUS      current
+    DESCRIPTION
+        "Original Filename."
+::= { infoGoldengate 6 }
+idRuleInfo OBJECT-TYPE
+    SYNTAX SnmpAdminString
+    MAX-ACCESS  accessible-for-notify
+    STATUS      current
+    DESCRIPTION
+        "ID of Rule."
+::= { infoGoldengate 7 }
+modeTransInfo OBJECT-TYPE
+    SYNTAX Gauge32
+    MAX-ACCESS  accessible-for-notify
+    STATUS      current
+    DESCRIPTION
+        "Mode of Transfer."
+::= { infoGoldengate 8 }
+retrieveModeInfo OBJECT-TYPE
+    SYNTAX SnmpAdminString
+    MAX-ACCESS  accessible-for-notify
+    STATUS      current
+    DESCRIPTION
+        "Retrieve Mode."
+::= { infoGoldengate 9 }
+startTransInfo OBJECT-TYPE
+    SYNTAX TimeStamp
+    MAX-ACCESS  accessible-for-notify
+    STATUS      current
+    DESCRIPTION
+        "Start Time of this transfer."
+::= { infoGoldengate 10 }
+infoStatusInfo OBJECT-TYPE
+    SYNTAX SnmpAdminString
+    MAX-ACCESS  accessible-for-notify
+    STATUS      current
+    DESCRIPTION
+        "Current Status."
+::= { infoGoldengate 11 }
+requesterInfo OBJECT-TYPE
+    SYNTAX SnmpAdminString
+    MAX-ACCESS  accessible-for-notify
+    STATUS      current
+    DESCRIPTION
+        "Requester Id for this transfer."
+::= { infoGoldengate 12 }
+requestedInfo OBJECT-TYPE
+    SYNTAX SnmpAdminString
+    MAX-ACCESS  accessible-for-notify
+    STATUS      current
+    DESCRIPTION
+        "Requested Id for this transfer."
+::= { infoGoldengate 13 }
+specialIdInfo OBJECT-TYPE
+    SYNTAX Counter64
+    MAX-ACCESS  accessible-for-notify
+    STATUS      current
+    DESCRIPTION
+        "Unique Id for this Transfer."
+::= { infoGoldengate 14 }
+               
+infoGoldengate NOTIFICATION-TYPE
+       OBJECTS { globalStepInfo, stepInfo, rankFileInfo, stepStatusInfo, filenameInfo, 
+       originalNameInfo, idRuleInfo, modeTransInfo, retrieveModeInfo, startTransInfo, 
+       infoStatusInfo, requesterInfo, requestedInfo, specialIdInfo }
        STATUS current
-       DESCRIPTION "Shutdown SMIv2 notification"
-       ::= { goldengategroup 4 }
-
+       DESCRIPTION "Info SMIv2 notification"
+       ::= { goldengategroup 5 }
+       
 goldengategroup NOTIFICATION-GROUP
-    NOTIFICATIONS  { warningGoldengate,errorGoldengate,overloadedGoldengate,shutdownGoldengate }
+    NOTIFICATIONS  { startOrShutdownGoldengate,errorGoldengate,warningGoldengate,overloadedGoldengate,infoGoldenGate }
     STATUS         current
     DESCRIPTION    "Group of Notification in GoldenGate"
     ::= { goldengatetraps 1 }
