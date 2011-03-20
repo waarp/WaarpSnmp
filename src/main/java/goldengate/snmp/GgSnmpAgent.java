@@ -161,7 +161,13 @@ public class GgSnmpAgent extends BaseAgent {
     public GgInterfaceMib getMib() {
         return mib;
     }
-
+    /**
+     * 
+     * @return the uptime in ms
+     */
+    public long getUptime() {
+        return getSnmpv2MIB().getUpTime().toMilliseconds();
+    }
     /*
      * (non-Javadoc)
      * 
@@ -533,7 +539,7 @@ public class GgSnmpAgent extends BaseAgent {
      */
     @Override
     protected void sendColdStartNotification() {
-        logger.warn("ColdStartNotification: {}",mib.getBaseOidStartOrShutdown());
+        logger.debug("ColdStartNotification: {}",mib.getBaseOidStartOrShutdown());
         SNMPv2MIB snmpv2 = this.mib.getSNMPv2MIB();
         notificationOriginator.notify(
                 new OctetString("public"), SnmpConstants.coldStart,

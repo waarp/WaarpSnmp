@@ -22,10 +22,7 @@ package goldengate.snmp.test;
 
 import goldengate.common.logging.GgInternalLogger;
 import goldengate.common.logging.GgInternalLoggerFactory;
-import goldengate.snmp.interf.GgInterfaceMib.TrapLevel;
 import goldengate.snmp.r66.GgPrivateMib;
-import goldengate.snmp.r66.GgPrivateMib.NotificationElements;
-import goldengate.snmp.r66.GgPrivateMib.NotificationTasks;
 import goldengate.snmp.utils.GgMOScalar;
 
 import org.snmp4j.agent.DuplicateRegistrationException;
@@ -72,10 +69,9 @@ public class GgImplPrivateMib extends GgPrivateMib {
     public void updateServices(GgMOScalar scalar) {
         // 3 groups to check
         OID oid = scalar.getOid();
-        if (oid.startsWith(rootOIDGoldenGateGeneral)) {
+        if (oid.startsWith(rootOIDGoldenGateGlobal)) {
             // UpTime
-            if (oid.equals(rootOIDGoldenGateGeneralUptime)) {
-                scalarUptime.setValue(upTime.get());
+            if (oid.equals(rootOIDGoldenGateGlobalUptime)) {
                 return;
             }
             ((GgPrivateMonitor) agent.monitor).generalValuesUpdate();
@@ -97,7 +93,7 @@ public class GgImplPrivateMib extends GgPrivateMib {
         boolean okDetailed = true;
         boolean okError = true;
         if (low != null) {
-            logger.debug("low: {}:{} "+rootOIDGoldenGateGeneral+":"+
+            logger.debug("low: {}:{} "+rootOIDGoldenGateGlobal+":"+
                     rootOIDGoldenGateDetailed+":"+rootOIDGoldenGateError,
                     low,range.isLowerIncluded());
             if (low.size() <= rootOIDGoldenGate.size() && low.startsWith(rootOIDGoldenGate)) {
@@ -105,16 +101,13 @@ public class GgImplPrivateMib extends GgPrivateMib {
                 okGeneral = okDetailed = okError = true;
             } else {
                 // Test for sub requests
-                okGeneral &= low.startsWith(rootOIDGoldenGateGeneral);
+                okGeneral &= low.startsWith(rootOIDGoldenGateGlobal);
                 okDetailed &= low.startsWith(rootOIDGoldenGateDetailed);
                 okError &= low.startsWith(rootOIDGoldenGateError);
             }
         }
         logger.debug("General:"+okGeneral+" Detailed:"+okDetailed+" Error:"+okError);
         if (okGeneral) {
-            // UpTime
-            if (rootOIDGoldenGateGeneralUptime.compareTo(low) >= 0)
-                scalarUptime.setValue(upTime.get());
             ((GgPrivateMonitor) agent.monitor).generalValuesUpdate();
         }
         if (okDetailed) {

@@ -20,9 +20,6 @@
  */
 package goldengate.snmp.utils;
 
-import goldengate.common.logging.GgInternalLogger;
-import goldengate.common.logging.GgInternalLoggerFactory;
-
 import org.snmp4j.agent.MOAccess;
 import org.snmp4j.agent.MOScope;
 import org.snmp4j.agent.mo.MOScalar;
@@ -37,12 +34,6 @@ import org.snmp4j.smi.Variable;
  *
  */
 public class GgMOScalar extends MOScalar {
-    /**
-     * Internal Logger
-     */
-    private static GgInternalLogger logger = GgInternalLoggerFactory
-            .getLogger(GgMOScalar.class);
-    
     public GgMORow row;
     /**
      * @param id
@@ -63,7 +54,6 @@ public class GgMOScalar extends MOScalar {
      */
     @Override
     public void get(SubRequest request) {
-        logger.debug("Get: {}",request);
         row.mib.updateServices(this);
         super.get(request);
     }
@@ -75,7 +65,6 @@ public class GgMOScalar extends MOScalar {
      */
     @Override
     public OID find(MOScope range) {
-        logger.debug("Find: {}",range);
         row.mib.updateServices(range);
         return super.find(range);
     }

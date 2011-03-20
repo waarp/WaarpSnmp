@@ -41,10 +41,10 @@ import goldengate.snmp.interf.GgInterfaceVariableFactory;
 public class GgTestVariableFactory implements GgInterfaceVariableFactory {
 
     /* (non-Javadoc)
-     * @see goldengate.snmp.GgVariableFactory#getVariable(OID, int)
+     * @see goldengate.snmp.GgVariableFactory#getVariable(OID, int, int, int)
      */
     @Override
-    public Variable getVariable(OID oid, int type) {
+    public Variable getVariable(OID oid, int type, int mibLevel, int entry) {
         Variable var;
         switch (type) {
             case SMIConstants.SYNTAX_INTEGER:

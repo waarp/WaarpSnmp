@@ -41,10 +41,12 @@ public class GgMORow implements MOGroup {
     public int []type;
     public OID reference;
     public GgInterfaceMib mib;
+    public int mibLevel;
     
-    public GgMORow(GgInterfaceMib mib, OID reference, GgEntry []entries) {
+    public GgMORow(GgInterfaceMib mib, OID reference, GgEntry []entries, int mibLevel) {
         this.mib = mib;
         this.reference = reference;
+        this.mibLevel = mibLevel;
         row = new GgMOScalar[entries.length];
         type = new int[entries.length];
         int []ref = this.reference.getValue();
@@ -57,7 +59,7 @@ public class GgMORow implements MOGroup {
             OID oid = new OID(ref, add);
             // the value is null at the creation, meaning values have to be setup once just after
             row[i] = GgMOFactory.create(oid, null, 
-                    entry.smiConstantsType, entry.access, this);
+                    entry.smiConstantsType, entry.access, this, mibLevel, i);
         }
     }
     /**
@@ -69,9 +71,11 @@ public class GgMORow implements MOGroup {
     public void setValue(int index, Object value) throws IllegalArgumentException {
         if (index >= row.length)
             throw new IllegalArgumentException("Index exceed Row size");
-        OID oid = new OID(row[index].getOid());
-        Variable var = GgMOFactory.getVariable(oid, value, type[index]);
-        row[index].setValue(var);
+        /*OID oid = new OID(row[index].getOid());
+        Variable var = GgMOFactory.getVariable(oid, value, type[index], mibLevel, index);
+        row[index].setValue(var);*/
+        Variable var = row[index].getValue();
+        GgMOFactory.setVariable(var, value, type[index]);
     }
 
     /* (non-Javadoc)

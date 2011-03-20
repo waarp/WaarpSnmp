@@ -18,18 +18,50 @@
    You should have received a copy of the GNU General Public License
    along with GoldenGate .  If not, see <http://www.gnu.org/licenses/>.
  */
-package goldengate.snmp.interf;
+package goldengate.snmp.utils;
 
-import org.snmp4j.smi.OID;
-import org.snmp4j.smi.Variable;
+import org.snmp4j.agent.mo.snmp.SysUpTime;
+import org.snmp4j.smi.TimeTicks;
+
 
 /**
- * Constructor of Variable
+ * Specific Value for TimeTicks for Uptime
  * 
  * @author Frederic Bregier
  *
  */
-public interface GgInterfaceVariableFactory {
-
-    public Variable getVariable(OID oid, int type, int mibLevel, int entry);
+@SuppressWarnings("serial")
+public class GgUptime extends TimeTicks {
+    protected SysUpTime type = null;
+    
+    protected void setInternalValue() {
+        setValue(type.get().getValue());
+    }
+    protected void setInternalValue(long value) {
+        setValue(type.get().getValue());
+    }
+    /**
+     * 
+     */
+    public GgUptime(SysUpTime type) {
+        this.type = type;
+        setInternalValue();
+    }
+    /* (non-Javadoc)
+     * @see org.snmp4j.smi.TimeTicks#clone()
+     */
+    @Override
+    public Object clone() {
+        setInternalValue();
+        return super.clone();
+    }
+    /* (non-Javadoc)
+     * @see org.snmp4j.smi.UnsignedInteger32#getValue()
+     */
+    @Override
+    public long getValue() {
+        setInternalValue();
+        return super.getValue();
+    }
+    
 }

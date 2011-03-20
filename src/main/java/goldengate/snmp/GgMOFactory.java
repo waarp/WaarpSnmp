@@ -47,19 +47,7 @@ import org.snmp4j.smi.Variable;
 public class GgMOFactory {
     public static GgInterfaceVariableFactory factory = null;
 
-    public static GgInterfaceVariableFactory defaultFactory = new GgDefaultVariableFactory();
-
-    /**
-     * 
-     * @param oid
-     * @param value
-     * @return an MOScalar according to the argument
-     */
-    public static GgMOScalar createReadOnlyString(OID oid, Object value,
-            GgMORow row) {
-        return new GgMOScalar(oid, MOAccessImpl.ACCESS_READ_ONLY,
-                getVariable(value), row);
-    }
+    private static GgInterfaceVariableFactory defaultFactory = new GgDefaultVariableFactory();
 
     /**
      * 
@@ -69,21 +57,9 @@ public class GgMOFactory {
      * @return an MOScalar according to the argument
      */
     public static GgMOScalar createReadOnly(OID oid, Object value, int type,
-            GgMORow row) {
+            GgMORow row, int mibLevel, int entry) {
         return new GgMOScalar(oid, MOAccessImpl.ACCESS_READ_ONLY, getVariable(
-                oid, value, type), row);
-    }
-
-    /**
-     * 
-     * @param oid
-     * @param value
-     * @param access
-     * @return an MOScalar according to the argument
-     */
-    public static GgMOScalar createString(OID oid, Object value,
-            MOAccess access, GgMORow row) {
-        return new GgMOScalar(oid, access, getVariable(value), row);
+                oid, value, type, mibLevel, entry), row);
     }
 
     /**
@@ -95,24 +71,11 @@ public class GgMOFactory {
      * @return an MOScalar according to the argument
      */
     public static GgMOScalar create(OID oid, Object value, int type,
-            MOAccess access, GgMORow row) {
-        return new GgMOScalar(oid, access, getVariable(oid, value, type), row);
+            MOAccess access, GgMORow row, int mibLevel, int entry) {
+        return new GgMOScalar(oid, access, getVariable(oid, value, type, mibLevel, entry), row);
     }
 
-    /**
-     * 
-     * @param value
-     * @return a Variable containing the String
-     */
-    private static Variable getVariable(Object value) {
-        if (value instanceof String) {
-            return new OctetString((String) value);
-        }
-        throw new IllegalArgumentException("Unmanaged Type: " +
-                value.getClass());
-    }
-
-    public static Variable getVariable(OID oid, Object value, int type) {
+    public static Variable getVariable(OID oid, Object value, int type, int mibLevel, int entry) {
         Variable var = null;
         GgInterfaceVariableFactory vf;
         if (factory == null) {
@@ -120,7 +83,7 @@ public class GgMOFactory {
         } else {
             vf = factory;
         }
-        var = vf.getVariable(oid, type);
+        var = vf.getVariable(oid, type, mibLevel, entry);
         if (value != null) {
             switch (type) {
                 case SMIConstants.SYNTAX_INTEGER:
@@ -166,5 +129,52 @@ public class GgMOFactory {
             }
         }
         return var;
+    }
+
+    public static void setVariable(Variable var, Object value, int type) {
+        if (value != null) {
+            switch (type) {
+                case SMIConstants.SYNTAX_INTEGER:
+                    // case SMIConstants.SYNTAX_INTEGER32:
+                    ((Integer32) var).setValue((Integer) value);
+                    break;
+                case SMIConstants.SYNTAX_OCTET_STRING:
+                    // case SMIConstants.SYNTAX_BITS:
+                    ((OctetString) var).setValue(value.toString());
+                    break;
+                case SMIConstants.SYNTAX_NULL:
+                    break;
+                case SMIConstants.SYNTAX_OBJECT_IDENTIFIER:
+                    ((OID) var).setValue(value.toString());
+                    break;
+                case SMIConstants.SYNTAX_IPADDRESS:
+                    ((IpAddress) var).setValue(value.toString());
+                    break;
+                case SMIConstants.SYNTAX_COUNTER32:
+                    ((Counter32) var).setValue((Long) value);
+                    break;
+                case SMIConstants.SYNTAX_GAUGE32:
+                    // case SMIConstants.SYNTAX_UNSIGNED_INTEGER32:
+                    ((Gauge32) var).setValue((Long) value);
+                    break;
+                case SMIConstants.SYNTAX_TIMETICKS:
+                    if (value instanceof TimeTicks) {
+                        ((TimeTicks) var).setValue(((TimeTicks) value)
+                                .toString());
+                    } else {
+                        ((TimeTicks) var).setValue((Long) value);
+                    }
+                    break;
+                case SMIConstants.SYNTAX_OPAQUE:
+                    ((Opaque) var).setValue((byte[]) value);
+                    break;
+                case SMIConstants.SYNTAX_COUNTER64:
+                    ((Counter64) var).setValue((Long) value);
+                    break;
+                default:
+                    throw new IllegalArgumentException("Unmanaged Type: " +
+                            value.getClass());
+            }
+        }
     }
 }

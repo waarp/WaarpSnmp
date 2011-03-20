@@ -26,6 +26,7 @@ import goldengate.snmp.interf.GgInterfaceMib;
 import goldengate.snmp.utils.GgEntry;
 import goldengate.snmp.utils.GgMORow;
 import goldengate.snmp.utils.GgMOScalar;
+import goldengate.snmp.utils.GgUptime;
 import goldengate.snmp.utils.MemoryGauge32;
 import goldengate.snmp.utils.MemoryGauge32.MemoryType;
 
@@ -90,14 +91,12 @@ public abstract class GgPrivateMib implements GgInterfaceMib {
     public OID rootOIDGoldenGateInfo;
     public GgMORow rowInfo;
     // General dynamic part
-    public OID rootOIDGoldenGateGeneral;
-    public GgMORow rowGeneral;
+    public OID rootOIDGoldenGateGlobal;
+    public GgMORow rowGlobal;
     // Uptime OID
-    public OID rootOIDGoldenGateGeneralUptime;
+    public OID rootOIDGoldenGateGlobalUptime;
     // Corresponding UpTime in Mib
     public GgMOScalar scalarUptime = null;
-    // Corresponding MemoryScalar (3) in Mib
-    public GgMOScalar memoryScalar = null;
     // Detailed dynamic part
     public OID rootOIDGoldenGateDetailed;
     public GgMORow rowDetailed;
@@ -126,8 +125,8 @@ public abstract class GgPrivateMib implements GgInterfaceMib {
         applicationProtocol = new OID(applicationProtocolBase+port);
         rootOIDGoldenGate = new OID(srootOIDGoldenGate);
         rootOIDGoldenGateInfo = new OID(srootOIDGoldenGate+".1");
-        rootOIDGoldenGateGeneral = new OID(srootOIDGoldenGate+".2");
-        rootOIDGoldenGateGeneralUptime = new OID(rootOIDGoldenGateGeneral.toString()+"."+
+        rootOIDGoldenGateGlobal = new OID(srootOIDGoldenGate+".2");
+        rootOIDGoldenGateGlobalUptime = new OID(rootOIDGoldenGateGlobal.toString()+"."+
                 goldenGateGlobalValuesIndex.applUptime.getOID()+".0");
         rootOIDGoldenGateDetailed = new OID(srootOIDGoldenGate+".3");
         rootOIDGoldenGateError = new OID(srootOIDGoldenGate+".4");
@@ -188,33 +187,38 @@ public abstract class GgPrivateMib implements GgInterfaceMib {
         // Save UpTime reference since used everywhere
         upTime = snmpv2.getSysUpTime();
     }
+    
     /**
      * Register this MIB
      * @throws DuplicateRegistrationException
      */
     protected void defaultAgentRegisterGoldenGateMib() throws DuplicateRegistrationException {
         // register Static info
-        rowInfo = new GgMORow(this, rootOIDGoldenGateInfo, goldenGateDefinition);
+        rowInfo = new GgMORow(this, rootOIDGoldenGateInfo, goldenGateDefinition, 
+                MibLevel.staticInfo.ordinal());
         rowInfo.registerMOs(agent.getServer(), null);
         // register General info
-        rowGeneral = new GgMORow(this, rootOIDGoldenGateGeneral, goldenGateGlobalValues);
-        memoryScalar = rowGeneral.row[goldenGateGlobalValuesIndex.memoryTotal.ordinal()];
+        rowGlobal = new GgMORow(this, rootOIDGoldenGateGlobal, goldenGateGlobalValues, 
+                MibLevel.globalInfo.ordinal());
+        GgMOScalar memoryScalar = rowGlobal.row[goldenGateGlobalValuesIndex.memoryTotal.ordinal()];
         memoryScalar.setValue(new MemoryGauge32(MemoryType.TotalMemory));
-        memoryScalar = rowGeneral.row[goldenGateGlobalValuesIndex.memoryFree.ordinal()];
+        memoryScalar = rowGlobal.row[goldenGateGlobalValuesIndex.memoryFree.ordinal()];
         memoryScalar.setValue(new MemoryGauge32(MemoryType.FreeMemory));
-        memoryScalar = rowGeneral.row[goldenGateGlobalValuesIndex.memoryUsed.ordinal()];
+        memoryScalar = rowGlobal.row[goldenGateGlobalValuesIndex.memoryUsed.ordinal()];
         memoryScalar.setValue(new MemoryGauge32(MemoryType.UsedMemory));
-        rowGeneral.registerMOs(agent.getServer(), null);
+        rowGlobal.registerMOs(agent.getServer(), null);
         // setup UpTime to SysUpTime and change status
-        scalarUptime = rowGeneral.row[goldenGateGlobalValuesIndex.applUptime.ordinal()];
-        scalarUptime.setValue(upTime.get());
+        scalarUptime = rowGlobal.row[goldenGateGlobalValuesIndex.applUptime.ordinal()];
+        scalarUptime.setValue(new GgUptime(upTime));
         changeStatus(OperStatus.restarting);
         changeStatus(OperStatus.up);
         // register Detailed info
-        rowDetailed = new GgMORow(this, rootOIDGoldenGateDetailed, goldenGateDetailedValues);
+        rowDetailed = new GgMORow(this, rootOIDGoldenGateDetailed, goldenGateDetailedValues, 
+                MibLevel.detailedInfo.ordinal());
         rowDetailed.registerMOs(agent.getServer(), null);
         // register Error info
-        rowError = new GgMORow(this, rootOIDGoldenGateError, goldenGateErrorValues);
+        rowError = new GgMORow(this, rootOIDGoldenGateError, goldenGateErrorValues, 
+                MibLevel.errorInfo.ordinal());
         rowError.registerMOs(agent.getServer(), null);
     }
     /**
@@ -228,7 +232,7 @@ public abstract class GgPrivateMib implements GgInterfaceMib {
     protected void agentUnregisterMibs() {
         logger.debug("UnRegisterGoldenGate");
         rowInfo.unregisterMOs(agent.getServer(), agent.getDefaultContext());
-        rowGeneral.unregisterMOs(agent.getServer(), agent.getDefaultContext());
+        rowGlobal.unregisterMOs(agent.getServer(), agent.getDefaultContext());
         rowDetailed.unregisterMOs(agent.getServer(), agent.getDefaultContext());
         rowError.unregisterMOs(agent.getServer(), agent.getDefaultContext());
     }
@@ -255,17 +259,24 @@ public abstract class GgPrivateMib implements GgInterfaceMib {
      */
     public void changeStatus(OperStatus status) {
         GgMOScalar statusScalar = 
-            rowGeneral.row[goldenGateGlobalValuesIndex.applOperStatus.ordinal()];
+            rowGlobal.row[goldenGateGlobalValuesIndex.applOperStatus.ordinal()];
         Integer32 var = (Integer32) statusScalar.getValue();
         if (var.getValue() != status.status) {
             var.setValue(status.status);
             GgMOScalar lastTimeScalar =
-                rowGeneral.row[goldenGateGlobalValuesIndex.applLastChange.ordinal()];
+                rowGlobal.row[goldenGateGlobalValuesIndex.applLastChange.ordinal()];
             TimeTicks time = (TimeTicks) lastTimeScalar.getValue();
             time.setValue(upTime.get().getValue());
         }
     }
-    
+    // MIB entry levels
+    public static enum MibLevel {
+        staticInfo,
+        globalInfo,
+        detailedInfo,
+        errorInfo,
+        trapInfo
+    }
     // From now the MIB definition
     public static enum NotificationElements {
         TrapShutdown(1),
@@ -319,9 +330,9 @@ public abstract class GgPrivateMib implements GgInterfaceMib {
         //applDescription
         new GgEntry(SMIConstants.SYNTAX_OCTET_STRING, MOAccessImpl.ACCESS_READ_ONLY),
         //applURL
-        new GgEntry(SMIConstants.SYNTAX_OBJECT_IDENTIFIER, MOAccessImpl.ACCESS_READ_ONLY),
+        new GgEntry(SMIConstants.SYNTAX_OCTET_STRING, MOAccessImpl.ACCESS_READ_ONLY),
         //applApplicationProtocol
-        new GgEntry(SMIConstants.SYNTAX_OCTET_STRING, MOAccessImpl.ACCESS_READ_ONLY)
+        new GgEntry(SMIConstants.SYNTAX_OBJECT_IDENTIFIER, MOAccessImpl.ACCESS_READ_ONLY)
     };
     
     public static enum goldenGateGlobalValuesIndex {
@@ -348,7 +359,9 @@ public abstract class GgPrivateMib implements GgInterfaceMib {
         nbStepAllTransfer,
         memoryTotal,
         memoryFree,
-        memoryUsed;
+        memoryUsed,
+        nbThreads,
+        nbNetworkConnection;
         
         public int getOID() {
             return this.ordinal()+1;
@@ -406,6 +419,10 @@ public abstract class GgPrivateMib implements GgInterfaceMib {
         //memoryFree
         new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
         //memoryUsed
+        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
+        //nbThreads
+        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
+        //nbNetworkConnection
         new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY)
     };
     
