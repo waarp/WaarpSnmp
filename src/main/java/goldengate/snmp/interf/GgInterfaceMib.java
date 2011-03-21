@@ -38,10 +38,26 @@ import org.snmp4j.smi.OID;
 public interface GgInterfaceMib extends MOGroup {
     public static OID rootEnterpriseMib = new OID(".1.3.6.1.4.1");
     public static enum TrapLevel {
+        /**
+         * No Trap/Notification at all
+         */
         None,
+        /**
+         * Trap/Notification only for start and stop
+         */
         StartStop,
+        /**
+         * Trap/Notification up to high alert
+         */
         Alert,
-        All
+        /**
+         * Trap/Notification for all important elements
+         */
+        All;
+        
+        public boolean isLevelValid(int level) {
+            return (level >= this.ordinal());
+        }
     }
     /**
      * Set the agent

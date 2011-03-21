@@ -71,9 +71,6 @@ public class GgMORow implements MOGroup {
     public void setValue(int index, Object value) throws IllegalArgumentException {
         if (index >= row.length)
             throw new IllegalArgumentException("Index exceed Row size");
-        /*OID oid = new OID(row[index].getOid());
-        Variable var = GgMOFactory.getVariable(oid, value, type[index], mibLevel, index);
-        row[index].setValue(var);*/
         Variable var = row[index].getValue();
         GgMOFactory.setVariable(var, value, type[index]);
     }

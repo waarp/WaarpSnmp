@@ -134,7 +134,7 @@ public class GgImplPrivateMib extends GgPrivateMib {
      * @param number
      */
     public void notifyInfo(String message, String message2, int number) {
-        if (agent.trapLevel < TrapLevel.All.ordinal())
+        if (!TrapLevel.All.isLevelValid(agent.trapLevel))
             return;
         logger.warn("Notify: "+NotificationElements.InfoTask+":"+message+":"+number);
         agent.getNotificationOriginator().notify(
@@ -167,7 +167,7 @@ public class GgImplPrivateMib extends GgPrivateMib {
      * @param number
      */
     public void notifyError(String message, String message2, int number) {
-        if (agent.trapLevel < TrapLevel.All.ordinal())
+        if (!TrapLevel.Alert.isLevelValid(agent.trapLevel))
             return;
         logger.warn("Notify: "+NotificationElements.TrapError+":"+message+":"+number);
         agent.getNotificationOriginator().notify(

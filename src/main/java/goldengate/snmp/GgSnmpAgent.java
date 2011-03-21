@@ -86,6 +86,8 @@ public class GgSnmpAgent extends BaseAgent {
     private boolean hasV2 = false;
     private boolean hasV3 = false;
 
+    private final long systemTimeStart = System.currentTimeMillis();
+    
     private WorkerPool workerPool = null;
     
     public GgInterfaceMonitor monitor;
@@ -167,6 +169,13 @@ public class GgSnmpAgent extends BaseAgent {
      */
     public long getUptime() {
         return getSnmpv2MIB().getUpTime().toMilliseconds();
+    }
+    /**
+     * 
+     * @return the uptime but in System time in ms
+     */
+    public long getUptimeSystemTime() {
+        return systemTimeStart;
     }
     /*
      * (non-Javadoc)
@@ -493,7 +502,7 @@ public class GgSnmpAgent extends BaseAgent {
         for (int i = 0; i < address.length; i++) {
             Address addr = GenericAddress.parse(address[i]);
             if (addr != null) {
-                logger.warn("SNMP Agent InitTransport: {} {}", addr.getClass().getSimpleName(), addr);
+                logger.info("SNMP Agent InitTransport: {} {}", addr.getClass().getSimpleName(), addr);
                 TransportMapping tm = TransportMappings.getInstance()
                         .createTransportMapping(addr);
                 if (tm != null) {
@@ -530,7 +539,7 @@ public class GgSnmpAgent extends BaseAgent {
         getServer().addContext(new OctetString("public"));
         finishInit();
         run();
-        if (trapLevel > TrapLevel.None.ordinal())
+        if (TrapLevel.StartStop.isLevelValid(trapLevel))
             sendColdStartNotification();
     }
 
@@ -577,8 +586,8 @@ public class GgSnmpAgent extends BaseAgent {
      */
     @Override
     public void stop() {
-        logger.warn("Stopping SNMP support");
-        if (trapLevel > TrapLevel.None.ordinal()) {
+        logger.info("Stopping SNMP support");
+        if (TrapLevel.StartStop.isLevelValid(trapLevel)) {
             sendShutdownNotification();
         }
         super.stop();
