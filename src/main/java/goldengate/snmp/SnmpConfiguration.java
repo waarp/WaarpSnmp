@@ -167,7 +167,7 @@ public class SnmpConfiguration {
     public static String []address = null;
     public static int nbThread = 4;
     public static boolean isFilterAccessEnabled = false;
-    public static boolean isUsingTrap = false;
+    public static boolean isUsingTrap = true;
     public static int trapLevel = 0;
     
     public static final String DEFAULTADDRESS = "udp:0.0.0.0/161";

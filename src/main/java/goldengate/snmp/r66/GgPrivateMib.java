@@ -119,7 +119,7 @@ public abstract class GgPrivateMib implements GgInterfaceMib {
         textualName = stextualName;
         address = saddress;
         service = iservice;
-        srootOIDGoldenGate = rootEnterpriseMib.toString()+"."+smiPrivateCode;
+        srootOIDGoldenGate = rootEnterpriseMib.toString()+"."+smiPrivateCode+"."+smiTypeGoldengate;
         applicationProtocolBase = srootOIDGoldenGate+".1.1.4.";
         ggObjectId = new OID(srootOIDGoldenGate+"."+smiTypeGoldengate);
         applicationProtocol = new OID(applicationProtocolBase+port);

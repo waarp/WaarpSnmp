@@ -51,6 +51,10 @@ public interface GgInterfaceMib extends MOGroup {
          */
         Alert,
         /**
+         * Trap/Notification up to warning alert
+         */
+        Warning,
+        /**
          * Trap/Notification for all important elements
          */
         All;

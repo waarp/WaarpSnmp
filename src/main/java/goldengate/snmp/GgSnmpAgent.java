@@ -79,7 +79,7 @@ public class GgSnmpAgent extends BaseAgent {
     private String [] address = new String[] {SnmpConfiguration.DEFAULTADDRESS};
     private int nbThread = 4;
     private boolean isFilterAccessEnabled = false;
-    private boolean useTrap = false;
+    private boolean useTrap = true;
     public int trapLevel = 0;
     private List<UsmUser> listUsmUser;
     private List<TargetElement> listTargetElements;
