@@ -121,7 +121,7 @@ public abstract class GgPrivateMib implements GgInterfaceMib {
         service = iservice;
         srootOIDGoldenGate = rootEnterpriseMib.toString()+"."+smiPrivateCode+"."+smiTypeGoldengate;
         applicationProtocolBase = srootOIDGoldenGate+".1.1.4.";
-        ggObjectId = new OID(srootOIDGoldenGate+"."+smiTypeGoldengate);
+        ggObjectId = new OID(srootOIDGoldenGate);
         applicationProtocol = new OID(applicationProtocolBase+port);
         rootOIDGoldenGate = new OID(srootOIDGoldenGate);
         rootOIDGoldenGateInfo = new OID(srootOIDGoldenGate+".1");
