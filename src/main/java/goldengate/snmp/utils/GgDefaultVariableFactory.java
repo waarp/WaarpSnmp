@@ -1,22 +1,21 @@
 /**
-   This file is part of GoldenGate Project (named also GoldenGate or GG).
-
-   Copyright 2009, Frederic Bregier, and individual contributors by the @author
-   tags. See the COPYRIGHT.txt in the distribution for a full listing of
-   individual contributors.
-
-   All GoldenGate Project is free software: you can redistribute it and/or 
-   modify it under the terms of the GNU General Public License as published 
-   by the Free Software Foundation, either version 3 of the License, or
-   (at your option) any later version.
-
-   GoldenGate is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
-
-   You should have received a copy of the GNU General Public License
-   along with GoldenGate .  If not, see <http://www.gnu.org/licenses/>.
+ * This file is part of GoldenGate Project (named also GoldenGate or GG).
+ * 
+ * Copyright 2009, Frederic Bregier, and individual contributors by the @author
+ * tags. See the COPYRIGHT.txt in the distribution for a full listing of
+ * individual contributors.
+ * 
+ * All GoldenGate Project is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your
+ * option) any later version.
+ * 
+ * GoldenGate is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License along with
+ * GoldenGate . If not, see <http://www.gnu.org/licenses/>.
  */
 package goldengate.snmp.utils;
 
@@ -36,12 +35,16 @@ import org.snmp4j.smi.Variable;
 import goldengate.snmp.interf.GgInterfaceVariableFactory;
 
 /**
+ * Default VariableFactory
+ * 
  * @author Frederic Bregier
- *
+ * 
  */
 public class GgDefaultVariableFactory implements GgInterfaceVariableFactory {
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see goldengate.snmp.GgVariableFactory#getVariable(OID, int, int, int)
      */
     @Override
@@ -49,11 +52,11 @@ public class GgDefaultVariableFactory implements GgInterfaceVariableFactory {
         Variable var;
         switch (type) {
             case SMIConstants.SYNTAX_INTEGER:
-            //case SMIConstants.SYNTAX_INTEGER32:
+                // case SMIConstants.SYNTAX_INTEGER32:
                 var = new Integer32();
                 break;
             case SMIConstants.SYNTAX_OCTET_STRING:
-            //case SMIConstants.SYNTAX_BITS:
+                // case SMIConstants.SYNTAX_BITS:
                 var = new OctetString();
                 break;
             case SMIConstants.SYNTAX_NULL:
@@ -69,7 +72,7 @@ public class GgDefaultVariableFactory implements GgInterfaceVariableFactory {
                 var = new Counter32();
                 break;
             case SMIConstants.SYNTAX_GAUGE32:
-            //case SMIConstants.SYNTAX_UNSIGNED_INTEGER32:
+                // case SMIConstants.SYNTAX_UNSIGNED_INTEGER32:
                 var = new Gauge32();
                 break;
             case SMIConstants.SYNTAX_TIMETICKS:
@@ -82,8 +85,7 @@ public class GgDefaultVariableFactory implements GgInterfaceVariableFactory {
                 var = new Counter64();
                 break;
             default:
-                throw new IllegalArgumentException("Unmanaged Type: " +
-                        type);
+                throw new IllegalArgumentException("Unmanaged Type: " + type);
         }
         return var;
     }

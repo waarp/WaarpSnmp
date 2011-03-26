@@ -42,7 +42,9 @@ import ch.qos.logback.classic.Level;
  */
 public class GgTestSnmpClientAgent {
     static GgSnmpAgent agent;
+
     static GgSimpleSnmpClient client;
+
     static GgImplPrivateMib test;
 
     public static void main(String[] args) throws Exception {
@@ -66,8 +68,8 @@ public class GgTestSnmpClientAgent {
         // Create a monitor
         GgPrivateMonitor monitor = new GgPrivateMonitor();
         // Create a Mib
-        test = new GgImplPrivateMib("GoldenGate Test SNMP", 6666, 66666, 66, "F. Bregier",
-                "GoldenGate Test SNMP V1.0", "Paris, France", 72);
+        test = new GgImplPrivateMib("GoldenGate Test SNMP", 6666, 66666, 66,
+                "F. Bregier", "GoldenGate Test SNMP V1.0", "Paris, France", 72);
         // Set the default VariableFactory
         GgMOFactory.factory = new GgTestVariableFactory();
         // Create the agent associated with the monitor and Mib
@@ -94,26 +96,30 @@ public class GgTestSnmpClientAgent {
      * our agent
      */
     public static void verifySysDescr() throws IOException {
-        assertEquals(test.textualSysDecr, client.getAsString(SnmpConstants.sysDescr));
+        assertEquals(test.textualSysDecr,
+                client.getAsString(SnmpConstants.sysDescr));
     }
 
     /**
      * Verify that the table contents is ok.
      */
     public static void verifyTableContents() {
-        for (GgMOScalar scalar : test.rowInfo.row) {
+        for (GgMOScalar scalar: test.rowInfo.row) {
             try {
-                System.out.println("Read "+scalar.getID()+":"+client.getAsString(scalar.getID()));
+                System.out.println("Read " + scalar.getID() + ":" +
+                        client.getAsString(scalar.getID()));
             } catch (IOException e) {
-                System.err.println(scalar.getID()+":"+e.getMessage());
+                System.err.println(scalar.getID() + ":" + e.getMessage());
                 continue;
             }
         }
     }
+
     public static void sendNotification() {
         test.notifyInfo("Une alerte", "un autre texte d'alerte", 1971);
         test.notifyError("Une seconde alerte", "un second texte d'alerte", 42);
     }
+
     static class StringResponseListener implements ResponseListener {
 
         private String value = null;

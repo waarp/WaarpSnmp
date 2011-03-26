@@ -55,63 +55,153 @@ public abstract class GgPrivateMib implements GgInterfaceMib {
             .getLogger(GgPrivateMib.class);
 
     // These are both standard in RFC-1213
-    //SnmpConstants.sysDescr
+    /** 
+     * SnmpConstants.sysDescr
+     */
     public String textualSysDecr = null;
-    //SnmpConstants.sysObjectID
+
+    /**
+     *  SnmpConstants.sysObjectID
+     */
     public OID ggObjectId = null; // will be smiPrivateCode.typeGoldenGate
-    //SnmpConstants.sysContact
+
+    /** 
+     * SnmpConstants.sysContact
+     */
     public String contactName = "Nobody";
-    //SnmpConstants.sysName
+
+    /**
+     *  SnmpConstants.sysName
+     */
     public String textualName = "OpenR66";
-    //SnmpConstants.sysLocation
+
+    /**
+     *  SnmpConstants.sysLocation
+     */
     public String address = "somewhere";
-    //SnmpConstants.sysServices
-    public int service = 72; // transport + application
-    //SnmpConstants.sysUpTime
+
+    /**
+     *  SnmpConstants.sysServices
+     *  
+     *  transport + application
+     */
+    public int service = 72; 
+
+    /**
+     *  SnmpConstants.sysUpTime
+     */
     public SysUpTime upTime = null;
-    
-    // need to add ".port" like "6666" Only in TCP (no UDP supported for GoldenGate)
-    // example: rootEnterpriseMib+"66666"+".1.1.4.";
-    public String applicationProtocolBase = null; 
-    // will be = new OID(applicationProtocolBase+port);
+
+    /**
+     *  need to add ".port" like "6666" Only in TCP (no UDP supported for
+     *  GoldenGate)
+     *  
+     *  example: rootEnterpriseMib+"66666"+".1.1.4.";
+     */
+    public String applicationProtocolBase = null;
+
+    /**
+     * will be = new OID(applicationProtocolBase+port);
+     */
     public OID applicationProtocol = null;
 
-    // Private MIB: not published so take an OID probably not attributed
+    /**
+     *  Private MIB: not published so take an OID probably not attributed
+     */
     public int smiPrivateCode = 66666;
-    // identification of GoldenGate module
-    public int smiTypeGoldengate = 66; // default = 66 = R66
-    
-    public String srootOIDGoldenGate;
-    public OID rootOIDGoldenGate;
-    // Used in Notify
-    public OID rootOIDGoldenGateNotif;
-    // Used in Notify Start or Shutdown
-    public OID rootOIDGoldenGateNotifStartOrShutdown;
-    // Info static part
-    public OID rootOIDGoldenGateInfo;
-    public GgMORow rowInfo;
-    // General dynamic part
-    public OID rootOIDGoldenGateGlobal;
-    public GgMORow rowGlobal;
-    // Uptime OID
-    public OID rootOIDGoldenGateGlobalUptime;
-    // Corresponding UpTime in Mib
-    public GgMOScalar scalarUptime = null;
-    // Detailed dynamic part
-    public OID rootOIDGoldenGateDetailed;
-    public GgMORow rowDetailed;
-    // Error dynamic part
-    public OID rootOIDGoldenGateError;
-    public GgMORow rowError;
-    
-    // New SNMPV2 MIB
-    public SNMPv2MIB snmpv2;
-    // Corresponding agent
-    public GgSnmpAgent agent;
 
+    /**
+     *  identification of GoldenGate module
+     */
+    public int smiTypeGoldengate = 66; // default = 66 = R66
+    /**
+     * root OID in String
+     */
+    public String srootOIDGoldenGate;
+    /**
+     * root OID
+     */
+    public OID rootOIDGoldenGate;
+
+    /**
+     *  Used in Notify
+     */
+    public OID rootOIDGoldenGateNotif;
+
+    /**
+     *  Used in Notify Start or Shutdown
+     */
+    public OID rootOIDGoldenGateNotifStartOrShutdown;
+
+    /**
+     *  Info static part
+     */
+    public OID rootOIDGoldenGateInfo;
+    /**
+     * Info Row access
+     */
+    public GgMORow rowInfo;
+
+    /**
+     *  Global dynamic part
+     */
+    public OID rootOIDGoldenGateGlobal;
+    /**
+     * Global Row access
+     */
+    public GgMORow rowGlobal;
+
+    /**
+     *  Uptime OID
+     */
+    public OID rootOIDGoldenGateGlobalUptime;
+
+    /**
+     *  Corresponding UpTime in Mib
+     */
+    public GgMOScalar scalarUptime = null;
+
+    /**
+     *  Detailed dynamic part
+     */
+    public OID rootOIDGoldenGateDetailed;
+    /**
+     * Detailed Row access
+     */
+    public GgMORow rowDetailed;
+
+    /**
+     *  Error dynamic part
+     */
+    public OID rootOIDGoldenGateError;
+    /**
+     * Error Row access
+     */
+    public GgMORow rowError;
+
+    /**
+     *  New SNMPV2 MIB
+     */
+    public SNMPv2MIB snmpv2;
+
+    /**
+     *  Corresponding agent
+     */
+    public GgSnmpAgent agent;
+    /**
+     * 
+     * @param sysdesc The System Description to associate
+     * @param port the port to show as used by the application
+     * @param smiPrivateCodeFinal the smiPrivateCode (should be 66666)
+     * @param typeGoldenGateObject the type of GoldenGate Object (should be 66)
+     * @param scontactName the contact name to show
+     * @param stextualName the textual name to show
+     * @param saddress the address to show
+     * @param iservice the service to show (should be 72)
+     */
     public GgPrivateMib(String sysdesc, int port, int smiPrivateCodeFinal,
-                int typeGoldenGateObject, String scontactName, String stextualName, 
-                String saddress, int iservice) {
+            int typeGoldenGateObject, String scontactName, String stextualName,
+            String saddress, int iservice) {
         textualSysDecr = sysdesc;
         smiPrivateCode = smiPrivateCodeFinal;
         smiTypeGoldengate = typeGoldenGateObject;
@@ -119,22 +209,27 @@ public abstract class GgPrivateMib implements GgInterfaceMib {
         textualName = stextualName;
         address = saddress;
         service = iservice;
-        srootOIDGoldenGate = rootEnterpriseMib.toString()+"."+smiPrivateCode+"."+smiTypeGoldengate;
-        applicationProtocolBase = srootOIDGoldenGate+".1.1.4.";
+        srootOIDGoldenGate = rootEnterpriseMib.toString() + "." +
+                smiPrivateCode + "." + smiTypeGoldengate;
+        applicationProtocolBase = srootOIDGoldenGate + ".1.1.4.";
         ggObjectId = new OID(srootOIDGoldenGate);
-        applicationProtocol = new OID(applicationProtocolBase+port);
+        applicationProtocol = new OID(applicationProtocolBase + port);
         rootOIDGoldenGate = new OID(srootOIDGoldenGate);
-        rootOIDGoldenGateInfo = new OID(srootOIDGoldenGate+".1");
-        rootOIDGoldenGateGlobal = new OID(srootOIDGoldenGate+".2");
-        rootOIDGoldenGateGlobalUptime = new OID(rootOIDGoldenGateGlobal.toString()+"."+
-                goldenGateGlobalValuesIndex.applUptime.getOID()+".0");
-        rootOIDGoldenGateDetailed = new OID(srootOIDGoldenGate+".3");
-        rootOIDGoldenGateError = new OID(srootOIDGoldenGate+".4");
-        rootOIDGoldenGateNotif = new OID(srootOIDGoldenGate+".5.1");
-        rootOIDGoldenGateNotifStartOrShutdown = new OID(srootOIDGoldenGate+".5.1.1.1");
+        rootOIDGoldenGateInfo = new OID(srootOIDGoldenGate + ".1");
+        rootOIDGoldenGateGlobal = new OID(srootOIDGoldenGate + ".2");
+        rootOIDGoldenGateGlobalUptime = new OID(
+                rootOIDGoldenGateGlobal.toString() + "." +
+                        goldenGateGlobalValuesIndex.applUptime.getOID() + ".0");
+        rootOIDGoldenGateDetailed = new OID(srootOIDGoldenGate + ".3");
+        rootOIDGoldenGateError = new OID(srootOIDGoldenGate + ".4");
+        rootOIDGoldenGateNotif = new OID(srootOIDGoldenGate + ".5.1");
+        rootOIDGoldenGateNotifStartOrShutdown = new OID(srootOIDGoldenGate +
+                ".5.1.1.1");
     }
-    
-    /* (non-Javadoc)
+
+    /*
+     * (non-Javadoc)
+     * 
      * @see goldengate.snmp.GgInterfaceMib#setAgent(goldengate.snmp.GgSnmpAgent)
      */
     @Override
@@ -142,8 +237,9 @@ public abstract class GgPrivateMib implements GgInterfaceMib {
         this.agent = agent;
     }
 
-    
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see goldengate.snmp.GgInterfaceMib#getBaseOidStartOrShutdown()
      */
     @Override
@@ -151,7 +247,9 @@ public abstract class GgPrivateMib implements GgInterfaceMib {
         return rootOIDGoldenGateNotifStartOrShutdown;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see goldengate.snmp.GgInterfaceMib#getSNMPv2MIB()
      */
     @Override
@@ -160,7 +258,9 @@ public abstract class GgPrivateMib implements GgInterfaceMib {
     }
 
     /**
-     * Unregister and Register again the SNMPv2MIB with System adapted to this Mib
+     * Unregister and Register again the SNMPv2MIB with System adapted to this
+     * Mib
+     * 
      * @throws DuplicateRegistrationException
      */
     protected void agentRegisterSystem() throws DuplicateRegistrationException {
@@ -169,63 +269,73 @@ public abstract class GgPrivateMib implements GgInterfaceMib {
         // override that method and register the mibs that you need
 
         agent.unregisterManagedObject(agent.getSnmpv2MIB());
-        
+
         // Register a system description, use one from you product environment
         // to test with
-        snmpv2 = new SNMPv2MIB(
-                new OctetString(textualSysDecr), 
-                ggObjectId, new Integer32(service));
+        snmpv2 = new SNMPv2MIB(new OctetString(textualSysDecr), ggObjectId,
+                new Integer32(service));
         snmpv2.setContact(new OctetString(contactName));
         snmpv2.setLocation(new OctetString(address));
         snmpv2.setName(new OctetString(textualName));
         snmpv2.registerMOs(agent.getServer(), null);
         if (logger.isDebugEnabled()) {
-            logger.debug("SNMPV2: "+snmpv2.getContact()+":"+snmpv2.getDescr()+":"+
-                    snmpv2.getLocation()+":"+snmpv2.getName()+":"+
-                    snmpv2.getObjectID()+":"+snmpv2.getServices()+":"+snmpv2.getUpTime());
+            logger.debug("SNMPV2: " + snmpv2.getContact() + ":" +
+                    snmpv2.getDescr() + ":" + snmpv2.getLocation() + ":" +
+                    snmpv2.getName() + ":" + snmpv2.getObjectID() + ":" +
+                    snmpv2.getServices() + ":" + snmpv2.getUpTime());
         }
         // Save UpTime reference since used everywhere
         upTime = snmpv2.getSysUpTime();
     }
-    
+
     /**
      * Register this MIB
+     * 
      * @throws DuplicateRegistrationException
      */
-    protected void defaultAgentRegisterGoldenGateMib() throws DuplicateRegistrationException {
+    protected void defaultAgentRegisterGoldenGateMib()
+            throws DuplicateRegistrationException {
         // register Static info
-        rowInfo = new GgMORow(this, rootOIDGoldenGateInfo, goldenGateDefinition, 
-                MibLevel.staticInfo.ordinal());
+        rowInfo = new GgMORow(this, rootOIDGoldenGateInfo,
+                goldenGateDefinition, MibLevel.staticInfo.ordinal());
         rowInfo.registerMOs(agent.getServer(), null);
         // register General info
-        rowGlobal = new GgMORow(this, rootOIDGoldenGateGlobal, goldenGateGlobalValues, 
-                MibLevel.globalInfo.ordinal());
-        GgMOScalar memoryScalar = rowGlobal.row[goldenGateGlobalValuesIndex.memoryTotal.ordinal()];
+        rowGlobal = new GgMORow(this, rootOIDGoldenGateGlobal,
+                goldenGateGlobalValues, MibLevel.globalInfo.ordinal());
+        GgMOScalar memoryScalar = rowGlobal.row[goldenGateGlobalValuesIndex.memoryTotal
+                .ordinal()];
         memoryScalar.setValue(new MemoryGauge32(MemoryType.TotalMemory));
-        memoryScalar = rowGlobal.row[goldenGateGlobalValuesIndex.memoryFree.ordinal()];
+        memoryScalar = rowGlobal.row[goldenGateGlobalValuesIndex.memoryFree
+                .ordinal()];
         memoryScalar.setValue(new MemoryGauge32(MemoryType.FreeMemory));
-        memoryScalar = rowGlobal.row[goldenGateGlobalValuesIndex.memoryUsed.ordinal()];
+        memoryScalar = rowGlobal.row[goldenGateGlobalValuesIndex.memoryUsed
+                .ordinal()];
         memoryScalar.setValue(new MemoryGauge32(MemoryType.UsedMemory));
         rowGlobal.registerMOs(agent.getServer(), null);
         // setup UpTime to SysUpTime and change status
-        scalarUptime = rowGlobal.row[goldenGateGlobalValuesIndex.applUptime.ordinal()];
+        scalarUptime = rowGlobal.row[goldenGateGlobalValuesIndex.applUptime
+                .ordinal()];
         scalarUptime.setValue(new GgUptime(upTime));
         changeStatus(OperStatus.restarting);
         changeStatus(OperStatus.up);
         // register Detailed info
-        rowDetailed = new GgMORow(this, rootOIDGoldenGateDetailed, goldenGateDetailedValues, 
-                MibLevel.detailedInfo.ordinal());
+        rowDetailed = new GgMORow(this, rootOIDGoldenGateDetailed,
+                goldenGateDetailedValues, MibLevel.detailedInfo.ordinal());
         rowDetailed.registerMOs(agent.getServer(), null);
         // register Error info
-        rowError = new GgMORow(this, rootOIDGoldenGateError, goldenGateErrorValues, 
-                MibLevel.errorInfo.ordinal());
+        rowError = new GgMORow(this, rootOIDGoldenGateError,
+                goldenGateErrorValues, MibLevel.errorInfo.ordinal());
         rowError.registerMOs(agent.getServer(), null);
     }
+
     /**
      * Register this MIB
+     * 
      * @throws DuplicateRegistrationException
      */
-    protected abstract void agentRegisterGoldenGateMib() throws DuplicateRegistrationException;
+    protected abstract void agentRegisterGoldenGateMib()
+            throws DuplicateRegistrationException;
+
     /**
      * Unregister this MIB
      */
@@ -236,9 +346,12 @@ public abstract class GgPrivateMib implements GgInterfaceMib {
         rowDetailed.unregisterMOs(agent.getServer(), agent.getDefaultContext());
         rowError.unregisterMOs(agent.getServer(), agent.getDefaultContext());
     }
-    
-    /* (non-Javadoc)
-     * @see org.snmp4j.agent.MOGroup#registerMOs(org.snmp4j.agent.MOServer, org.snmp4j.smi.OctetString)
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.snmp4j.agent.MOGroup#registerMOs(org.snmp4j.agent.MOServer,
+     * org.snmp4j.smi.OctetString)
      */
     @Override
     public void registerMOs(MOServer server, OctetString context)
@@ -246,67 +359,104 @@ public abstract class GgPrivateMib implements GgInterfaceMib {
         agentRegisterSystem();
         agentRegisterGoldenGateMib();
     }
-    /* (non-Javadoc)
-     * @see org.snmp4j.agent.MOGroup#unregisterMOs(org.snmp4j.agent.MOServer, org.snmp4j.smi.OctetString)
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.snmp4j.agent.MOGroup#unregisterMOs(org.snmp4j.agent.MOServer,
+     * org.snmp4j.smi.OctetString)
      */
     @Override
     public void unregisterMOs(MOServer server, OctetString context) {
         agentUnregisterMibs();
     }
+
     /**
      * Change the status and the LastChange Timeticks
+     * 
      * @param status
      */
     public void changeStatus(OperStatus status) {
-        GgMOScalar statusScalar = 
-            rowGlobal.row[goldenGateGlobalValuesIndex.applOperStatus.ordinal()];
+        GgMOScalar statusScalar = rowGlobal.row[goldenGateGlobalValuesIndex.applOperStatus
+                .ordinal()];
         Integer32 var = (Integer32) statusScalar.getValue();
         if (var.getValue() != status.status) {
             var.setValue(status.status);
-            GgMOScalar lastTimeScalar =
-                rowGlobal.row[goldenGateGlobalValuesIndex.applLastChange.ordinal()];
+            GgMOScalar lastTimeScalar = rowGlobal.row[goldenGateGlobalValuesIndex.applLastChange
+                    .ordinal()];
             TimeTicks time = (TimeTicks) lastTimeScalar.getValue();
             time.setValue(upTime.get().getValue());
         }
     }
-    // MIB entry levels
+
+    /**
+     *  MIB entry levels
+     * @author Frederic Bregier
+     *
+     */
     public static enum MibLevel {
-        staticInfo,
-        globalInfo,
-        detailedInfo,
-        errorInfo,
-        trapInfo
+        staticInfo, globalInfo, detailedInfo, errorInfo, trapInfo
     }
     // From now the MIB definition
+    /**
+     *  Notification Elements
+     * @author Frederic Bregier
+     *
+     */
     public static enum NotificationElements {
         TrapShutdown(1),
         TrapError(2),
         TrapWarning(3),
         TrapOverloaded(4),
         InfoTask(5);
-        
-        public int []oid;
+
+        public int[] oid;
+
         private NotificationElements(int oid) {
-            this.oid = new int[]{oid};
+            this.oid = new int[] {
+                oid };
         }
+
         public OID getOID(OID oidBase) {
             return new OID(oidBase.getValue(), this.oid);
         }
+
         public OID getOID(OID oidBase, int rank) {
-            int []ids = new int[] { this.oid[0], rank };
+            int[] ids = new int[] {
+                    this.oid[0], rank };
             return new OID(oidBase.getValue(), ids);
         }
     }
-
+    /**
+     * Notification for a task trap
+     * @author Frederic Bregier
+     *
+     */
     public static enum NotificationTasks {
-        globalStepInfo, stepInfo, rankFileInfo, stepStatusInfo, filenameInfo, 
-        originalNameInfo, idRuleInfo, modeTransInfo, retrieveModeInfo, startTransInfo, 
-        infoStatusInfo, requesterInfo, requestedInfo, specialIdInfo;
-        
+        globalStepInfo,
+        stepInfo,
+        rankFileInfo,
+        stepStatusInfo,
+        filenameInfo,
+        originalNameInfo,
+        idRuleInfo,
+        modeTransInfo,
+        retrieveModeInfo,
+        startTransInfo,
+        infoStatusInfo,
+        requesterInfo,
+        requestedInfo,
+        specialIdInfo;
+
         public int getOID() {
-            return this.ordinal()+1;
+            return this.ordinal() + 1;
         }
     }
+    /**
+     * Definition part
+     * @author Frederic Bregier
+     *
+     */
     public static enum goldenGateDefinitionIndex {
         applName,
         applServerName,
@@ -314,27 +464,38 @@ public abstract class GgPrivateMib implements GgInterfaceMib {
         applDescription,
         applURL,
         applApplicationProtocol;
-        
+
         public int getOID() {
-            return this.ordinal()+1;
+            return this.ordinal() + 1;
         }
     }
-    public static GgEntry [] goldenGateDefinition =
-    {
-        //applName
-        new GgEntry(SMIConstants.SYNTAX_OCTET_STRING, MOAccessImpl.ACCESS_READ_ONLY),
-        //applServerName
-        new GgEntry(SMIConstants.SYNTAX_OCTET_STRING, MOAccessImpl.ACCESS_READ_ONLY),
-        //applVersion
-        new GgEntry(SMIConstants.SYNTAX_OCTET_STRING, MOAccessImpl.ACCESS_READ_ONLY),
-        //applDescription
-        new GgEntry(SMIConstants.SYNTAX_OCTET_STRING, MOAccessImpl.ACCESS_READ_ONLY),
-        //applURL
-        new GgEntry(SMIConstants.SYNTAX_OCTET_STRING, MOAccessImpl.ACCESS_READ_ONLY),
-        //applApplicationProtocol
-        new GgEntry(SMIConstants.SYNTAX_OBJECT_IDENTIFIER, MOAccessImpl.ACCESS_READ_ONLY)
-    };
-    
+    /**
+     * Definition part
+     */
+    public static GgEntry[] goldenGateDefinition = {
+            // applName
+            new GgEntry(SMIConstants.SYNTAX_OCTET_STRING,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // applServerName
+            new GgEntry(SMIConstants.SYNTAX_OCTET_STRING,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // applVersion
+            new GgEntry(SMIConstants.SYNTAX_OCTET_STRING,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // applDescription
+            new GgEntry(SMIConstants.SYNTAX_OCTET_STRING,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // applURL
+            new GgEntry(SMIConstants.SYNTAX_OCTET_STRING,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // applApplicationProtocol
+            new GgEntry(SMIConstants.SYNTAX_OBJECT_IDENTIFIER,
+                    MOAccessImpl.ACCESS_READ_ONLY) };
+    /**
+     * Global part
+     * @author Frederic Bregier
+     *
+     */
     public static enum goldenGateGlobalValuesIndex {
         applUptime,
         applOperStatus,
@@ -362,70 +523,101 @@ public abstract class GgPrivateMib implements GgInterfaceMib {
         memoryUsed,
         nbThreads,
         nbNetworkConnection;
-        
+
         public int getOID() {
-            return this.ordinal()+1;
-        }        
+            return this.ordinal() + 1;
+        }
     }
-    public static GgEntry [] goldenGateGlobalValues =
-    {
-        //applUptime
-        new GgEntry(SMIConstants.SYNTAX_TIMETICKS, MOAccessImpl.ACCESS_READ_ONLY),
-        //applOperStatus
-        new GgEntry(SMIConstants.SYNTAX_INTEGER, MOAccessImpl.ACCESS_READ_ONLY),
-        //applLastChange
-        new GgEntry(SMIConstants.SYNTAX_TIMETICKS, MOAccessImpl.ACCESS_READ_ONLY),
-        //applInboundAssociations
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        //applOutboundAssociations
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        //applAccumInboundAssociations
-        new GgEntry(SMIConstants.SYNTAX_COUNTER32, MOAccessImpl.ACCESS_READ_ONLY),
-        //applAccumOutboundAssociations
-        new GgEntry(SMIConstants.SYNTAX_COUNTER32, MOAccessImpl.ACCESS_READ_ONLY),
-        //applLastInboundActivity
-        new GgEntry(SMIConstants.SYNTAX_TIMETICKS, MOAccessImpl.ACCESS_READ_ONLY),
-        //applLastOutboundActivity
-        new GgEntry(SMIConstants.SYNTAX_TIMETICKS, MOAccessImpl.ACCESS_READ_ONLY),
-        //applRejectedInboundAssociations
-        new GgEntry(SMIConstants.SYNTAX_COUNTER32, MOAccessImpl.ACCESS_READ_ONLY),
-        //applFailedOutboundAssociations
-        new GgEntry(SMIConstants.SYNTAX_COUNTER32, MOAccessImpl.ACCESS_READ_ONLY),
-        // Bandwidth
-        //applInboundBandwidthKBS
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        //applOutboundBandwidthKBS
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        // Overall status including past, future and current transfers
-        //nbInfoUnknown
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        //nbInfoNotUpdated
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        //nbInfoInterrupted
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        //nbInfoToSubmit
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        //nbInfoError
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        //nbInfoRunning
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        //nbInfoDone
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        // Current situation of all transfers, running or not
-        //nbStepAllTransfer
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        //memoryTotal
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        //memoryFree
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        //memoryUsed
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        //nbThreads
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        //nbNetworkConnection
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY)
-    };
-    
+    /**
+     * Global part
+     */
+    public static GgEntry[] goldenGateGlobalValues = {
+            // applUptime
+            new GgEntry(SMIConstants.SYNTAX_TIMETICKS,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // applOperStatus
+            new GgEntry(SMIConstants.SYNTAX_INTEGER,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // applLastChange
+            new GgEntry(SMIConstants.SYNTAX_TIMETICKS,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // applInboundAssociations
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // applOutboundAssociations
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // applAccumInboundAssociations
+            new GgEntry(SMIConstants.SYNTAX_COUNTER32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // applAccumOutboundAssociations
+            new GgEntry(SMIConstants.SYNTAX_COUNTER32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // applLastInboundActivity
+            new GgEntry(SMIConstants.SYNTAX_TIMETICKS,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // applLastOutboundActivity
+            new GgEntry(SMIConstants.SYNTAX_TIMETICKS,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // applRejectedInboundAssociations
+            new GgEntry(SMIConstants.SYNTAX_COUNTER32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // applFailedOutboundAssociations
+            new GgEntry(SMIConstants.SYNTAX_COUNTER32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // Bandwidth
+            // applInboundBandwidthKBS
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // applOutboundBandwidthKBS
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // Overall status including past, future and current transfers
+            // nbInfoUnknown
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoNotUpdated
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoInterrupted
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoToSubmit
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoError
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoRunning
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoDone
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // Current situation of all transfers, running or not
+            // nbStepAllTransfer
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // memoryTotal
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // memoryFree
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // memoryUsed
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbThreads
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbNetworkConnection
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY) };
+    /**
+     * Detailed part
+     * @author Frederic Bregier
+     *
+     */
     public static enum goldenGateDetailedValuesIndex {
         nbStepNotask,
         nbStepPretask,
@@ -440,41 +632,60 @@ public abstract class GgPrivateMib implements GgInterfaceMib {
         nbTransferOkStep,
         nbPostProcessingOkStep,
         nbCompleteOkStep;
-        
+
         public int getOID() {
-            return this.ordinal()+1;
+            return this.ordinal() + 1;
         }
     }
-    public static GgEntry [] goldenGateDetailedValues =
-    {
-        //nbStepNotask
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        //nbStepPretask
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        //nbStepTransfer
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        //nbStepPosttask
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        //nbStepAllDone
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        //nbStepError
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        // First on Running Transfers only
-        //nbAllRunningStep
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        //nbRunningStep
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        //nbInitOkStep
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        //nbPreProcessingOkStep
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        //nbTransferOkStep
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        //nbPostProcessingOkStep
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        //nbCompleteOkStep
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY)
-    };
+    /**
+     * Detailed part
+     */
+    public static GgEntry[] goldenGateDetailedValues = {
+            // nbStepNotask
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbStepPretask
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbStepTransfer
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbStepPosttask
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbStepAllDone
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbStepError
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // First on Running Transfers only
+            // nbAllRunningStep
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbRunningStep
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInitOkStep
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbPreProcessingOkStep
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbTransferOkStep
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbPostProcessingOkStep
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbCompleteOkStep
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY) };
+    /**
+     * Error part
+     * @author Frederic Bregier
+     *
+     */
     public static enum goldenGateErrorValuesIndex {
         nbStatusConnectionImpossible,
         nbStatusServerOverloaded,
@@ -500,76 +711,100 @@ public abstract class GgPrivateMib implements GgInterfaceMib {
         nbStatusCanceled,
         nbStatusFileNotFound,
         nbStatusUnknown;
-        
+
         public int getOID() {
-            return this.ordinal()+1;
+            return this.ordinal() + 1;
         }
     }
-    public static GgEntry [] goldenGateErrorValues =
-    {
-        // Error Status on all transfers
-        //nbStatusConnectionImpossible
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        //nbStatusServerOverloaded
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        //nbStatusBadAuthent
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        //nbStatusExternalOp
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        //nbStatusTransferError
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        //nbStatusMD5Error
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        //nbStatusDisconnection
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        //nbStatusFinalOp
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        //nbStatusUnimplemented
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        //nbStatusInternal
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        //nbStatusWarning
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        //nbStatusQueryAlreadyFinished
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        //nbStatusQueryStillRunning
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        //nbStatusNotKnownHost
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        //nbStatusQueryRemotelyUnknown
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        //nbStatusCommandNotFound
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        //nbStatusPassThroughMode
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        //nbStatusRemoteShutdown
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        //nbStatusShutdown
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        //nbStatusRemoteError
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        //nbStatusStopped
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        //nbStatusCanceled
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        //nbStatusFileNotFound
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY),
-        //nbStatusUnknown
-        new GgEntry(SMIConstants.SYNTAX_GAUGE32, MOAccessImpl.ACCESS_READ_ONLY)
-    };
-
+    /**
+     * Error part
+     */
+    public static GgEntry[] goldenGateErrorValues = {
+            // Error Status on all transfers
+            // nbStatusConnectionImpossible
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbStatusServerOverloaded
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbStatusBadAuthent
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbStatusExternalOp
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbStatusTransferError
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbStatusMD5Error
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbStatusDisconnection
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbStatusFinalOp
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbStatusUnimplemented
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbStatusInternal
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbStatusWarning
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbStatusQueryAlreadyFinished
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbStatusQueryStillRunning
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbStatusNotKnownHost
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbStatusQueryRemotelyUnknown
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbStatusCommandNotFound
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbStatusPassThroughMode
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbStatusRemoteShutdown
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbStatusShutdown
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbStatusRemoteError
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbStatusStopped
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbStatusCanceled
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbStatusFileNotFound
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbStatusUnknown
+            new GgEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY) };
+    /**
+     * Oper Status (as defined in Net Application SNMP)
+     * @author Frederic Bregier
+     *
+     */
     public static enum OperStatus {
-       up(1),
-       down(2),
-       halted(3),
-       congested(4),
-       restarting(5),
-       quiescing(6);
-       
-       public int status;
-       
-       private OperStatus(int status) {
-           this.status = status;
-       }
+        up(1), down(2), halted(3), congested(4), restarting(5), quiescing(6);
+
+        public int status;
+
+        private OperStatus(int status) {
+            this.status = status;
+        }
     }
 }

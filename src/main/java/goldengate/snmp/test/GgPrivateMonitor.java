@@ -38,7 +38,6 @@ public class GgPrivateMonitor implements GgInterfaceMonitor {
             .getLogger(GgPrivateMonitor.class);
 
     public GgSnmpAgent agent;
-    
 
     /**
      * @return the agent
@@ -48,7 +47,8 @@ public class GgPrivateMonitor implements GgInterfaceMonitor {
     }
 
     /**
-     * @param agent the agent to set
+     * @param agent
+     *            the agent to set
      */
     public void setAgent(GgSnmpAgent agent) {
         this.agent = agent;
@@ -80,22 +80,6 @@ public class GgPrivateMonitor implements GgInterfaceMonitor {
     /*
      * function to test if the computations need to be redone
      * 
-             // FIXME should test the OID
-        if (lastcheck > System.currentTimeMillis()+1000) {
-            // at least 1 second
-            return;
-        }
-        lastcheck = System.currentTimeMillis();
-        test--;
-        if (test >=0){
-            // no update
-            return;
-        }
-        Variable var;
-        lastChange = 1000;
-        lastInBand = lastChange-500;
-        lastOutBand = lastChange-100;
-
      */
     public void generalValuesUpdate() {
         synchronized (agent) {

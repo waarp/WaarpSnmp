@@ -51,6 +51,7 @@ import org.snmp4j.util.TableUtils;
 public class GgSimpleSnmpClient {
 
     private String address;
+
     private int port;
 
     private Snmp snmp;
@@ -85,7 +86,7 @@ public class GgSimpleSnmpClient {
      **/
     private void start() throws IOException {
         UdpAddress upaddress = new UdpAddress(port);
-        System.err.println("Listen: "+upaddress);
+        System.err.println("Listen: " + upaddress);
         TransportMapping transport = new DefaultUdpTransportMapping(upaddress);
         snmp = new Snmp(transport);
         // Do not forget this line!
@@ -185,7 +186,8 @@ public class GgSimpleSnmpClient {
             if (event.isError()) {
                 System.err.println(event);
                 continue;
-                //throw new RuntimeException(event.getErrorMessage(),event.getException());
+                // throw new
+                // RuntimeException(event.getErrorMessage(),event.getException());
             }
             List<String> strList = new ArrayList<String>();
             list.add(strList);

@@ -45,8 +45,14 @@ import org.snmp4j.smi.Variable;
  * 
  */
 public class GgMOFactory {
+    /**
+     * To be setup to default Factory to be used or kept as null for default one
+     */
     public static GgInterfaceVariableFactory factory = null;
 
+    /**
+     * Default one
+     */
     private static GgInterfaceVariableFactory defaultFactory = new GgDefaultVariableFactory();
 
     /**
@@ -72,10 +78,22 @@ public class GgMOFactory {
      */
     public static GgMOScalar create(OID oid, Object value, int type,
             MOAccess access, GgMORow row, int mibLevel, int entry) {
-        return new GgMOScalar(oid, access, getVariable(oid, value, type, mibLevel, entry), row);
+        return new GgMOScalar(oid, access, getVariable(oid, value, type,
+                mibLevel, entry), row);
     }
 
-    public static Variable getVariable(OID oid, Object value, int type, int mibLevel, int entry) {
+    /**
+     * Create a Variable using the arguments
+     * 
+     * @param oid
+     * @param value
+     * @param type
+     * @param mibLevel
+     * @param entry
+     * @return a Variable using the arguments
+     */
+    public static Variable getVariable(OID oid, Object value, int type,
+            int mibLevel, int entry) {
         Variable var = null;
         GgInterfaceVariableFactory vf;
         if (factory == null) {
@@ -131,6 +149,13 @@ public class GgMOFactory {
         return var;
     }
 
+    /**
+     * Set a Variable value
+     * 
+     * @param var
+     * @param value
+     * @param type
+     */
     public static void setVariable(Variable var, Object value, int type) {
         if (value != null) {
             switch (type) {
