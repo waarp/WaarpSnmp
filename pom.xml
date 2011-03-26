@@ -92,6 +92,14 @@
   			<enabled>false</enabled>
   		</snapshots>
   	</repository>
+  	<repository>
+  		<id>SNMP4J repository</id>
+  		<name>SNMP4J repository</name>
+  		<url>https://server.oosnmp.net/dist/release</url>
+  		<snapshots>
+  			<enabled>false</enabled>
+  		</snapshots>
+  	</repository>
   </repositories>
   <dependencies>
     <dependency>
