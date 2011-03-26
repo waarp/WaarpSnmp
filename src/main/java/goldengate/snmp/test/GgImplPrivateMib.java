@@ -139,7 +139,6 @@ public class GgImplPrivateMib extends GgPrivateMib {
     /**
      * Example of trap for All
      * 
-     * @param element
      * @param message
      * @param message2
      * @param number
@@ -178,7 +177,6 @@ public class GgImplPrivateMib extends GgPrivateMib {
     /**
      * Example of trap for Error
      * 
-     * @param element
      * @param message
      * @param message2
      * @param number

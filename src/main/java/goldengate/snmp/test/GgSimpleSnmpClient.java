@@ -57,7 +57,7 @@ public class GgSimpleSnmpClient {
     private Snmp snmp;
 
     /**
-     * @param address
+     * @param clientAddress
      * @param port
      */
     public GgSimpleSnmpClient(String clientAddress, int port) {
@@ -143,7 +143,7 @@ public class GgSimpleSnmpClient {
      * This method is capable of handling multiple OIDs
      * 
      * @param oids
-     * @return
+     * @return ResponseEvent
      * @throws IOException
      **/
     public ResponseEvent get(OID oids[]) throws IOException {

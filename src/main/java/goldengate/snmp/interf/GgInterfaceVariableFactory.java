@@ -35,7 +35,7 @@ public interface GgInterfaceVariableFactory {
      * @param type type of MIB
      * @param mibLevel level entry
      * @param entry entry rank
-     * @return
+     * @return the Variable
      */
     public Variable getVariable(OID oid, int type, int mibLevel, int entry);
 }
