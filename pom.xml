@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>GoldenGate</groupId>
   <artifactId>GoldenGateSnmp</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
   <name>GoldenGateSnmp</name>
   <description>GoldenGate SNMP support through SNMP4J</description>
   <url>http://openr66.free.fr/GoldenGateSnmp</url>
@@ -130,7 +130,7 @@
     <dependency>
     	<groupId>GoldenGate</groupId>
     	<artifactId>GoldenGateCommon</artifactId>
-    	<version>1.1.2</version>
+    	<version>1.1.4</version>
     	<type>jar</type>
     	<scope>compile</scope>
     </dependency>

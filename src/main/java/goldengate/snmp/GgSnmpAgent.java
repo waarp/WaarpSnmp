@@ -471,19 +471,29 @@ public class GgSnmpAgent extends BaseAgent {
             if (addr != null) {
                 logger.info("SNMP Agent InitTransport: {} {}", addr.getClass()
                         .getSimpleName(), addr);
-                TransportMapping tm = TransportMappings.getInstance()
+                TransportMapping tm = null;
+                try {
+                    tm = TransportMappings.getInstance()
                         .createTransportMapping(addr);
+                } catch (RuntimeException e) {
+                    continue;
+                }
                 if (tm != null) {
                     testMappings[nb] = tm;
                     nb ++;
                 }
             }
         }
-        transportMappings = new TransportMapping[nb];
-        for (int i = 0; i < nb; i ++) {
-            transportMappings[i] = testMappings[i];
+        if (nb > 0) {
+            transportMappings = new TransportMapping[nb];
+            for (int i = 0; i < nb; i ++) {
+                transportMappings[i] = testMappings[i];
+            }
+            testMappings = null;
+        } else {
+            transportMappings = null;
+            throw new IOException("No address to connect");
         }
-        testMappings = null;
     }
 
     /**
@@ -543,6 +553,9 @@ public class GgSnmpAgent extends BaseAgent {
      * Send a Notification just before Shutdown the SNMP service.
      */
     protected void sendShutdownNotification() {
+        if (this.mib == null || notificationOriginator == null) {
+            return;
+        }
         SNMPv2MIB snmpv2 = this.mib.getSNMPv2MIB();
         notificationOriginator.notify(
                 new OctetString("public"),
@@ -578,11 +591,15 @@ public class GgSnmpAgent extends BaseAgent {
             sendShutdownNotification();
         }
         super.stop();
-        monitor.releaseResources();
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
+        if (monitor != null) {
+            monitor.releaseResources();
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+            }
+            if (this.workerPool != null) {
+                this.workerPool.cancel();
+            }
         }
-        this.workerPool.cancel();
     }
 }

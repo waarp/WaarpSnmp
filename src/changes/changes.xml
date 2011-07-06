@@ -5,6 +5,10 @@
 		<author email="fredbregier at free.fr">Frederic Bregier</author>
 	</properties>
 	<body>
+		<release version="1.0.1" date="2011-07-06" description="Fix release">
+			<action dev="Frederic Bregier" type="fix">Fix some bugs</action>
+			<action dev="Frederic Bregier" type="fix">Update to new dependent Jars</action>
+		</release>
 		<release version="1.0.0" date="2011-03-27" description="Production release">
 			<action dev="Frederic Bregier" type="add">First release of SNMP support for GoldenGate project using SNMP4J</action>
 		</release>
