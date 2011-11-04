@@ -87,7 +87,7 @@ public class GgSimpleSnmpClient {
     private void start() throws IOException {
         UdpAddress upaddress = new UdpAddress(port);
         System.err.println("Listen: " + upaddress);
-        TransportMapping transport = new DefaultUdpTransportMapping(upaddress);
+        TransportMapping<UdpAddress> transport = new DefaultUdpTransportMapping(upaddress);
         snmp = new Snmp(transport);
         // Do not forget this line!
         transport.listen();
@@ -177,7 +177,6 @@ public class GgSimpleSnmpClient {
     public List<List<String>> getTableAsStrings(OID[] oids) {
         TableUtils tUtils = new TableUtils(snmp, new DefaultPDUFactory());
 
-        @SuppressWarnings("unchecked")
         List<TableEvent> events = tUtils
                 .getTable(getTarget(), oids, null, null);
 

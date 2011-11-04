@@ -439,6 +439,7 @@ public class GgSnmpAgent extends BaseAgent {
      * 
      * We only configure one, "public".
      */
+    @SuppressWarnings("unchecked")
     protected void addCommunities(SnmpCommunityMIB communityMIB) {
         Variable[] com2sec = new Variable[] {
                 new OctetString("public"), // community name
@@ -464,14 +465,14 @@ public class GgSnmpAgent extends BaseAgent {
      */
     @Override
     protected void initTransportMappings() throws IOException {
-        TransportMapping[] testMappings = new TransportMapping[address.length];
+        TransportMapping<?>[] testMappings = new TransportMapping[address.length];
         int nb = 0;
         for (int i = 0; i < address.length; i ++) {
             Address addr = GenericAddress.parse(address[i]);
             if (addr != null) {
                 logger.info("SNMP Agent InitTransport: {} {}", addr.getClass()
                         .getSimpleName(), addr);
-                TransportMapping tm = null;
+                TransportMapping<?> tm = null;
                 try {
                     tm = TransportMappings.getInstance()
                         .createTransportMapping(addr);

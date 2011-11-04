@@ -32,7 +32,7 @@ import org.snmp4j.smi.Variable;
  * @author Frederic Bregier
  * 
  */
-public class GgMOScalar extends MOScalar {
+public class GgMOScalar extends MOScalar<Variable> {
     public GgMORow row;
 
     /**
@@ -53,7 +53,7 @@ public class GgMOScalar extends MOScalar {
      * @see org.snmp4j.agent.mo.MOScalar#get(org.snmp4j.agent.request.SubRequest)
      */
     @Override
-    public void get(SubRequest request) {
+    public void get(@SuppressWarnings("rawtypes") SubRequest request) {
         row.mib.updateServices(this);
         super.get(request);
     }

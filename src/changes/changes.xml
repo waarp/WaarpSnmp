@@ -5,6 +5,9 @@
 		<author email="fredbregier at free.fr">Frederic Bregier</author>
 	</properties>
 	<body>
+		<release version="1.0.2" date="2011-07-06" description="Update Jars dependencies">
+			<action dev="Frederic Bregier" type="fix">Update to new dependent Jars</action>
+		</release>
 		<release version="1.0.1" date="2011-07-06" description="Fix release">
 			<action dev="Frederic Bregier" type="fix">Fix some bugs</action>
 			<action dev="Frederic Bregier" type="fix">Update to new dependent Jars</action>
