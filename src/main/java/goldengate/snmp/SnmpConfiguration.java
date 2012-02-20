@@ -250,9 +250,10 @@ public class SnmpConfiguration {
             } else if (nb < length) {
                 // less addresses than intended
                 address = new String[nb];
-                for (int i = 0; i < nb; i ++) {
+                System.arraycopy(tmp, 0, address, 0, nb);
+                /*for (int i = 0; i < nb; i ++) {
                     address[i] = tmp[i];
-                }
+                }*/
             }
         }
         value = hashConfig.get(SNMP_NBTHREAD);

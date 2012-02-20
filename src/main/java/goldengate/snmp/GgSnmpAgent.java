@@ -487,9 +487,10 @@ public class GgSnmpAgent extends BaseAgent {
         }
         if (nb > 0) {
             transportMappings = new TransportMapping[nb];
-            for (int i = 0; i < nb; i ++) {
+            System.arraycopy(testMappings, 0, transportMappings, 0, nb);
+            /*for (int i = 0; i < nb; i ++) {
                 transportMappings[i] = testMappings[i];
-            }
+            }*/
             testMappings = null;
         } else {
             transportMappings = null;
