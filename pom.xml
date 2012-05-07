@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>GoldenGate</groupId>
   <artifactId>GoldenGateSnmp</artifactId>
-  <version>1.0.4</version>
+  <version>1.0.5</version>
   <name>GoldenGateSnmp</name>
   <description>GoldenGate SNMP support through SNMP4J</description>
   <url>http://openr66.free.fr/GoldenGateSnmp</url>
@@ -48,17 +48,20 @@
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-access</artifactId>
-      <version>1.0.0</version>
+      <version>1.0.3</version>
+      <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
-      <version>1.0.0</version>
+      <version>1.0.3</version>
+      <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-core</artifactId>
-      <version>1.0.0</version>
+      <version>1.0.3</version>
+      <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.snmp4j</groupId>
@@ -73,8 +76,7 @@
     <dependency>
     	<groupId>GoldenGate</groupId>
     	<artifactId>GoldenGateCommon</artifactId>
-    	<version>1.1.8</version>
-    	<scope>compile</scope>
+    	<version>1.1.11</version>
     </dependency>
   </dependencies>
   <properties>
