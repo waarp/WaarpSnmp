@@ -1,0 +1,10 @@
+
+# /
+/.settings
+
+# /src/main/
+/src/main/bootCounter.agent
+/src/main/conf.agent
+/src/main/dummyBootCounter.agent
+/src/main/dummyConf.agent
+[?1034h
