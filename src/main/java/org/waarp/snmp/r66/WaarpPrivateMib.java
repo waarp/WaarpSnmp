@@ -42,7 +42,7 @@ import org.waarp.snmp.utils.MemoryGauge32;
 import org.waarp.snmp.utils.MemoryGauge32.MemoryType;
 
 /**
- * Private MIB for GoldenGate OpenR66
+ * Private MIB for Waarp OpenR66
  * 
  * @author Frederic Bregier
  * 
@@ -63,7 +63,7 @@ public abstract class WaarpPrivateMib implements WaarpInterfaceMib {
     /**
      *  SnmpConstants.sysObjectID
      */
-    public OID ggObjectId = null; // will be smiPrivateCode.typeGoldenGate
+    public OID ggObjectId = null; // will be smiPrivateCode.typeWaarp
 
     /** 
      * SnmpConstants.sysContact
@@ -94,7 +94,7 @@ public abstract class WaarpPrivateMib implements WaarpInterfaceMib {
 
     /**
      *  need to add ".port" like "6666" Only in TCP (no UDP supported for
-     *  GoldenGate)
+     *  Waarp)
      *  
      *  example: rootEnterpriseMib+"66666"+".1.1.4.";
      */
@@ -111,32 +111,32 @@ public abstract class WaarpPrivateMib implements WaarpInterfaceMib {
     public int smiPrivateCode = 66666;
 
     /**
-     *  identification of GoldenGate module
+     *  identification of Waarp module
      */
-    public int smiTypeGoldengate = 66; // default = 66 = R66
+    public int smiTypeWaarp = 66; // default = 66 = R66
     /**
      * root OID in String
      */
-    public String srootOIDGoldenGate;
+    public String srootOIDWaarp;
     /**
      * root OID
      */
-    public OID rootOIDGoldenGate;
+    public OID rootOIDWaarp;
 
     /**
      *  Used in Notify
      */
-    public OID rootOIDGoldenGateNotif;
+    public OID rootOIDWaarpNotif;
 
     /**
      *  Used in Notify Start or Shutdown
      */
-    public OID rootOIDGoldenGateNotifStartOrShutdown;
+    public OID rootOIDWaarpNotifStartOrShutdown;
 
     /**
      *  Info static part
      */
-    public OID rootOIDGoldenGateInfo;
+    public OID rootOIDWaarpInfo;
     /**
      * Info Row access
      */
@@ -145,7 +145,7 @@ public abstract class WaarpPrivateMib implements WaarpInterfaceMib {
     /**
      *  Global dynamic part
      */
-    public OID rootOIDGoldenGateGlobal;
+    public OID rootOIDWaarpGlobal;
     /**
      * Global Row access
      */
@@ -154,7 +154,7 @@ public abstract class WaarpPrivateMib implements WaarpInterfaceMib {
     /**
      *  Uptime OID
      */
-    public OID rootOIDGoldenGateGlobalUptime;
+    public OID rootOIDWaarpGlobalUptime;
 
     /**
      *  Corresponding UpTime in Mib
@@ -164,7 +164,7 @@ public abstract class WaarpPrivateMib implements WaarpInterfaceMib {
     /**
      *  Detailed dynamic part
      */
-    public OID rootOIDGoldenGateDetailed;
+    public OID rootOIDWaarpDetailed;
     /**
      * Detailed Row access
      */
@@ -173,7 +173,7 @@ public abstract class WaarpPrivateMib implements WaarpInterfaceMib {
     /**
      *  Error dynamic part
      */
-    public OID rootOIDGoldenGateError;
+    public OID rootOIDWaarpError;
     /**
      * Error Row access
      */
@@ -193,37 +193,37 @@ public abstract class WaarpPrivateMib implements WaarpInterfaceMib {
      * @param sysdesc The System Description to associate
      * @param port the port to show as used by the application
      * @param smiPrivateCodeFinal the smiPrivateCode (should be 66666)
-     * @param typeGoldenGateObject the type of GoldenGate Object (should be 66)
+     * @param typeWaarpObject the type of Waarp Object (should be 66)
      * @param scontactName the contact name to show
      * @param stextualName the textual name to show
      * @param saddress the address to show
      * @param iservice the service to show (should be 72)
      */
     public WaarpPrivateMib(String sysdesc, int port, int smiPrivateCodeFinal,
-            int typeGoldenGateObject, String scontactName, String stextualName,
+            int typeWaarpObject, String scontactName, String stextualName,
             String saddress, int iservice) {
         textualSysDecr = sysdesc;
         smiPrivateCode = smiPrivateCodeFinal;
-        smiTypeGoldengate = typeGoldenGateObject;
+        smiTypeWaarp = typeWaarpObject;
         contactName = scontactName;
         textualName = stextualName;
         address = saddress;
         service = iservice;
-        srootOIDGoldenGate = rootEnterpriseMib.toString() + "." +
-                smiPrivateCode + "." + smiTypeGoldengate;
-        applicationProtocolBase = srootOIDGoldenGate + ".1.1.4.";
-        ggObjectId = new OID(srootOIDGoldenGate);
+        srootOIDWaarp = rootEnterpriseMib.toString() + "." +
+                smiPrivateCode + "." + smiTypeWaarp;
+        applicationProtocolBase = srootOIDWaarp + ".1.1.4.";
+        ggObjectId = new OID(srootOIDWaarp);
         applicationProtocol = new OID(applicationProtocolBase + port);
-        rootOIDGoldenGate = new OID(srootOIDGoldenGate);
-        rootOIDGoldenGateInfo = new OID(srootOIDGoldenGate + ".1");
-        rootOIDGoldenGateGlobal = new OID(srootOIDGoldenGate + ".2");
-        rootOIDGoldenGateGlobalUptime = new OID(
-                rootOIDGoldenGateGlobal.toString() + "." +
-                        goldenGateGlobalValuesIndex.applUptime.getOID() + ".0");
-        rootOIDGoldenGateDetailed = new OID(srootOIDGoldenGate + ".3");
-        rootOIDGoldenGateError = new OID(srootOIDGoldenGate + ".4");
-        rootOIDGoldenGateNotif = new OID(srootOIDGoldenGate + ".5.1");
-        rootOIDGoldenGateNotifStartOrShutdown = new OID(srootOIDGoldenGate +
+        rootOIDWaarp = new OID(srootOIDWaarp);
+        rootOIDWaarpInfo = new OID(srootOIDWaarp + ".1");
+        rootOIDWaarpGlobal = new OID(srootOIDWaarp + ".2");
+        rootOIDWaarpGlobalUptime = new OID(
+                rootOIDWaarpGlobal.toString() + "." +
+                        WaarpGlobalValuesIndex.applUptime.getOID() + ".0");
+        rootOIDWaarpDetailed = new OID(srootOIDWaarp + ".3");
+        rootOIDWaarpError = new OID(srootOIDWaarp + ".4");
+        rootOIDWaarpNotif = new OID(srootOIDWaarp + ".5.1");
+        rootOIDWaarpNotifStartOrShutdown = new OID(srootOIDWaarp +
                 ".5.1.1.1");
     }
 
@@ -244,7 +244,7 @@ public abstract class WaarpPrivateMib implements WaarpInterfaceMib {
      */
     @Override
     public OID getBaseOidStartOrShutdown() {
-        return rootOIDGoldenGateNotifStartOrShutdown;
+        return rootOIDWaarpNotifStartOrShutdown;
     }
 
     /*
@@ -293,38 +293,38 @@ public abstract class WaarpPrivateMib implements WaarpInterfaceMib {
      * 
      * @throws DuplicateRegistrationException
      */
-    protected void defaultAgentRegisterGoldenGateMib()
+    protected void defaultAgentRegisterWaarpMib()
             throws DuplicateRegistrationException {
         // register Static info
-        rowInfo = new WaarpMORow(this, rootOIDGoldenGateInfo,
-                goldenGateDefinition, MibLevel.staticInfo.ordinal());
+        rowInfo = new WaarpMORow(this, rootOIDWaarpInfo,
+                WaarpDefinition, MibLevel.staticInfo.ordinal());
         rowInfo.registerMOs(agent.getServer(), null);
         // register General info
-        rowGlobal = new WaarpMORow(this, rootOIDGoldenGateGlobal,
-                goldenGateGlobalValues, MibLevel.globalInfo.ordinal());
-        WaarpMOScalar memoryScalar = rowGlobal.row[goldenGateGlobalValuesIndex.memoryTotal
+        rowGlobal = new WaarpMORow(this, rootOIDWaarpGlobal,
+                WaarpGlobalValues, MibLevel.globalInfo.ordinal());
+        WaarpMOScalar memoryScalar = rowGlobal.row[WaarpGlobalValuesIndex.memoryTotal
                 .ordinal()];
         memoryScalar.setValue(new MemoryGauge32(MemoryType.TotalMemory));
-        memoryScalar = rowGlobal.row[goldenGateGlobalValuesIndex.memoryFree
+        memoryScalar = rowGlobal.row[WaarpGlobalValuesIndex.memoryFree
                 .ordinal()];
         memoryScalar.setValue(new MemoryGauge32(MemoryType.FreeMemory));
-        memoryScalar = rowGlobal.row[goldenGateGlobalValuesIndex.memoryUsed
+        memoryScalar = rowGlobal.row[WaarpGlobalValuesIndex.memoryUsed
                 .ordinal()];
         memoryScalar.setValue(new MemoryGauge32(MemoryType.UsedMemory));
         rowGlobal.registerMOs(agent.getServer(), null);
         // setup UpTime to SysUpTime and change status
-        scalarUptime = rowGlobal.row[goldenGateGlobalValuesIndex.applUptime
+        scalarUptime = rowGlobal.row[WaarpGlobalValuesIndex.applUptime
                 .ordinal()];
         scalarUptime.setValue(new WaarpUptime(upTime));
         changeStatus(OperStatus.restarting);
         changeStatus(OperStatus.up);
         // register Detailed info
-        rowDetailed = new WaarpMORow(this, rootOIDGoldenGateDetailed,
-                goldenGateDetailedValues, MibLevel.detailedInfo.ordinal());
+        rowDetailed = new WaarpMORow(this, rootOIDWaarpDetailed,
+                WaarpDetailedValues, MibLevel.detailedInfo.ordinal());
         rowDetailed.registerMOs(agent.getServer(), null);
         // register Error info
-        rowError = new WaarpMORow(this, rootOIDGoldenGateError,
-                goldenGateErrorValues, MibLevel.errorInfo.ordinal());
+        rowError = new WaarpMORow(this, rootOIDWaarpError,
+                WaarpErrorValues, MibLevel.errorInfo.ordinal());
         rowError.registerMOs(agent.getServer(), null);
     }
 
@@ -333,14 +333,14 @@ public abstract class WaarpPrivateMib implements WaarpInterfaceMib {
      * 
      * @throws DuplicateRegistrationException
      */
-    protected abstract void agentRegisterGoldenGateMib()
+    protected abstract void agentRegisterWaarpMib()
             throws DuplicateRegistrationException;
 
     /**
      * Unregister this MIB
      */
     protected void agentUnregisterMibs() {
-        logger.debug("UnRegisterGoldenGate");
+        logger.debug("UnRegisterWaarp");
         rowInfo.unregisterMOs(agent.getServer(), agent.getDefaultContext());
         rowGlobal.unregisterMOs(agent.getServer(), agent.getDefaultContext());
         rowDetailed.unregisterMOs(agent.getServer(), agent.getDefaultContext());
@@ -357,7 +357,7 @@ public abstract class WaarpPrivateMib implements WaarpInterfaceMib {
     public void registerMOs(MOServer server, OctetString context)
             throws DuplicateRegistrationException {
         agentRegisterSystem();
-        agentRegisterGoldenGateMib();
+        agentRegisterWaarpMib();
     }
 
     /*
@@ -377,12 +377,12 @@ public abstract class WaarpPrivateMib implements WaarpInterfaceMib {
      * @param status
      */
     public void changeStatus(OperStatus status) {
-        WaarpMOScalar statusScalar = rowGlobal.row[goldenGateGlobalValuesIndex.applOperStatus
+        WaarpMOScalar statusScalar = rowGlobal.row[WaarpGlobalValuesIndex.applOperStatus
                 .ordinal()];
         Integer32 var = (Integer32) statusScalar.getValue();
         if (var.getValue() != status.status) {
             var.setValue(status.status);
-            WaarpMOScalar lastTimeScalar = rowGlobal.row[goldenGateGlobalValuesIndex.applLastChange
+            WaarpMOScalar lastTimeScalar = rowGlobal.row[WaarpGlobalValuesIndex.applLastChange
                     .ordinal()];
             TimeTicks time = (TimeTicks) lastTimeScalar.getValue();
             time.setValue(upTime.get().getValue());
@@ -457,7 +457,7 @@ public abstract class WaarpPrivateMib implements WaarpInterfaceMib {
      * @author Frederic Bregier
      *
      */
-    public static enum goldenGateDefinitionIndex {
+    public static enum WaarpDefinitionIndex {
         applName,
         applServerName,
         applVersion,
@@ -472,7 +472,7 @@ public abstract class WaarpPrivateMib implements WaarpInterfaceMib {
     /**
      * Definition part
      */
-    public static WaarpEntry[] goldenGateDefinition = {
+    public static WaarpEntry[] WaarpDefinition = {
             // applName
             new WaarpEntry(SMIConstants.SYNTAX_OCTET_STRING,
                     MOAccessImpl.ACCESS_READ_ONLY),
@@ -496,7 +496,7 @@ public abstract class WaarpPrivateMib implements WaarpInterfaceMib {
      * @author Frederic Bregier
      *
      */
-    public static enum goldenGateGlobalValuesIndex {
+    public static enum WaarpGlobalValuesIndex {
         applUptime,
         applOperStatus,
         applLastChange,
@@ -531,7 +531,7 @@ public abstract class WaarpPrivateMib implements WaarpInterfaceMib {
     /**
      * Global part
      */
-    public static WaarpEntry[] goldenGateGlobalValues = {
+    public static WaarpEntry[] WaarpGlobalValues = {
             // applUptime
             new WaarpEntry(SMIConstants.SYNTAX_TIMETICKS,
                     MOAccessImpl.ACCESS_READ_ONLY),
@@ -618,7 +618,7 @@ public abstract class WaarpPrivateMib implements WaarpInterfaceMib {
      * @author Frederic Bregier
      *
      */
-    public static enum goldenGateDetailedValuesIndex {
+    public static enum WaarpDetailedValuesIndex {
         nbStepNotask,
         nbStepPretask,
         nbStepTransfer,
@@ -640,7 +640,7 @@ public abstract class WaarpPrivateMib implements WaarpInterfaceMib {
     /**
      * Detailed part
      */
-    public static WaarpEntry[] goldenGateDetailedValues = {
+    public static WaarpEntry[] WaarpDetailedValues = {
             // nbStepNotask
             new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
                     MOAccessImpl.ACCESS_READ_ONLY),
@@ -686,7 +686,7 @@ public abstract class WaarpPrivateMib implements WaarpInterfaceMib {
      * @author Frederic Bregier
      *
      */
-    public static enum goldenGateErrorValuesIndex {
+    public static enum WaarpErrorValuesIndex {
         nbStatusConnectionImpossible,
         nbStatusServerOverloaded,
         nbStatusBadAuthent,
@@ -719,7 +719,7 @@ public abstract class WaarpPrivateMib implements WaarpInterfaceMib {
     /**
      * Error part
      */
-    public static WaarpEntry[] goldenGateErrorValues = {
+    public static WaarpEntry[] WaarpErrorValues = {
             // Error Status on all transfers
             // nbStatusConnectionImpossible
             new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
