@@ -1,21 +1,24 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>GoldenGate</groupId>
-  <artifactId>GoldenGateSnmp</artifactId>
-  <version>1.0.5</version>
-  <name>GoldenGateSnmp</name>
-  <description>GoldenGate SNMP support through SNMP4J</description>
-  <url>http://openr66.free.fr/GoldenGateSnmp</url>
+  <artifactId>WaarpSnmp</artifactId>
+  <version>1.1.0</version>
+  <name>WaarpSnmp</name>
+  <description>Waarp SNMP support through SNMP4J</description>
+  <url>http://waarp.github.com/WaarpDigest</url>
   <inceptionYear>2009</inceptionYear>
   <parent>
-    <groupId>GoldenGate</groupId>
+    <groupId>Waarp</groupId>
     <artifactId>persistence-deps</artifactId>
-    <version>1.1</version>
+    <version>1.2</version>
   </parent>
+  <issueManagement>
+	<system>GitHub</system>
+  	<url>https://github.com/waarp/WaarpDigest/issues/</url>
+  </issueManagement>
   <scm>
-  	<connection>scm:svn:http://goldengate.svn.sourceforge.net/svnroot/goldengate/GoldenGateSnmp/trunk</connection>
-  	<developerConnection>scm:svn:https://goldengate.svn.sourceforge.net/svnroot/goldengate/GoldenGateSnmp/trunk</developerConnection>
-  	<url>http://goldengate.svn.sourceforge.net/svnroot/goldengate/GoldenGateSnmp/trunk</url>
+  	<connection>scm:git:git://github.com/waarp/WaarpDigest.git</connection>
+  	<developerConnection>scm:git:git@github.com:YourID/WaarpDigest.git</developerConnection>
+  	<url>https://github.com/waarp/WaarpDigest</url>
   </scm>
   <licenses>
   	<license>
@@ -25,9 +28,9 @@
   </licenses>
   <repositories>
   	<repository>
-  		<id>goldengate.releases</id>
-  		<name>GoldenGate releases</name>
-  		<url>http://openr66.free.fr/maven2</url>
+  		<id>waarp.releases</id>
+  		<name>Waarp releases</name>
+  		<url>http://waarp.github.com/Waarp/maven2</url>
   		<releases>
   			<enabled>true</enabled>
   		</releases>
@@ -66,17 +69,17 @@
     <dependency>
       <groupId>org.snmp4j</groupId>
       <artifactId>snmp4j</artifactId>
-      <version>2.0.3</version>
+      <version>2.1.0</version>
     </dependency>
     <dependency>
       <groupId>org.snmp4j</groupId>
       <artifactId>snmp4j-agent</artifactId>
-      <version>2.0.5</version>
+      <version>2.0.6</version>
     </dependency>
     <dependency>
-    	<groupId>GoldenGate</groupId>
-    	<artifactId>GoldenGateCommon</artifactId>
-    	<version>1.1.11</version>
+    	<groupId>Waarp</groupId>
+    	<artifactId>WaarpCommon</artifactId>
+    	<version>1.2.0</version>
     </dependency>
   </dependencies>
   <properties>
@@ -101,11 +104,11 @@
                 <mkdir dir="${project.build.directory}"/>
                 <mkdir dir="${project.build.directory}/classes"/>
                 <echo message="${project.version}" file="${project.build.directory}/version.txt" />
-                <echo message="// DO NOT MODIFY - WILL BE OVERWRITTEN DURING THE BUILD PROCESS${line.separator}package goldengate.snmp.utils;${line.separator}/** Provides the version information of GoldenGate SNMP */${line.separator}public final class Version {${line.separator} /** The version identifier. */${line.separator} public static final String ID = &quot;${project.version}&quot;;${line.separator} /** Prints out the version identifier to stdout. */${line.separator} public static void main(String[] args) { System.out.println(ID); }${line.separator} private Version() { super(); }${line.separator}}${line.separator}" file="${basedir}/src/main/java/goldengate/snmp/utils/Version.java" />
+                <echo message="// DO NOT MODIFY - WILL BE OVERWRITTEN DURING THE BUILD PROCESS${line.separator}package org.waarp.snmp.utils;${line.separator}/** Provides the version information of Waarp SNMP */${line.separator}public final class Version {${line.separator} /** The version identifier. */${line.separator} public static final String ID = &quot;${project.version}&quot;;${line.separator} /** Prints out the version identifier to stdout. */${line.separator} public static void main(String[] args) { System.out.println(ID); }${line.separator} private Version() { super(); }${line.separator}}${line.separator}" file="${basedir}/src/main/java/org/waarp/snmp/utils/Version.java" />
                 <echo message="${project.artifactId}" />
                 <taskdef resource="net/sf/antcontrib/antlib.xml" />
                 <if>
-                <equals arg1="${project.artifactId}" arg2="GoldenGateSnmp"/>
+                <equals arg1="${project.artifactId}" arg2="WaarpSnmp"/>
                 <then>
                 	<mkdir dir="${project.build.directory}/site"/>
                 </then>
@@ -203,15 +206,15 @@
 	          <windowtitle>${project.name} ${project.version} API Reference</windowtitle>
 	          <additionalparam>
 	            -link http://java.sun.com/javase/6/docs/api/
-	            -link http://jboss.org/file-access/default/members/netty/freezone/api/3.1/
+	            -link http://static.netty.io/3.5/api/
 
-				-group "GoldenGate SNMP Support package" "ggsnmp*"
+				-group "Waarp SNMP Support package" "org.waarp.snmp*"
 
 	            -sourceclasspath ${basedir}/target/classes
 	          </additionalparam>
 	          <encoding>UTF-8</encoding>
 	          <locale>en_US</locale>
-	          <excludePackageNames>${project.groupId}.example*:${project.groupId}.util.internal*</excludePackageNames>
+	          <excludePackageNames>${project.groupId}.test*:${project.groupId}.example*:${project.groupId}.util.internal*</excludePackageNames>
           </configuration>
           <reports>
            <report>aggregate</report>
