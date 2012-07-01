@@ -1,6 +1,6 @@
-GoldenGate SNMP
+Waarp SNMP
 
-  The GoldenGate SNMP support is made to provide SNMP agent support to softwares in GoldenGate project.
+  The Waarp SNMP support is made to provide SNMP agent support to softwares in Waarp project.
   It is based on SNMP4J library.
 
 Dependency

@@ -1,10 +1,10 @@
-GoldenGateSNMP Configuration
+WaarpSNMP Configuration
 
-*How to configure GoldenGate SNMP support
+*How to configure Waarp SNMP support
 
 **Configuration file
 
-  In the zip distribution <GoldenGateSnmp-X.Y.Z-dist.zip> (available at sourceforge for download),
+  In the zip distribution <WaarpSnmp-X.Y.Z-dist.zip> (available at github for download),
   you will find an extra directory named: <src/main/config> where one example file is located as:
   <snmpconfig.xml>.
 
