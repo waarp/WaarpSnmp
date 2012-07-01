@@ -68,8 +68,8 @@ public class WaarpTestSnmpClientAgent {
         // Create a monitor
         WaarpPrivateMonitor monitor = new WaarpPrivateMonitor();
         // Create a Mib
-        test = new WaarpImplPrivateMib("GoldenGate Test SNMP", 6666, 66666, 66,
-                "F. Bregier", "GoldenGate Test SNMP V1.0", "Paris, France", 72);
+        test = new WaarpImplPrivateMib("Waarp Test SNMP", 6666, 66666, 66,
+                "F. Bregier", "Waarp Test SNMP V1.0", "Paris, France", 72);
         // Set the default VariableFactory
         WaarpMOFactory.factory = new WaarpTestVariableFactory();
         // Create the agent associated with the monitor and Mib
@@ -117,7 +117,7 @@ public class WaarpTestSnmpClientAgent {
 
     public static void sendNotification() {
         test.notifyInfo("Une alerte", "un autre texte d'alerte", 1971);
-        test.notifyError("Une seconde alerte", "un second texte d'alerte", 42);
+        test.notifyError("Une seconde alerte", "un second texte d'alerte", 20);
     }
 
     static class StringResponseListener implements ResponseListener {
