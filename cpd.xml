@@ -1,0 +1,993 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd-cpd>
+<duplication lines="44" tokens="250">
+<file line="105" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\WaarpMOFactory.java"/>
+<file line="160" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\WaarpMOFactory.java"/>
+<codefragment>
+<![CDATA[
+        if (value != null) {
+            switch (type) {
+                case SMIConstants.SYNTAX_INTEGER:
+                    // case SMIConstants.SYNTAX_INTEGER32:
+                    ((Integer32) var).setValue((Integer) value);
+                    break;
+                case SMIConstants.SYNTAX_OCTET_STRING:
+                    // case SMIConstants.SYNTAX_BITS:
+                    ((OctetString) var).setValue(value.toString());
+                    break;
+                case SMIConstants.SYNTAX_NULL:
+                    break;
+                case SMIConstants.SYNTAX_OBJECT_IDENTIFIER:
+                    ((OID) var).setValue(value.toString());
+                    break;
+                case SMIConstants.SYNTAX_IPADDRESS:
+                    ((IpAddress) var).setValue(value.toString());
+                    break;
+                case SMIConstants.SYNTAX_COUNTER32:
+                    ((Counter32) var).setValue((Long) value);
+                    break;
+                case SMIConstants.SYNTAX_GAUGE32:
+                    // case SMIConstants.SYNTAX_UNSIGNED_INTEGER32:
+                    ((Gauge32) var).setValue((Long) value);
+                    break;
+                case SMIConstants.SYNTAX_TIMETICKS:
+                    if (value instanceof TimeTicks) {
+                        ((TimeTicks) var).setValue(((TimeTicks) value)
+                                .toString());
+                    } else {
+                        ((TimeTicks) var).setValue((Long) value);
+                    }
+                    break;
+                case SMIConstants.SYNTAX_OPAQUE:
+                    ((Opaque) var).setValue((byte[]) value);
+                    break;
+                case SMIConstants.SYNTAX_COUNTER64:
+                    ((Counter64) var).setValue((Long) value);
+                    break;
+                default:
+                    throw new IllegalArgumentException("Unmanaged Type: " +
+                            value.getClass());
+            }
+        }
+]]>
+</codefragment>
+</duplication>
+<duplication lines="56" tokens="189">
+<file line="566" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="749" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<codefragment>
+<![CDATA[
+            new WaarpEntry(SMIConstants.SYNTAX_COUNTER32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // Bandwidth
+            // applInboundBandwidthKBS
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // applOutboundBandwidthKBS
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // Overall status including past, future and current transfers
+            // nbInfoUnknown
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoNotUpdated
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoInterrupted
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoToSubmit
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoError
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoRunning
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoDone
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // Current situation of all transfers, running or not
+            // nbStepAllTransfer
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // memoryTotal
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // memoryFree
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // memoryUsed
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbThreads
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbNetworkConnection
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY) };
+    /**
+     * Detailed part
+     * @author Frederic Bregier
+     *
+     */
+    public static enum WaarpDetailedValuesIndex {
+]]>
+</codefragment>
+</duplication>
+<duplication lines="50" tokens="185">
+<file line="566" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="725" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="728" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="731" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="734" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="737" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="740" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="743" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="746" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<codefragment>
+<![CDATA[
+            new WaarpEntry(SMIConstants.SYNTAX_COUNTER32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // Bandwidth
+            // applInboundBandwidthKBS
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // applOutboundBandwidthKBS
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // Overall status including past, future and current transfers
+            // nbInfoUnknown
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoNotUpdated
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoInterrupted
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoToSubmit
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoError
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoRunning
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoDone
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // Current situation of all transfers, running or not
+            // nbStepAllTransfer
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // memoryTotal
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // memoryFree
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // memoryUsed
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbThreads
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbNetworkConnection
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY) };
+]]>
+</codefragment>
+</duplication>
+<duplication lines="46" tokens="179">
+<file line="570" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="725" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<codefragment>
+<![CDATA[
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // applOutboundBandwidthKBS
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // Overall status including past, future and current transfers
+            // nbInfoUnknown
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoNotUpdated
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoInterrupted
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoToSubmit
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoError
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoRunning
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoDone
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // Current situation of all transfers, running or not
+            // nbStepAllTransfer
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // memoryTotal
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // memoryFree
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // memoryUsed
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbThreads
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbNetworkConnection
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY) };
+]]>
+</codefragment>
+</duplication>
+<duplication lines="47" tokens="173">
+<file line="566" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="752" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<codefragment>
+<![CDATA[
+            new WaarpEntry(SMIConstants.SYNTAX_COUNTER32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // Bandwidth
+            // applInboundBandwidthKBS
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // applOutboundBandwidthKBS
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // Overall status including past, future and current transfers
+            // nbInfoUnknown
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoNotUpdated
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoInterrupted
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoToSubmit
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoError
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoRunning
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoDone
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // Current situation of all transfers, running or not
+            // nbStepAllTransfer
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // memoryTotal
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // memoryFree
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // memoryUsed
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbThreads
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+]]>
+</codefragment>
+</duplication>
+<duplication lines="43" tokens="167">
+<file line="573" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="725" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<codefragment>
+<![CDATA[
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // Overall status including past, future and current transfers
+            // nbInfoUnknown
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoNotUpdated
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoInterrupted
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoToSubmit
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoError
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoRunning
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoDone
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // Current situation of all transfers, running or not
+            // nbStepAllTransfer
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // memoryTotal
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // memoryFree
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // memoryUsed
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbThreads
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbNetworkConnection
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY) };
+]]>
+</codefragment>
+</duplication>
+<duplication lines="44" tokens="161">
+<file line="566" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="755" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<codefragment>
+<![CDATA[
+            new WaarpEntry(SMIConstants.SYNTAX_COUNTER32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // Bandwidth
+            // applInboundBandwidthKBS
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // applOutboundBandwidthKBS
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // Overall status including past, future and current transfers
+            // nbInfoUnknown
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoNotUpdated
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoInterrupted
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoToSubmit
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoError
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoRunning
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoDone
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // Current situation of all transfers, running or not
+            // nbStepAllTransfer
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // memoryTotal
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // memoryFree
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // memoryUsed
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+]]>
+</codefragment>
+</duplication>
+<duplication lines="45" tokens="159">
+<file line="577" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="645" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="758" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<codefragment>
+<![CDATA[
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoNotUpdated
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoInterrupted
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoToSubmit
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoError
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoRunning
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoDone
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // Current situation of all transfers, running or not
+            // nbStepAllTransfer
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // memoryTotal
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // memoryFree
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // memoryUsed
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbThreads
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbNetworkConnection
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY) };
+    /**
+     * Detailed part
+     * @author Frederic Bregier
+     *
+     */
+    public static enum WaarpDetailedValuesIndex {
+]]>
+</codefragment>
+</duplication>
+<duplication lines="41" tokens="157">
+<file line="643" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="722" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<codefragment>
+<![CDATA[
+    public static WaarpEntry[] WaarpDetailedValues = {
+            // nbStepNotask
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbStepPretask
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbStepTransfer
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbStepPosttask
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbStepAllDone
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbStepError
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // First on Running Transfers only
+            // nbAllRunningStep
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbRunningStep
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInitOkStep
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbPreProcessingOkStep
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbTransferOkStep
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbPostProcessingOkStep
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbCompleteOkStep
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY) };
+]]>
+</codefragment>
+</duplication>
+<duplication lines="39" tokens="155">
+<file line="577" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="725" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<codefragment>
+<![CDATA[
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoNotUpdated
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoInterrupted
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoToSubmit
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoError
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoRunning
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoDone
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // Current situation of all transfers, running or not
+            // nbStepAllTransfer
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // memoryTotal
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // memoryFree
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // memoryUsed
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbThreads
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbNetworkConnection
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY) };
+]]>
+</codefragment>
+</duplication>
+<duplication lines="40" tokens="155">
+<file line="570" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="573" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="645" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="728" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="731" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="734" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="737" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="740" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="743" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="746" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="749" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="752" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="755" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<codefragment>
+<![CDATA[
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // applOutboundBandwidthKBS
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // Overall status including past, future and current transfers
+            // nbInfoUnknown
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoNotUpdated
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoInterrupted
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoToSubmit
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoError
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoRunning
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoDone
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // Current situation of all transfers, running or not
+            // nbStepAllTransfer
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // memoryTotal
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // memoryFree
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // memoryUsed
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+]]>
+</codefragment>
+</duplication>
+<duplication lines="41" tokens="149">
+<file line="566" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="645" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="758" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<codefragment>
+<![CDATA[
+            new WaarpEntry(SMIConstants.SYNTAX_COUNTER32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // Bandwidth
+            // applInboundBandwidthKBS
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // applOutboundBandwidthKBS
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // Overall status including past, future and current transfers
+            // nbInfoUnknown
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoNotUpdated
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoInterrupted
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoToSubmit
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoError
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoRunning
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoDone
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // Current situation of all transfers, running or not
+            // nbStepAllTransfer
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // memoryTotal
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // memoryFree
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+]]>
+</codefragment>
+</duplication>
+<duplication lines="36" tokens="143">
+<file line="580" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="645" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="648" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="725" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="761" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<codefragment>
+<![CDATA[
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoInterrupted
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoToSubmit
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoError
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoRunning
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoDone
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // Current situation of all transfers, running or not
+            // nbStepAllTransfer
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // memoryTotal
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // memoryFree
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // memoryUsed
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbThreads
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbNetworkConnection
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY) };
+]]>
+</codefragment>
+</duplication>
+<duplication lines="38" tokens="137">
+<file line="566" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="648" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="761" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<codefragment>
+<![CDATA[
+            new WaarpEntry(SMIConstants.SYNTAX_COUNTER32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // Bandwidth
+            // applInboundBandwidthKBS
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // applOutboundBandwidthKBS
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // Overall status including past, future and current transfers
+            // nbInfoUnknown
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoNotUpdated
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoInterrupted
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoToSubmit
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoError
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoRunning
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoDone
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // Current situation of all transfers, running or not
+            // nbStepAllTransfer
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // memoryTotal
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+]]>
+</codefragment>
+</duplication>
+<duplication lines="33" tokens="131">
+<file line="583" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="645" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="651" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="725" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="764" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<codefragment>
+<![CDATA[
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoToSubmit
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoError
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoRunning
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoDone
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // Current situation of all transfers, running or not
+            // nbStepAllTransfer
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // memoryTotal
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // memoryFree
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // memoryUsed
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbThreads
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbNetworkConnection
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY) };
+]]>
+</codefragment>
+</duplication>
+<duplication lines="35" tokens="125">
+<file line="566" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="651" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="764" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<codefragment>
+<![CDATA[
+            new WaarpEntry(SMIConstants.SYNTAX_COUNTER32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // Bandwidth
+            // applInboundBandwidthKBS
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // applOutboundBandwidthKBS
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // Overall status including past, future and current transfers
+            // nbInfoUnknown
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoNotUpdated
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoInterrupted
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoToSubmit
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoError
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoRunning
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoDone
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // Current situation of all transfers, running or not
+            // nbStepAllTransfer
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+]]>
+</codefragment>
+</duplication>
+<duplication lines="30" tokens="119">
+<file line="586" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="645" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="654" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="725" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="767" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<codefragment>
+<![CDATA[
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoError
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoRunning
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoDone
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // Current situation of all transfers, running or not
+            // nbStepAllTransfer
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // memoryTotal
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // memoryFree
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // memoryUsed
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbThreads
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbNetworkConnection
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY) };
+]]>
+</codefragment>
+</duplication>
+<duplication lines="31" tokens="113">
+<file line="566" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="654" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="767" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<codefragment>
+<![CDATA[
+            new WaarpEntry(SMIConstants.SYNTAX_COUNTER32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // Bandwidth
+            // applInboundBandwidthKBS
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // applOutboundBandwidthKBS
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // Overall status including past, future and current transfers
+            // nbInfoUnknown
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoNotUpdated
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoInterrupted
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoToSubmit
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoError
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoRunning
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoDone
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+]]>
+</codefragment>
+</duplication>
+<duplication lines="27" tokens="107">
+<file line="589" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="645" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="657" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="725" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="770" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<codefragment>
+<![CDATA[
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoRunning
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoDone
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // Current situation of all transfers, running or not
+            // nbStepAllTransfer
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // memoryTotal
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // memoryFree
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // memoryUsed
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbThreads
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbNetworkConnection
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY) };
+]]>
+</codefragment>
+</duplication>
+<duplication lines="28" tokens="101">
+<file line="566" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="657" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="770" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<codefragment>
+<![CDATA[
+            new WaarpEntry(SMIConstants.SYNTAX_COUNTER32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // Bandwidth
+            // applInboundBandwidthKBS
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // applOutboundBandwidthKBS
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // Overall status including past, future and current transfers
+            // nbInfoUnknown
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoNotUpdated
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoInterrupted
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoToSubmit
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoError
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+            // nbInfoRunning
+            new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
+                    MOAccessImpl.ACCESS_READ_ONLY),
+]]>
+</codefragment>
+</duplication>
+</pmd-cpd>

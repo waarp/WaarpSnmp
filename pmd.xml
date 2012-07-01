@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd version="4.3" timestamp="2012-07-01T23:11:53.711">
+<file name="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\SnmpConfiguration.java">
+<violation beginline="60" endline="648" begincolumn="32" endcolumn="1" rule="UseSingleton" ruleset="Design Rules" package="org.waarp.snmp" class="SnmpConfiguration" externalInfoUrl="http://pmd.sourceforge.net/rules/design.html#UseSingleton" priority="3">
+All methods are static.  Consider using Singleton instead.  Alternatively, you could add a private constructor or make the class abstract to silence this warning.
+</violation>
+<violation beginline="550" endline="563" begincolumn="17" endcolumn="17" rule="SwitchStmtsShouldHaveDefault" ruleset="Design Rules" package="org.waarp.snmp" class="SnmpConfiguration" method="loadTarget" externalInfoUrl="http://pmd.sourceforge.net/rules/design.html#SwitchStmtsShouldHaveDefault" priority="3">
+Switch statements should have a default label
+</violation>
+<violation beginline="597" endline="601" begincolumn="37" endcolumn="42" rule="AccessorClassGeneration" ruleset="Design Rules" package="org.waarp.snmp" class="SnmpConfiguration" method="loadTarget" externalInfoUrl="http://pmd.sourceforge.net/rules/design.html#AccessorClassGeneration" priority="3">
+Avoid instantiation through private constructors from outside of the constructor's class.
+</violation>
+</file>
+<file name="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\WaarpMOFactory.java">
+<violation beginline="47" endline="205" begincolumn="29" endcolumn="1" rule="UseSingleton" ruleset="Design Rules" package="org.waarp.snmp" class="WaarpMOFactory" externalInfoUrl="http://pmd.sourceforge.net/rules/design.html#UseSingleton" priority="3">
+All methods are static.  Consider using Singleton instead.  Alternatively, you could add a private constructor or make the class abstract to silence this warning.
+</violation>
+</file>
+<file name="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\WaarpSnmpAgent.java">
+<violation beginline="79" endline="79" begincolumn="22" endcolumn="28" rule="ImmutableField" ruleset="Design Rules" package="org.waarp.snmp" class="WaarpSnmpAgent" variable="address" externalInfoUrl="http://pmd.sourceforge.net/rules/design.html#ImmutableField" priority="3">
+Private field 'address' could be made final; it is only initialized in the declaration or constructor.
+</violation>
+<violation beginline="82" endline="82" begincolumn="13" endcolumn="29" rule="SingularField" ruleset="Design Rules" package="org.waarp.snmp" class="WaarpSnmpAgent" variable="nbThread" externalInfoUrl="http://pmd.sourceforge.net/rules/design.html#SingularField" priority="3">
+Perhaps 'nbThread' could be replaced by a local variable.
+</violation>
+<violation beginline="82" endline="82" begincolumn="17" endcolumn="24" rule="ImmutableField" ruleset="Design Rules" package="org.waarp.snmp" class="WaarpSnmpAgent" variable="nbThread" externalInfoUrl="http://pmd.sourceforge.net/rules/design.html#ImmutableField" priority="3">
+Private field 'nbThread' could be made final; it is only initialized in the declaration or constructor.
+</violation>
+<violation beginline="84" endline="84" begincolumn="21" endcolumn="41" rule="ImmutableField" ruleset="Design Rules" package="org.waarp.snmp" class="WaarpSnmpAgent" variable="isFilterAccessEnabled" externalInfoUrl="http://pmd.sourceforge.net/rules/design.html#ImmutableField" priority="3">
+Private field 'isFilterAccessEnabled' could be made final; it is only initialized in the declaration or constructor.
+</violation>
+<violation beginline="86" endline="86" begincolumn="21" endcolumn="27" rule="ImmutableField" ruleset="Design Rules" package="org.waarp.snmp" class="WaarpSnmpAgent" variable="useTrap" externalInfoUrl="http://pmd.sourceforge.net/rules/design.html#ImmutableField" priority="3">
+Private field 'useTrap' could be made final; it is only initialized in the declaration or constructor.
+</violation>
+<violation beginline="90" endline="90" begincolumn="27" endcolumn="37" rule="ImmutableField" ruleset="Design Rules" package="org.waarp.snmp" class="WaarpSnmpAgent" variable="listUsmUser" externalInfoUrl="http://pmd.sourceforge.net/rules/design.html#ImmutableField" priority="3">
+Private field 'listUsmUser' could be made final; it is only initialized in the declaration or constructor.
+</violation>
+<violation beginline="92" endline="92" begincolumn="33" endcolumn="50" rule="ImmutableField" ruleset="Design Rules" package="org.waarp.snmp" class="WaarpSnmpAgent" variable="listTargetElements" externalInfoUrl="http://pmd.sourceforge.net/rules/design.html#ImmutableField" priority="3">
+Private field 'listTargetElements' could be made final; it is only initialized in the declaration or constructor.
+</violation>
+<violation beginline="94" endline="94" begincolumn="21" endcolumn="25" rule="ImmutableField" ruleset="Design Rules" package="org.waarp.snmp" class="WaarpSnmpAgent" variable="hasV2" externalInfoUrl="http://pmd.sourceforge.net/rules/design.html#ImmutableField" priority="3">
+Private field 'hasV2' could be made final; it is only initialized in the declaration or constructor.
+</violation>
+<violation beginline="96" endline="96" begincolumn="21" endcolumn="25" rule="ImmutableField" ruleset="Design Rules" package="org.waarp.snmp" class="WaarpSnmpAgent" variable="hasV3" externalInfoUrl="http://pmd.sourceforge.net/rules/design.html#ImmutableField" priority="3">
+Private field 'hasV3' could be made final; it is only initialized in the declaration or constructor.
+</violation>
+<violation beginline="100" endline="100" begincolumn="24" endcolumn="33" rule="ImmutableField" ruleset="Design Rules" package="org.waarp.snmp" class="WaarpSnmpAgent" variable="workerPool" externalInfoUrl="http://pmd.sourceforge.net/rules/design.html#ImmutableField" priority="3">
+Private field 'workerPool' could be made final; it is only initialized in the declaration or constructor.
+</violation>
+</file>
+<file name="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\interf\WaarpCounter32.java">
+<violation beginline="80" endline="82" begincolumn="12" endcolumn="5" rule="EmptyMethodInAbstractClassShouldBeAbstract" ruleset="Design Rules" package="org.waarp.snmp.interf" class="WaarpCounter32" externalInfoUrl="http://pmd.sourceforge.net/rules/design.html#EmptyMethodInAbstractClassShouldBeAbstract" priority="1">
+An empty method in an abstract class should be abstract instead
+</violation>
+</file>
+<file name="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\interf\WaarpGauge32.java">
+<violation beginline="80" endline="82" begincolumn="12" endcolumn="5" rule="EmptyMethodInAbstractClassShouldBeAbstract" ruleset="Design Rules" package="org.waarp.snmp.interf" class="WaarpGauge32" externalInfoUrl="http://pmd.sourceforge.net/rules/design.html#EmptyMethodInAbstractClassShouldBeAbstract" priority="1">
+An empty method in an abstract class should be abstract instead
+</violation>
+</file>
+<file name="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\interf\WaarpTimeTicks.java">
+<violation beginline="80" endline="82" begincolumn="12" endcolumn="5" rule="EmptyMethodInAbstractClassShouldBeAbstract" ruleset="Design Rules" package="org.waarp.snmp.interf" class="WaarpTimeTicks" externalInfoUrl="http://pmd.sourceforge.net/rules/design.html#EmptyMethodInAbstractClassShouldBeAbstract" priority="1">
+An empty method in an abstract class should be abstract instead
+</violation>
+</file>
+<file name="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\utils\MemoryGauge32.java">
+<violation beginline="54" endline="67" begincolumn="9" endcolumn="9" rule="SwitchStmtsShouldHaveDefault" ruleset="Design Rules" package="org.waarp.snmp.utils" class="MemoryGauge32" method="setInternalValue" externalInfoUrl="http://pmd.sourceforge.net/rules/design.html#SwitchStmtsShouldHaveDefault" priority="3">
+Switch statements should have a default label
+</violation>
+<violation beginline="81" endline="81" begincolumn="9" endcolumn="26" rule="ConstructorCallsOverridableMethod" ruleset="Design Rules" package="org.waarp.snmp.utils" class="MemoryGauge32" externalInfoUrl="http://pmd.sourceforge.net/rules/design.html#ConstructorCallsOverridableMethod" priority="1">
+Overridable method 'setInternalValue' called during object construction
+</violation>
+</file>
+<file name="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\utils\WaarpUptime.java">
+<violation beginline="49" endline="49" begincolumn="9" endcolumn="26" rule="ConstructorCallsOverridableMethod" ruleset="Design Rules" package="org.waarp.snmp.utils" class="WaarpUptime" externalInfoUrl="http://pmd.sourceforge.net/rules/design.html#ConstructorCallsOverridableMethod" priority="1">
+Overridable method 'setInternalValue' called during object construction
+</violation>
+</file>
+</pmd>
