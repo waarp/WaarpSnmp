@@ -4,7 +4,7 @@
   <version>1.1.0</version>
   <name>WaarpSnmp</name>
   <description>Waarp SNMP support through SNMP4J</description>
-  <url>http://waarp.github.com/WaarpDigest</url>
+  <url>http://waarp.github.com/WaarpSnmp</url>
   <inceptionYear>2009</inceptionYear>
   <parent>
     <groupId>Waarp</groupId>
@@ -13,12 +13,12 @@
   </parent>
   <issueManagement>
 	<system>GitHub</system>
-  	<url>https://github.com/waarp/WaarpDigest/issues/</url>
+  	<url>https://github.com/waarp/WaarpSnmp/issues/</url>
   </issueManagement>
   <scm>
-  	<connection>scm:git:git://github.com/waarp/WaarpDigest.git</connection>
-  	<developerConnection>scm:git:git@github.com:YourID/WaarpDigest.git</developerConnection>
-  	<url>https://github.com/waarp/WaarpDigest</url>
+  	<connection>scm:git:git://github.com/waarp/WaarpSnmp.git</connection>
+  	<developerConnection>scm:git:git@github.com:YourID/WaarpSnmp.git</developerConnection>
+  	<url>https://github.com/waarp/WaarpSnmp</url>
   </scm>
   <licenses>
   	<license>
