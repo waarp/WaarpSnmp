@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <artifactId>WaarpSnmp</artifactId>
-  <version>1.1.1</version>
+  <version>1.1.2</version>
   <name>WaarpSnmp</name>
   <description>Waarp SNMP support through SNMP4J</description>
   <url>http://waarp.github.com/WaarpSnmp</url>
@@ -51,19 +51,19 @@
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-access</artifactId>
-      <version>1.0.6</version>
+      <version>1.0.7</version>
       <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
-      <version>1.0.6</version>
+      <version>1.0.7</version>
       <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-core</artifactId>
-      <version>1.0.6</version>
+      <version>1.0.7</version>
       <optional>true</optional>
     </dependency>
     <dependency>
@@ -79,7 +79,7 @@
     <dependency>
     	<groupId>Waarp</groupId>
     	<artifactId>WaarpCommon</artifactId>
-    	<version>1.2.2</version>
+    	<version>1.2.8</version>
     </dependency>
   </dependencies>
   <properties>

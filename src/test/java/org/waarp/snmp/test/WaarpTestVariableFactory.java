@@ -39,12 +39,6 @@ import org.waarp.snmp.interf.WaarpInterfaceVariableFactory;
  */
 public class WaarpTestVariableFactory implements WaarpInterfaceVariableFactory {
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.waarp.snmp.GgVariableFactory#getVariable(OID, int, int, int)
-     */
-    @Override
     public Variable getVariable(OID oid, int type, int mibLevel, int entry) {
         Variable var;
         switch (type) {

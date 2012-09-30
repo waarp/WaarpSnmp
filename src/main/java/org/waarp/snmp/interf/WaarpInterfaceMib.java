@@ -56,7 +56,11 @@ public interface WaarpInterfaceMib extends MOGroup {
         /**
          * Trap/Notification for all important elements
          */
-        All;
+        All,
+        /**
+         * Trap/Notification for all, whatever level
+         */
+        AllEvents;
 
         public boolean isLevelValid(int level) {
             return (level >= this.ordinal());
