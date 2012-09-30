@@ -124,7 +124,6 @@ public class WaarpTestSnmpClientAgent {
 
         private String value = null;
 
-        @Override
         public void onResponse(ResponseEvent event) {
             System.out.println(event.getResponse());
             if (event.getResponse() != null) {

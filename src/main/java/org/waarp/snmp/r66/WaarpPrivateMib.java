@@ -227,32 +227,14 @@ public abstract class WaarpPrivateMib implements WaarpInterfaceMib {
                 ".5.1.1.1");
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.waarp.snmp.GgInterfaceMib#setAgent(org.waarp.snmp.WaarpSnmpAgent)
-     */
-    @Override
     public void setAgent(WaarpSnmpAgent agent) {
         this.agent = agent;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.waarp.snmp.GgInterfaceMib#getBaseOidStartOrShutdown()
-     */
-    @Override
     public OID getBaseOidStartOrShutdown() {
         return rootOIDWaarpNotifStartOrShutdown;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.waarp.snmp.GgInterfaceMib#getSNMPv2MIB()
-     */
-    @Override
     public SNMPv2MIB getSNMPv2MIB() {
         return snmpv2;
     }
@@ -347,26 +329,12 @@ public abstract class WaarpPrivateMib implements WaarpInterfaceMib {
         rowError.unregisterMOs(agent.getServer(), agent.getDefaultContext());
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.snmp4j.agent.MOGroup#registerMOs(org.snmp4j.agent.MOServer,
-     * org.snmp4j.smi.OctetString)
-     */
-    @Override
     public void registerMOs(MOServer server, OctetString context)
             throws DuplicateRegistrationException {
         agentRegisterSystem();
         agentRegisterWaarpMib();
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.snmp4j.agent.MOGroup#unregisterMOs(org.snmp4j.agent.MOServer,
-     * org.snmp4j.smi.OctetString)
-     */
-    @Override
     public void unregisterMOs(MOServer server, OctetString context) {
         agentUnregisterMibs();
     }

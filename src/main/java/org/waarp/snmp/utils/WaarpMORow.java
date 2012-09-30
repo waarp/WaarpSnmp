@@ -99,13 +99,6 @@ public class WaarpMORow implements MOGroup {
         WaarpMOFactory.setVariable(var, value, type[index]);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.snmp4j.agent.MOGroup#registerMOs(org.snmp4j.agent.MOServer,
-     * org.snmp4j.smi.OctetString)
-     */
-    @Override
     public void registerMOs(MOServer server, OctetString context)
             throws DuplicateRegistrationException {
         for (int i = 0; i < row.length; i ++) {
@@ -114,13 +107,6 @@ public class WaarpMORow implements MOGroup {
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.snmp4j.agent.MOGroup#unregisterMOs(org.snmp4j.agent.MOServer,
-     * org.snmp4j.smi.OctetString)
-     */
-    @Override
     public void unregisterMOs(MOServer server, OctetString context) {
         for (int i = 0; i < row.length; i ++) {
             WaarpMOScalar scalar = row[i];

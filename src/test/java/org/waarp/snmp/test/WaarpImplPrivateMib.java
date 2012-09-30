@@ -61,12 +61,6 @@ public class WaarpImplPrivateMib extends WaarpPrivateMib {
                 scontactName, stextualName, saddress, iservice);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.waarp.snmp.GgInterfaceMib#updateServices()
-     */
-    @Override
     public void updateServices(WaarpMOScalar scalar) {
         // 3 groups to check
         OID oid = scalar.getOid();
@@ -83,13 +77,6 @@ public class WaarpImplPrivateMib extends WaarpPrivateMib {
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * org.waarp.snmp.GgInterfaceMib#updateServices(org.snmp4j.agent.MOScope)
-     */
-    @Override
     public void updateServices(MOScope range) {
         // UpTime first
         OID low = range.getLowerBound();

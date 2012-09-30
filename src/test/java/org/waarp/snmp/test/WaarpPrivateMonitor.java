@@ -55,23 +55,11 @@ public class WaarpPrivateMonitor implements WaarpInterfaceMonitor {
         this.agent = agent;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.waarp.snmp.GgInterfaceMonitor#initialize()
-     */
-    @Override
     public void initialize() {
         // TODO Auto-generated method stub
         logger.warn("Call");
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.waarp.snmp.GgInterfaceMonitor#releaseResources()
-     */
-    @Override
     public void releaseResources() {
         // TODO Auto-generated method stub
         logger.warn("Call");
