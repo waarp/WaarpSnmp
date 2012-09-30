@@ -53,8 +53,8 @@
 </codefragment>
 </duplication>
 <duplication lines="56" tokens="189">
-<file line="566" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="749" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="534" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="717" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
 <codefragment>
 <![CDATA[
             new WaarpEntry(SMIConstants.SYNTAX_COUNTER32,
@@ -117,15 +117,15 @@
 </codefragment>
 </duplication>
 <duplication lines="50" tokens="185">
-<file line="566" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="725" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="728" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="731" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="734" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="737" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="740" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="743" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="746" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="534" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="693" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="696" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="699" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="702" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="705" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="708" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="711" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="714" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
 <codefragment>
 <![CDATA[
             new WaarpEntry(SMIConstants.SYNTAX_COUNTER32,
@@ -182,8 +182,8 @@
 </codefragment>
 </duplication>
 <duplication lines="46" tokens="179">
-<file line="570" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="725" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="538" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="693" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
 <codefragment>
 <![CDATA[
             new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
@@ -236,8 +236,8 @@
 </codefragment>
 </duplication>
 <duplication lines="47" tokens="173">
-<file line="566" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="752" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="534" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="720" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
 <codefragment>
 <![CDATA[
             new WaarpEntry(SMIConstants.SYNTAX_COUNTER32,
@@ -291,8 +291,8 @@
 </codefragment>
 </duplication>
 <duplication lines="43" tokens="167">
-<file line="573" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="725" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="541" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="693" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
 <codefragment>
 <![CDATA[
             new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
@@ -342,8 +342,8 @@
 </codefragment>
 </duplication>
 <duplication lines="44" tokens="161">
-<file line="566" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="755" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="534" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="723" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
 <codefragment>
 <![CDATA[
             new WaarpEntry(SMIConstants.SYNTAX_COUNTER32,
@@ -394,9 +394,9 @@
 </codefragment>
 </duplication>
 <duplication lines="45" tokens="159">
-<file line="577" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="645" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="758" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="545" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="613" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="726" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
 <codefragment>
 <![CDATA[
             new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
@@ -448,8 +448,8 @@
 </codefragment>
 </duplication>
 <duplication lines="41" tokens="157">
-<file line="643" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="722" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="611" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="690" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
 <codefragment>
 <![CDATA[
     public static WaarpEntry[] WaarpDetailedValues = {
@@ -497,8 +497,8 @@
 </codefragment>
 </duplication>
 <duplication lines="39" tokens="155">
-<file line="577" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="725" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="545" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="693" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
 <codefragment>
 <![CDATA[
             new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
@@ -544,19 +544,19 @@
 </codefragment>
 </duplication>
 <duplication lines="40" tokens="155">
-<file line="570" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="573" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="645" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="728" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="731" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="734" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="737" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="740" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="743" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="746" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="749" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="752" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="755" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="538" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="541" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="613" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="696" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="699" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="702" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="705" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="708" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="711" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="714" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="717" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="720" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="723" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
 <codefragment>
 <![CDATA[
             new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
@@ -603,9 +603,9 @@
 </codefragment>
 </duplication>
 <duplication lines="41" tokens="149">
-<file line="566" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="645" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="758" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="534" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="613" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="726" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
 <codefragment>
 <![CDATA[
             new WaarpEntry(SMIConstants.SYNTAX_COUNTER32,
@@ -653,11 +653,11 @@
 </codefragment>
 </duplication>
 <duplication lines="36" tokens="143">
-<file line="580" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="645" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="648" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="725" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="761" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="548" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="613" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="616" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="693" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="729" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
 <codefragment>
 <![CDATA[
             new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
@@ -700,9 +700,9 @@
 </codefragment>
 </duplication>
 <duplication lines="38" tokens="137">
-<file line="566" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="648" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="761" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="534" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="616" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="729" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
 <codefragment>
 <![CDATA[
             new WaarpEntry(SMIConstants.SYNTAX_COUNTER32,
@@ -747,11 +747,11 @@
 </codefragment>
 </duplication>
 <duplication lines="33" tokens="131">
-<file line="583" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="645" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="651" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="725" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="764" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="551" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="613" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="619" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="693" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="732" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
 <codefragment>
 <![CDATA[
             new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
@@ -791,9 +791,9 @@
 </codefragment>
 </duplication>
 <duplication lines="35" tokens="125">
-<file line="566" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="651" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="764" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="534" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="619" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="732" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
 <codefragment>
 <![CDATA[
             new WaarpEntry(SMIConstants.SYNTAX_COUNTER32,
@@ -835,11 +835,11 @@
 </codefragment>
 </duplication>
 <duplication lines="30" tokens="119">
-<file line="586" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="645" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="654" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="725" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="767" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="554" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="613" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="622" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="693" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="735" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
 <codefragment>
 <![CDATA[
             new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
@@ -876,9 +876,9 @@
 </codefragment>
 </duplication>
 <duplication lines="31" tokens="113">
-<file line="566" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="654" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="767" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="534" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="622" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="735" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
 <codefragment>
 <![CDATA[
             new WaarpEntry(SMIConstants.SYNTAX_COUNTER32,
@@ -916,11 +916,11 @@
 </codefragment>
 </duplication>
 <duplication lines="27" tokens="107">
-<file line="589" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="645" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="657" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="725" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="770" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="557" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="613" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="625" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="693" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="738" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
 <codefragment>
 <![CDATA[
             new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
@@ -954,9 +954,9 @@
 </codefragment>
 </duplication>
 <duplication lines="28" tokens="101">
-<file line="566" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="657" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
-<file line="770" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="534" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="625" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
+<file line="738" path="J:\Git\github\waarp-digest\WaarpSnmp\src\main\java\org\waarp\snmp\r66\WaarpPrivateMib.java"/>
 <codefragment>
 <![CDATA[
             new WaarpEntry(SMIConstants.SYNTAX_COUNTER32,
