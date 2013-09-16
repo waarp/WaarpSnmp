@@ -362,8 +362,9 @@ public class SnmpConfiguration {
                 if (value == null || (value.isEmpty())) {
                     // not allowed
                     securityProtocol = null;
+                } else {
+                	securityPassphrase = value.getString();
                 }
-                securityPassphrase = value.getString();
             }
             value = subHash.get(SNMP_SECURITY_PRIV_PROTOCOL);
             PrivacyProtocolList privprot = null;
@@ -381,8 +382,9 @@ public class SnmpConfiguration {
                 if (value == null || (value.isEmpty())) {
                     // not allowed
                     securityPrivProtocol = null;
+                } else {
+                	securityPrivPassphrase = value.getString();
                 }
-                securityPrivPassphrase = value.getString();
             }
             UsmUser usm = new UsmUser(new OctetString(securityName),
                     secprot == null? null : secprot.oid, secprot == null? null
@@ -569,16 +571,18 @@ public class SnmpConfiguration {
             value = subHash.get(SNMP_TARGET_TIMEOUT);
             if (value == null || (value.isEmpty())) {
                 targetTimeout = 200;
+            } else {
+            	targetTimeout = value.getInteger();
             }
-            targetTimeout = value.getInteger();
             if (targetTimeout <= 100) {
                 targetTimeout = 100;
             }
             value = subHash.get(SNMP_TARGET_RETRIES);
             if (value == null || (value.isEmpty())) {
                 targetRetries = 1;
+            } else {
+            	targetRetries = value.getInteger();
             }
-            targetRetries = value.getInteger();
             if (targetRetries <= 0) targetRetries = 1;
             value = subHash.get(SNMP_TARGET_ISV2);
             boolean isV2 = true;
