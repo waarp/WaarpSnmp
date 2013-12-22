@@ -296,13 +296,13 @@
 <a class="jxr_linenumber" name="286" href="#286">286</a>                 WaarpGlobalValues, MibLevel.globalInfo.ordinal());
 <a class="jxr_linenumber" name="287" href="#287">287</a>         <a href="../../../../org/waarp/snmp/utils/WaarpMOScalar.html">WaarpMOScalar</a> memoryScalar = rowGlobal.row[WaarpGlobalValuesIndex.memoryTotal
 <a class="jxr_linenumber" name="288" href="#288">288</a>                 .ordinal()];
-<a class="jxr_linenumber" name="289" href="#289">289</a>         memoryScalar.setValue(<strong class="jxr_keyword">new</strong> <a href="../../../../org/waarp/snmp/utils/MemoryGauge32.html">MemoryGauge32</a>(MemoryType.TotalMemory));
+<a class="jxr_linenumber" name="289" href="#289">289</a>         memoryScalar.setValue(<strong class="jxr_keyword">new</strong> MemoryGauge32(MemoryType.TotalMemory));
 <a class="jxr_linenumber" name="290" href="#290">290</a>         memoryScalar = rowGlobal.row[WaarpGlobalValuesIndex.memoryFree
 <a class="jxr_linenumber" name="291" href="#291">291</a>                 .ordinal()];
-<a class="jxr_linenumber" name="292" href="#292">292</a>         memoryScalar.setValue(<strong class="jxr_keyword">new</strong> <a href="../../../../org/waarp/snmp/utils/MemoryGauge32.html">MemoryGauge32</a>(MemoryType.FreeMemory));
+<a class="jxr_linenumber" name="292" href="#292">292</a>         memoryScalar.setValue(<strong class="jxr_keyword">new</strong> MemoryGauge32(MemoryType.FreeMemory));
 <a class="jxr_linenumber" name="293" href="#293">293</a>         memoryScalar = rowGlobal.row[WaarpGlobalValuesIndex.memoryUsed
 <a class="jxr_linenumber" name="294" href="#294">294</a>                 .ordinal()];
-<a class="jxr_linenumber" name="295" href="#295">295</a>         memoryScalar.setValue(<strong class="jxr_keyword">new</strong> <a href="../../../../org/waarp/snmp/utils/MemoryGauge32.html">MemoryGauge32</a>(MemoryType.UsedMemory));
+<a class="jxr_linenumber" name="295" href="#295">295</a>         memoryScalar.setValue(<strong class="jxr_keyword">new</strong> MemoryGauge32(MemoryType.UsedMemory));
 <a class="jxr_linenumber" name="296" href="#296">296</a>         rowGlobal.registerMOs(agent.getServer(), <strong class="jxr_keyword">null</strong>);
 <a class="jxr_linenumber" name="297" href="#297">297</a>         <em class="jxr_comment">// setup UpTime to SysUpTime and change status</em>
 <a class="jxr_linenumber" name="298" href="#298">298</a>         scalarUptime = rowGlobal.row[WaarpGlobalValuesIndex.applUptime

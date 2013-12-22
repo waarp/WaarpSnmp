@@ -38,7 +38,7 @@
 <a class="jxr_linenumber" name="28" href="#28">28</a>  <em class="jxr_javadoccomment"> * </em>
 <a class="jxr_linenumber" name="29" href="#29">29</a>  <em class="jxr_javadoccomment"> */</em>
 <a class="jxr_linenumber" name="30" href="#30">30</a>  @SuppressWarnings(<span class="jxr_string">"serial"</span>)
-<a class="jxr_linenumber" name="31" href="#31">31</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">abstract</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../org/waarp/snmp/interf/WaarpCounter32.html">WaarpCounter32</a> <strong class="jxr_keyword">extends</strong> Counter32 {
+<a class="jxr_linenumber" name="31" href="#31">31</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">abstract</strong> <strong class="jxr_keyword">class</strong> WaarpCounter32 <strong class="jxr_keyword">extends</strong> Counter32 {
 <a class="jxr_linenumber" name="32" href="#32">32</a>      <em class="jxr_javadoccomment">/**</em>
 <a class="jxr_linenumber" name="33" href="#33">33</a>  <em class="jxr_javadoccomment">     * Function to set the data before it is accessed by SNMP4J. This function</em>
 <a class="jxr_linenumber" name="34" href="#34">34</a>  <em class="jxr_javadoccomment">     * MUST call setValue(long)</em>
@@ -51,11 +51,11 @@
 <a class="jxr_linenumber" name="41" href="#41">41</a>  <em class="jxr_javadoccomment">     */</em>
 <a class="jxr_linenumber" name="42" href="#42">42</a>      <strong class="jxr_keyword">protected</strong> <strong class="jxr_keyword">abstract</strong> <strong class="jxr_keyword">void</strong> setInternalValue(<strong class="jxr_keyword">long</strong> value);
 <a class="jxr_linenumber" name="43" href="#43">43</a>  
-<a class="jxr_linenumber" name="44" href="#44">44</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../org/waarp/snmp/interf/WaarpCounter32.html">WaarpCounter32</a>() {
+<a class="jxr_linenumber" name="44" href="#44">44</a>      <strong class="jxr_keyword">public</strong> WaarpCounter32() {
 <a class="jxr_linenumber" name="45" href="#45">45</a>          setInternalValue();
 <a class="jxr_linenumber" name="46" href="#46">46</a>      }
 <a class="jxr_linenumber" name="47" href="#47">47</a>  
-<a class="jxr_linenumber" name="48" href="#48">48</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../org/waarp/snmp/interf/WaarpCounter32.html">WaarpCounter32</a>(<strong class="jxr_keyword">long</strong> value) {
+<a class="jxr_linenumber" name="48" href="#48">48</a>      <strong class="jxr_keyword">public</strong> WaarpCounter32(<strong class="jxr_keyword">long</strong> value) {
 <a class="jxr_linenumber" name="49" href="#49">49</a>          setInternalValue(value);
 <a class="jxr_linenumber" name="50" href="#50">50</a>      }
 <a class="jxr_linenumber" name="51" href="#51">51</a>  
