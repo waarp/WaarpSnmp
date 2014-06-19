@@ -16,6 +16,7 @@ local.properties
 .settings/
 .loadpath
 .pmd
+bin/
 
 # External tool builders
 .externalToolBuilders/
