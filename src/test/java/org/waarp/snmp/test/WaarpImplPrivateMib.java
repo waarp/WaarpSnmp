@@ -26,8 +26,8 @@ import org.snmp4j.smi.Counter64;
 import org.snmp4j.smi.OID;
 import org.snmp4j.smi.OctetString;
 import org.snmp4j.smi.VariableBinding;
-import org.waarp.common.logging.WaarpInternalLogger;
-import org.waarp.common.logging.WaarpInternalLoggerFactory;
+import org.waarp.common.logging.WaarpLogger;
+import org.waarp.common.logging.WaarpLoggerFactory;
 import org.waarp.snmp.r66.WaarpPrivateMib;
 import org.waarp.snmp.utils.WaarpMOScalar;
 
@@ -41,7 +41,7 @@ public class WaarpImplPrivateMib extends WaarpPrivateMib {
     /**
      * Internal Logger
      */
-    private static WaarpInternalLogger logger = WaarpInternalLoggerFactory
+    private static WaarpLogger logger = WaarpLoggerFactory
             .getLogger(WaarpImplPrivateMib.class);
 
     /**

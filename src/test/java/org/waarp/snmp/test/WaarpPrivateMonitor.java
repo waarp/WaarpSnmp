@@ -19,8 +19,8 @@
  */
 package org.waarp.snmp.test;
 
-import org.waarp.common.logging.WaarpInternalLogger;
-import org.waarp.common.logging.WaarpInternalLoggerFactory;
+import org.waarp.common.logging.WaarpLogger;
+import org.waarp.common.logging.WaarpLoggerFactory;
 import org.waarp.snmp.WaarpSnmpAgent;
 import org.waarp.snmp.interf.WaarpInterfaceMonitor;
 
@@ -35,7 +35,7 @@ public class WaarpPrivateMonitor implements WaarpInterfaceMonitor {
     /**
      * Internal Logger
      */
-    private static WaarpInternalLogger logger = WaarpInternalLoggerFactory
+    private static WaarpLogger logger = WaarpLoggerFactory
             .getLogger(WaarpPrivateMonitor.class);
 
     public WaarpSnmpAgent agent;

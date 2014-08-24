@@ -55,8 +55,8 @@ import org.snmp4j.smi.VariableBinding;
 import org.snmp4j.transport.TransportMappings;
 import org.snmp4j.util.ThreadPool;
 import org.snmp4j.util.WorkerPool;
-import org.waarp.common.logging.WaarpInternalLogger;
-import org.waarp.common.logging.WaarpInternalLoggerFactory;
+import org.waarp.common.logging.WaarpLogger;
+import org.waarp.common.logging.WaarpLoggerFactory;
 import org.waarp.snmp.SnmpConfiguration.TargetElement;
 import org.waarp.snmp.interf.WaarpInterfaceMib;
 import org.waarp.snmp.interf.WaarpInterfaceMonitor;
@@ -73,7 +73,7 @@ public class WaarpSnmpAgent extends BaseAgent {
     /**
      * Internal Logger
      */
-    private static WaarpInternalLogger logger = WaarpInternalLoggerFactory
+    private static WaarpLogger logger = WaarpLoggerFactory
             .getLogger(WaarpSnmpAgent.class);
 
     private String[] address = new String[] {

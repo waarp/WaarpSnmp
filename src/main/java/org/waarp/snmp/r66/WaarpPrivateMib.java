@@ -30,8 +30,8 @@ import org.snmp4j.smi.OID;
 import org.snmp4j.smi.OctetString;
 import org.snmp4j.smi.SMIConstants;
 import org.snmp4j.smi.TimeTicks;
-import org.waarp.common.logging.WaarpInternalLogger;
-import org.waarp.common.logging.WaarpInternalLoggerFactory;
+import org.waarp.common.logging.WaarpLogger;
+import org.waarp.common.logging.WaarpLoggerFactory;
 import org.waarp.snmp.WaarpSnmpAgent;
 import org.waarp.snmp.interf.WaarpInterfaceMib;
 import org.waarp.snmp.utils.WaarpEntry;
@@ -51,7 +51,7 @@ public abstract class WaarpPrivateMib implements WaarpInterfaceMib {
     /**
      * Internal Logger
      */
-    private static WaarpInternalLogger logger = WaarpInternalLoggerFactory
+    private static WaarpLogger logger = WaarpLoggerFactory
             .getLogger(WaarpPrivateMib.class);
 
     // These are both standard in RFC-1213

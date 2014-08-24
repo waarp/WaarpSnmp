@@ -23,7 +23,7 @@ package org.waarp.snmp.test;
 import java.io.File;
 import java.io.IOException;
 
-import org.jboss.netty.logging.InternalLoggerFactory;
+import io.netty.logging.WaarpLoggerFactory;
 import org.snmp4j.event.ResponseEvent;
 import org.snmp4j.event.ResponseListener;
 import org.snmp4j.mp.SnmpConstants;
@@ -48,7 +48,7 @@ public class WaarpTestSnmpClientAgent {
     static WaarpImplPrivateMib test;
 
     public static void main(String[] args) throws Exception {
-        InternalLoggerFactory.setDefaultFactory(new WaarpSlf4JLoggerFactory(
+        WaarpLoggerFactory.setDefaultFactory(new WaarpSlf4JLoggerFactory(
                 Level.ALL));
         setUp(args[0]);
         System.out.println("Test SysDescr");
