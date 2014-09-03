@@ -23,16 +23,15 @@ package org.waarp.snmp.test;
 import java.io.File;
 import java.io.IOException;
 
-import io.netty.logging.WaarpLoggerFactory;
 import org.snmp4j.event.ResponseEvent;
 import org.snmp4j.event.ResponseListener;
 import org.snmp4j.mp.SnmpConstants;
+import org.waarp.common.logging.WaarpLogLevel;
+import org.waarp.common.logging.WaarpLoggerFactory;
 import org.waarp.common.logging.WaarpSlf4JLoggerFactory;
 import org.waarp.snmp.WaarpMOFactory;
 import org.waarp.snmp.WaarpSnmpAgent;
 import org.waarp.snmp.utils.WaarpMOScalar;
-
-import ch.qos.logback.classic.Level;
 
 /**
  * Test class for Agent and simple Client
@@ -48,8 +47,11 @@ public class WaarpTestSnmpClientAgent {
     static WaarpImplPrivateMib test;
 
     public static void main(String[] args) throws Exception {
-        WaarpLoggerFactory.setDefaultFactory(new WaarpSlf4JLoggerFactory(
-                Level.ALL));
+        WaarpLoggerFactory.setDefaultFactory(new WaarpSlf4JLoggerFactory(WaarpLogLevel.DEBUG));
+        if (args.length == 0) {
+            System.err.println("Need SnmpConfig file");
+            System.exit(1);
+        }
         setUp(args[0]);
         System.out.println("Test SysDescr");
         verifySysDescr();

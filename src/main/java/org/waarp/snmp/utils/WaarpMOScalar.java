@@ -53,7 +53,7 @@ public class WaarpMOScalar extends MOScalar<Variable> {
      * @see org.snmp4j.agent.mo.MOScalar#get(org.snmp4j.agent.request.SubRequest)
      */
     @Override
-    public void get(@SuppressWarnings("rawtypes") SubRequest request) {
+    public void get(SubRequest request) {
         row.mib.updateServices(this);
         super.get(request);
     }
