@@ -29,10 +29,10 @@ import org.snmp4j.agent.BaseAgent;
 import org.snmp4j.agent.CommandProcessor;
 import org.snmp4j.agent.DuplicateRegistrationException;
 import org.snmp4j.agent.MOGroup;
-import org.snmp4j.agent.mo.MOTableRow;
 import org.snmp4j.agent.mo.snmp.RowStatus;
 import org.snmp4j.agent.mo.snmp.SNMPv2MIB;
 import org.snmp4j.agent.mo.snmp.SnmpCommunityMIB;
+import org.snmp4j.agent.mo.snmp.SnmpCommunityMIB.SnmpCommunityEntryRow;
 import org.snmp4j.agent.mo.snmp.SnmpNotificationMIB;
 import org.snmp4j.agent.mo.snmp.SnmpTargetMIB;
 import org.snmp4j.agent.mo.snmp.StorageType;
@@ -439,7 +439,6 @@ public class WaarpSnmpAgent extends BaseAgent {
      * 
      * We only configure one, "public".
      */
-    @SuppressWarnings("unchecked")
     protected void addCommunities(SnmpCommunityMIB communityMIB) {
         Variable[] com2sec = new Variable[] {
                 new OctetString("public"), // community name
@@ -450,8 +449,7 @@ public class WaarpSnmpAgent extends BaseAgent {
                 new Integer32(StorageType.nonVolatile), // storage type
                 new Integer32(RowStatus.active) // row status
         };
-        @SuppressWarnings("rawtypes")
-		MOTableRow row = communityMIB.getSnmpCommunityEntry().createRow(
+		SnmpCommunityEntryRow row = communityMIB.getSnmpCommunityEntry().createRow(
                 new OctetString("public2public").toSubIndex(true), com2sec);
         communityMIB.getSnmpCommunityEntry().addRow(row);
         if (isFilterAccessEnabled) {
