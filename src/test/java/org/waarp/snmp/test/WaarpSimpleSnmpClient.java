@@ -103,7 +103,7 @@ public class WaarpSimpleSnmpClient {
      **/
     public String getAsString(OID oid) throws IOException {
         ResponseEvent event = get(new OID[] {
-            oid });
+                oid });
         return event.getResponse().get(0).getVariable().toString();
     }
 
@@ -118,7 +118,7 @@ public class WaarpSimpleSnmpClient {
     public void getAsString(OID oids, ResponseListener listener) {
         try {
             snmp.send(getPDU(new OID[] {
-                oids }), getTarget(), null, listener);
+                    oids }), getTarget(), null, listener);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -131,7 +131,7 @@ public class WaarpSimpleSnmpClient {
      */
     private PDU getPDU(OID oids[]) {
         PDU pdu = new PDU();
-        for (OID oid: oids) {
+        for (OID oid : oids) {
             pdu.add(new VariableBinding(oid));
         }
 
@@ -181,7 +181,7 @@ public class WaarpSimpleSnmpClient {
                 .getTable(getTarget(), oids, null, null);
 
         List<List<String>> list = new ArrayList<List<String>>();
-        for (TableEvent event: events) {
+        for (TableEvent event : events) {
             if (event.isError()) {
                 System.err.println(event);
                 continue;
@@ -190,7 +190,7 @@ public class WaarpSimpleSnmpClient {
             }
             List<String> strList = new ArrayList<String>();
             list.add(strList);
-            for (VariableBinding vb: event.getColumns()) {
+            for (VariableBinding vb : event.getColumns()) {
                 strList.add(vb.getVariable().toString());
             }
         }

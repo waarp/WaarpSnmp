@@ -22,7 +22,6 @@ package org.waarp.snmp.test;
 import org.snmp4j.smi.OID;
 import org.waarp.snmp.interf.WaarpGauge32;
 
-
 /**
  * Example of WaarpGauge32 Usage
  * 
@@ -36,7 +35,7 @@ public class ExampleImplGauge32 extends WaarpGauge32 {
     long _internalValue = 42;
 
     protected void setInternalValue() {
-        _internalValue ++;
+        _internalValue++;
         setValue(_internalValue);
     }
 

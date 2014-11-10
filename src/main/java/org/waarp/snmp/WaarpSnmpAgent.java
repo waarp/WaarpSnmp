@@ -19,7 +19,6 @@
  */
 package org.waarp.snmp;
 
-
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -77,7 +76,7 @@ public class WaarpSnmpAgent extends BaseAgent {
             .getLogger(WaarpSnmpAgent.class);
 
     private String[] address = new String[] {
-        SnmpConfiguration.DEFAULTADDRESS };
+            SnmpConfiguration.DEFAULTADDRESS };
 
     private int nbThread = 4;
 
@@ -109,9 +108,10 @@ public class WaarpSnmpAgent extends BaseAgent {
 
     /**
      * 
-     * @param configurationFile XML format
+     * @param configurationFile
+     *            XML format
      * @param monitor
-     *            the associated monitor 
+     *            the associated monitor
      * @param mib
      *            the associated MIB
      * 
@@ -242,7 +242,7 @@ public class WaarpSnmpAgent extends BaseAgent {
      * V3
      */
     protected void addUsmUser(USM usm) {
-        for (UsmUser userlist: listUsmUser) {
+        for (UsmUser userlist : listUsmUser) {
             logger.debug("User: " + userlist);
             usm.addUser(userlist.getSecurityName(), usm.getLocalEngineID(),
                     userlist);
@@ -307,7 +307,7 @@ public class WaarpSnmpAgent extends BaseAgent {
             SnmpNotificationMIB notificationMIB) {
         targetMIB.addDefaultTDomains();
 
-        for (TargetElement element: listTargetElements) {
+        for (TargetElement element : listTargetElements) {
             logger.debug("AddTarget: " + element);
             targetMIB.addTargetAddress(element.name, element.transportDomain,
                     element.address, element.timeout, element.retries,
@@ -372,7 +372,7 @@ public class WaarpSnmpAgent extends BaseAgent {
                 "v3notify"), new OctetString("v3group"),
                 StorageType.nonVolatile);
 
-        for (UsmUser user: listUsmUser) {
+        for (UsmUser user : listUsmUser) {
             logger.debug("Groups: " + user.getSecurityName() + " Restricted? " +
                     (user.getPrivacyProtocol() == null));
             if (user.getPrivacyProtocol() == null) {
@@ -449,7 +449,7 @@ public class WaarpSnmpAgent extends BaseAgent {
                 new Integer32(StorageType.nonVolatile), // storage type
                 new Integer32(RowStatus.active) // row status
         };
-		SnmpCommunityEntryRow row = communityMIB.getSnmpCommunityEntry().createRow(
+        SnmpCommunityEntryRow row = communityMIB.getSnmpCommunityEntry().createRow(
                 new OctetString("public2public").toSubIndex(true), com2sec);
         communityMIB.getSnmpCommunityEntry().addRow(row);
         if (isFilterAccessEnabled) {
@@ -466,7 +466,7 @@ public class WaarpSnmpAgent extends BaseAgent {
     protected void initTransportMappings() throws IOException {
         TransportMapping<?>[] testMappings = new TransportMapping[address.length];
         int nb = 0;
-        for (int i = 0; i < address.length; i ++) {
+        for (int i = 0; i < address.length; i++) {
             Address addr = GenericAddress.parse(address[i]);
             if (addr != null) {
                 logger.info("SNMP Agent InitTransport: {} {}", addr.getClass()
@@ -474,13 +474,13 @@ public class WaarpSnmpAgent extends BaseAgent {
                 TransportMapping<?> tm = null;
                 try {
                     tm = TransportMappings.getInstance()
-                        .createTransportMapping(addr);
+                            .createTransportMapping(addr);
                 } catch (RuntimeException e) {
                     continue;
                 }
                 if (tm != null) {
                     testMappings[nb] = tm;
-                    nb ++;
+                    nb++;
                 }
             }
         }
@@ -550,6 +550,7 @@ public class WaarpSnmpAgent extends BaseAgent {
                         new VariableBinding(SnmpConstants.sysLocation, snmpv2
                                 .getLocation()) });
     }
+
     /**
      * Send a Notification just before Shutdown the SNMP service.
      */

@@ -50,7 +50,6 @@ import org.waarp.common.xml.XmlType;
 import org.waarp.common.xml.XmlUtil;
 import org.waarp.common.xml.XmlValue;
 
-
 /**
  * SnmpConfiguration class from XML file
  * 
@@ -79,7 +78,7 @@ public class SnmpConfiguration {
     private static final String SNMP_TRAPLEVEL = "trapinformlevel";
 
     private static final XmlDecl[] configConfigDecls = {
-    new XmlDecl(SNMP_LOCAL_ADDRESS, XmlType.STRING, SNMP_LOCAL_ADDRESS, true),
+            new XmlDecl(SNMP_LOCAL_ADDRESS, XmlType.STRING, SNMP_LOCAL_ADDRESS, true),
             new XmlDecl(XmlType.INTEGER, SNMP_NBTHREAD),
             new XmlDecl(XmlType.BOOLEAN, SNMP_FILTERED),
             new XmlDecl(XmlType.BOOLEAN, SNMP_USETRAP),
@@ -232,21 +231,21 @@ public class SnmpConfiguration {
         int length = values.size();
         if (length == 0) {
             address = new String[] {
-                DEFAULTADDRESS };
+                    DEFAULTADDRESS };
         } else {
             address = new String[length];
             int nb = 0;
             address = values.toArray(address);
             String[] tmp = new String[length];
-            for (int j = 0; j < length; j ++) {
+            for (int j = 0; j < length; j++) {
                 if (address[j] != null && (!address[j].trim().isEmpty())) {
                     tmp[nb] = address[j];
-                    nb ++;
+                    nb++;
                 }
             }
             if (nb == 0) {
                 address = new String[] {
-                    DEFAULTADDRESS };
+                        DEFAULTADDRESS };
             } else if (nb < length) {
                 // less addresses than intended
                 address = new String[nb];
@@ -259,7 +258,8 @@ public class SnmpConfiguration {
         value = hashConfig.get(SNMP_NBTHREAD);
         if (value != null && (!value.isEmpty())) {
             nbThread = value.getInteger();
-            if (nbThread <= 0) nbThread = 4;
+            if (nbThread <= 0)
+                nbThread = 4;
         }
         value = hashConfig.get(SNMP_FILTERED);
         if (value != null && (!value.isEmpty())) {
@@ -275,12 +275,15 @@ public class SnmpConfiguration {
         }
         return true;
     }
+
     /**
      * List of all UsmUser
      */
     public static final List<UsmUser> listUsmUser = new ArrayList<UsmUser>();
+
     /**
      * Protocols for Security
+     * 
      * @author Frederic Bregier
      *
      */
@@ -293,8 +296,10 @@ public class SnmpConfiguration {
             this.oid = oid;
         }
     }
+
     /**
      * Protocol for Privacy
+     * 
      * @author Frederic Bregier
      *
      */
@@ -363,7 +368,7 @@ public class SnmpConfiguration {
                     // not allowed
                     securityProtocol = null;
                 } else {
-                	securityPassphrase = value.getString();
+                    securityPassphrase = value.getString();
                 }
             }
             value = subHash.get(SNMP_SECURITY_PRIV_PROTOCOL);
@@ -383,14 +388,14 @@ public class SnmpConfiguration {
                     // not allowed
                     securityPrivProtocol = null;
                 } else {
-                	securityPrivPassphrase = value.getString();
+                    securityPrivPassphrase = value.getString();
                 }
             }
             UsmUser usm = new UsmUser(new OctetString(securityName),
-                    secprot == null? null : secprot.oid, secprot == null? null
+                    secprot == null ? null : secprot.oid, secprot == null ? null
                             : new OctetString(securityPassphrase),
-                    privprot == null? null : privprot.oid,
-                    privprot == null? null : new OctetString(
+                    privprot == null ? null : privprot.oid,
+                    privprot == null ? null : new OctetString(
                             securityPrivPassphrase));
             listUsmUser.add(usm);
         }
@@ -413,8 +418,10 @@ public class SnmpConfiguration {
             this.oid = oid;
         }
     }
+
     /**
      * Target entry
+     * 
      * @author Frederic Bregier
      *
      */
@@ -464,6 +471,7 @@ public class SnmpConfiguration {
                     tagList + " PM: " + params + " ST: " + storageType;
         }
     }
+
     /**
      * List of Target Element
      */
@@ -572,7 +580,7 @@ public class SnmpConfiguration {
             if (value == null || (value.isEmpty())) {
                 targetTimeout = 200;
             } else {
-            	targetTimeout = value.getInteger();
+                targetTimeout = value.getInteger();
             }
             if (targetTimeout <= 100) {
                 targetTimeout = 100;
@@ -581,9 +589,10 @@ public class SnmpConfiguration {
             if (value == null || (value.isEmpty())) {
                 targetRetries = 1;
             } else {
-            	targetRetries = value.getInteger();
+                targetRetries = value.getInteger();
             }
-            if (targetRetries <= 0) targetRetries = 1;
+            if (targetRetries <= 0)
+                targetRetries = 1;
             value = subHash.get(SNMP_TARGET_ISV2);
             boolean isV2 = true;
             if (value == null || (value.isEmpty())) {
@@ -633,15 +642,18 @@ public class SnmpConfiguration {
         configuration = XmlUtil.read(document, configSNMP);
         hashConfig = new XmlHash(configuration);
         address = new String[] {
-            DEFAULTADDRESS };
+                DEFAULTADDRESS };
         nbThread = 4;
         listUsmUser.clear();
         listTargetElements.clear();
         try {
             // Now read the configuration
-            if (!loadConfig()) return false;
-            if (!loadSecurity()) return false;
-            if (!loadTarget()) return false;
+            if (!loadConfig())
+                return false;
+            if (!loadSecurity())
+                return false;
+            if (!loadTarget())
+                return false;
         } finally {
             hashConfig.clear();
             hashConfig = null;

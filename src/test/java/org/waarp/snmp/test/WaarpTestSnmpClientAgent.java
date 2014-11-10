@@ -19,7 +19,6 @@
  */
 package org.waarp.snmp.test;
 
-
 import java.io.File;
 import java.io.IOException;
 
@@ -106,7 +105,7 @@ public class WaarpTestSnmpClientAgent {
      * Verify that the table contents is ok.
      */
     public static void verifyTableContents() {
-        for (WaarpMOScalar scalar: test.rowInfo.row) {
+        for (WaarpMOScalar scalar : test.rowInfo.row) {
             try {
                 System.out.println("Read " + scalar.getID() + ":" +
                         client.getAsString(scalar.getID()));

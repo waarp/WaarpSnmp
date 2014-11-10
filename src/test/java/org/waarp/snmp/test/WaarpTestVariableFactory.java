@@ -32,7 +32,6 @@ import org.snmp4j.smi.TimeTicks;
 import org.snmp4j.smi.Variable;
 import org.waarp.snmp.interf.WaarpInterfaceVariableFactory;
 
-
 /**
  * @author Frederic Bregier
  * 

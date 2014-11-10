@@ -36,10 +36,13 @@ public class WaarpEntry {
      * Access as defined in SNMP4J
      */
     public MOAccess access;
+
     /**
      * 
-     * @param smiConstantsType as defined in SNMP4J
-     * @param access as defined in SNMP4J
+     * @param smiConstantsType
+     *            as defined in SNMP4J
+     * @param access
+     *            as defined in SNMP4J
      */
     public WaarpEntry(int smiConstantsType, MOAccess access) {
         this.smiConstantsType = smiConstantsType;

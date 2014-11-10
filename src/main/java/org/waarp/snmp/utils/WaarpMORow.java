@@ -19,7 +19,6 @@
  */
 package org.waarp.snmp.utils;
 
-
 import org.snmp4j.agent.DuplicateRegistrationException;
 import org.snmp4j.agent.MOGroup;
 import org.snmp4j.agent.MOServer;
@@ -56,12 +55,14 @@ public class WaarpMORow implements MOGroup {
      * Mib Level entry identification
      */
     public int mibLevel;
+
     /**
      * 
      * @param mib
      * @param reference
      * @param entries
-     * @param mibLevel this integer identifies this Row in the MIB
+     * @param mibLevel
+     *            this integer identifies this Row in the MIB
      */
     public WaarpMORow(WaarpInterfaceMib mib, OID reference, WaarpEntry[] entries,
             int mibLevel) {
@@ -73,7 +74,7 @@ public class WaarpMORow implements MOGroup {
         int[] ref = this.reference.getValue();
         int[] add = new int[2];
         add[1] = 0;
-        for (int i = 0; i < entries.length; i ++) {
+        for (int i = 0; i < entries.length; i++) {
             WaarpEntry entry = entries[i];
             type[i] = entry.smiConstantsType;
             add[0] = i + 1;
@@ -87,6 +88,7 @@ public class WaarpMORow implements MOGroup {
 
     /**
      * Set a Value in this Row
+     * 
      * @param index
      * @param value
      * @throws IllegalArgumentException
@@ -101,14 +103,14 @@ public class WaarpMORow implements MOGroup {
 
     public void registerMOs(MOServer server, OctetString context)
             throws DuplicateRegistrationException {
-        for (int i = 0; i < row.length; i ++) {
+        for (int i = 0; i < row.length; i++) {
             WaarpMOScalar scalar = row[i];
             server.register(scalar, context);
         }
     }
 
     public void unregisterMOs(MOServer server, OctetString context) {
-        for (int i = 0; i < row.length; i ++) {
+        for (int i = 0; i < row.length; i++) {
             WaarpMOScalar scalar = row[i];
             server.unregister(scalar, context);
         }

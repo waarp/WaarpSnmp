@@ -19,7 +19,6 @@
  */
 package org.waarp.snmp.interf;
 
-
 import org.snmp4j.agent.MOGroup;
 import org.snmp4j.agent.MOScope;
 import org.snmp4j.agent.mo.snmp.SNMPv2MIB;

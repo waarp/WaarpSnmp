@@ -19,7 +19,6 @@
  */
 package org.waarp.snmp.r66;
 
-
 import org.snmp4j.agent.DuplicateRegistrationException;
 import org.snmp4j.agent.MOServer;
 import org.snmp4j.agent.mo.MOAccessImpl;
@@ -55,48 +54,48 @@ public abstract class WaarpPrivateMib implements WaarpInterfaceMib {
             .getLogger(WaarpPrivateMib.class);
 
     // These are both standard in RFC-1213
-    /** 
+    /**
      * SnmpConstants.sysDescr
      */
     public String textualSysDecr = null;
 
     /**
-     *  SnmpConstants.sysObjectID
+     * SnmpConstants.sysObjectID
      */
     public OID ggObjectId = null; // will be smiPrivateCode.typeWaarp
 
-    /** 
+    /**
      * SnmpConstants.sysContact
      */
     public String contactName = "Nobody";
 
     /**
-     *  SnmpConstants.sysName
+     * SnmpConstants.sysName
      */
     public String textualName = "OpenR66";
 
     /**
-     *  SnmpConstants.sysLocation
+     * SnmpConstants.sysLocation
      */
     public String address = "somewhere";
 
     /**
-     *  SnmpConstants.sysServices
-     *  
-     *  transport + application
+     * SnmpConstants.sysServices
+     * 
+     * transport + application
      */
-    public int service = 72; 
+    public int service = 72;
 
     /**
-     *  SnmpConstants.sysUpTime
+     * SnmpConstants.sysUpTime
      */
     public SysUpTime upTime = null;
 
     /**
-     *  need to add ".port" like "6666" Only in TCP (no UDP supported for
-     *  Waarp)
-     *  
-     *  example: rootEnterpriseMib+"66666"+".1.1.4.";
+     * need to add ".port" like "6666" Only in TCP (no UDP supported for
+     * Waarp)
+     * 
+     * example: rootEnterpriseMib+"66666"+".1.1.4.";
      */
     public String applicationProtocolBase = null;
 
@@ -106,12 +105,12 @@ public abstract class WaarpPrivateMib implements WaarpInterfaceMib {
     public OID applicationProtocol = null;
 
     /**
-     *  Private MIB: not published so take an OID probably not attributed
+     * Private MIB: not published so take an OID probably not attributed
      */
     public int smiPrivateCode = 66666;
 
     /**
-     *  identification of Waarp module
+     * identification of Waarp module
      */
     public int smiTypeWaarp = 66; // default = 66 = R66
     /**
@@ -124,17 +123,17 @@ public abstract class WaarpPrivateMib implements WaarpInterfaceMib {
     public OID rootOIDWaarp;
 
     /**
-     *  Used in Notify
+     * Used in Notify
      */
     public OID rootOIDWaarpNotif;
 
     /**
-     *  Used in Notify Start or Shutdown
+     * Used in Notify Start or Shutdown
      */
     public OID rootOIDWaarpNotifStartOrShutdown;
 
     /**
-     *  Info static part
+     * Info static part
      */
     public OID rootOIDWaarpInfo;
     /**
@@ -143,7 +142,7 @@ public abstract class WaarpPrivateMib implements WaarpInterfaceMib {
     public WaarpMORow rowInfo;
 
     /**
-     *  Global dynamic part
+     * Global dynamic part
      */
     public OID rootOIDWaarpGlobal;
     /**
@@ -152,17 +151,17 @@ public abstract class WaarpPrivateMib implements WaarpInterfaceMib {
     public WaarpMORow rowGlobal;
 
     /**
-     *  Uptime OID
+     * Uptime OID
      */
     public OID rootOIDWaarpGlobalUptime;
 
     /**
-     *  Corresponding UpTime in Mib
+     * Corresponding UpTime in Mib
      */
     public WaarpMOScalar scalarUptime = null;
 
     /**
-     *  Detailed dynamic part
+     * Detailed dynamic part
      */
     public OID rootOIDWaarpDetailed;
     /**
@@ -171,7 +170,7 @@ public abstract class WaarpPrivateMib implements WaarpInterfaceMib {
     public WaarpMORow rowDetailed;
 
     /**
-     *  Error dynamic part
+     * Error dynamic part
      */
     public OID rootOIDWaarpError;
     /**
@@ -180,24 +179,33 @@ public abstract class WaarpPrivateMib implements WaarpInterfaceMib {
     public WaarpMORow rowError;
 
     /**
-     *  New SNMPV2 MIB
+     * New SNMPV2 MIB
      */
     public SNMPv2MIB snmpv2;
 
     /**
-     *  Corresponding agent
+     * Corresponding agent
      */
     public WaarpSnmpAgent agent;
+
     /**
      * 
-     * @param sysdesc The System Description to associate
-     * @param port the port to show as used by the application
-     * @param smiPrivateCodeFinal the smiPrivateCode (should be 66666)
-     * @param typeWaarpObject the type of Waarp Object (should be 66)
-     * @param scontactName the contact name to show
-     * @param stextualName the textual name to show
-     * @param saddress the address to show
-     * @param iservice the service to show (should be 72)
+     * @param sysdesc
+     *            The System Description to associate
+     * @param port
+     *            the port to show as used by the application
+     * @param smiPrivateCodeFinal
+     *            the smiPrivateCode (should be 66666)
+     * @param typeWaarpObject
+     *            the type of Waarp Object (should be 66)
+     * @param scontactName
+     *            the contact name to show
+     * @param stextualName
+     *            the textual name to show
+     * @param saddress
+     *            the address to show
+     * @param iservice
+     *            the service to show (should be 72)
      */
     public WaarpPrivateMib(String sysdesc, int port, int smiPrivateCodeFinal,
             int typeWaarpObject, String scontactName, String stextualName,
@@ -358,16 +366,19 @@ public abstract class WaarpPrivateMib implements WaarpInterfaceMib {
     }
 
     /**
-     *  MIB entry levels
+     * MIB entry levels
+     * 
      * @author Frederic Bregier
      *
      */
     public static enum MibLevel {
         staticInfo, globalInfo, detailedInfo, errorInfo, trapInfo
     }
+
     // From now the MIB definition
     /**
-     *  Notification Elements
+     * Notification Elements
+     * 
      * @author Frederic Bregier
      *
      */
@@ -382,7 +393,7 @@ public abstract class WaarpPrivateMib implements WaarpInterfaceMib {
 
         private NotificationElements(int oid) {
             this.oid = new int[] {
-                oid };
+                    oid };
         }
 
         public OID getOID(OID oidBase) {
@@ -395,8 +406,10 @@ public abstract class WaarpPrivateMib implements WaarpInterfaceMib {
             return new OID(oidBase.getValue(), ids);
         }
     }
+
     /**
      * Notification for a task trap
+     * 
      * @author Frederic Bregier
      *
      */
@@ -420,8 +433,10 @@ public abstract class WaarpPrivateMib implements WaarpInterfaceMib {
             return this.ordinal() + 1;
         }
     }
+
     /**
      * Definition part
+     * 
      * @author Frederic Bregier
      *
      */
@@ -437,6 +452,7 @@ public abstract class WaarpPrivateMib implements WaarpInterfaceMib {
             return this.ordinal() + 1;
         }
     }
+
     /**
      * Definition part
      */
@@ -459,8 +475,10 @@ public abstract class WaarpPrivateMib implements WaarpInterfaceMib {
             // applApplicationProtocol
             new WaarpEntry(SMIConstants.SYNTAX_OBJECT_IDENTIFIER,
                     MOAccessImpl.ACCESS_READ_ONLY) };
+
     /**
      * Global part
+     * 
      * @author Frederic Bregier
      *
      */
@@ -496,6 +514,7 @@ public abstract class WaarpPrivateMib implements WaarpInterfaceMib {
             return this.ordinal() + 1;
         }
     }
+
     /**
      * Global part
      */
@@ -581,8 +600,10 @@ public abstract class WaarpPrivateMib implements WaarpInterfaceMib {
             // nbNetworkConnection
             new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
                     MOAccessImpl.ACCESS_READ_ONLY) };
+
     /**
      * Detailed part
+     * 
      * @author Frederic Bregier
      *
      */
@@ -605,6 +626,7 @@ public abstract class WaarpPrivateMib implements WaarpInterfaceMib {
             return this.ordinal() + 1;
         }
     }
+
     /**
      * Detailed part
      */
@@ -649,8 +671,10 @@ public abstract class WaarpPrivateMib implements WaarpInterfaceMib {
             // nbCompleteOkStep
             new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
                     MOAccessImpl.ACCESS_READ_ONLY) };
+
     /**
      * Error part
+     * 
      * @author Frederic Bregier
      *
      */
@@ -684,6 +708,7 @@ public abstract class WaarpPrivateMib implements WaarpInterfaceMib {
             return this.ordinal() + 1;
         }
     }
+
     /**
      * Error part
      */
@@ -761,8 +786,10 @@ public abstract class WaarpPrivateMib implements WaarpInterfaceMib {
             // nbStatusUnknown
             new WaarpEntry(SMIConstants.SYNTAX_GAUGE32,
                     MOAccessImpl.ACCESS_READ_ONLY) };
+
     /**
      * Oper Status (as defined in Net Application SNMP)
+     * 
      * @author Frederic Bregier
      *
      */

@@ -19,7 +19,6 @@
  */
 package org.waarp.snmp.test;
 
-
 import org.snmp4j.agent.DuplicateRegistrationException;
 import org.snmp4j.agent.MOScope;
 import org.snmp4j.smi.Counter64;
@@ -131,7 +130,8 @@ public class WaarpImplPrivateMib extends WaarpPrivateMib {
      * @param number
      */
     public void notifyInfo(String message, String message2, int number) {
-        if (!TrapLevel.All.isLevelValid(agent.trapLevel)) return;
+        if (!TrapLevel.All.isLevelValid(agent.trapLevel))
+            return;
         logger.warn("Notify: " + NotificationElements.InfoTask + ":" + message +
                 ":" + number);
         agent.getNotificationOriginator().notify(
@@ -169,7 +169,8 @@ public class WaarpImplPrivateMib extends WaarpPrivateMib {
      * @param number
      */
     public void notifyError(String message, String message2, int number) {
-        if (!TrapLevel.Alert.isLevelValid(agent.trapLevel)) return;
+        if (!TrapLevel.Alert.isLevelValid(agent.trapLevel))
+            return;
         logger.warn("Notify: " + NotificationElements.TrapError + ":" +
                 message + ":" + number);
         agent.getNotificationOriginator().notify(

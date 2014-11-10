@@ -24,7 +24,6 @@ import org.waarp.common.logging.WaarpLoggerFactory;
 import org.waarp.snmp.WaarpSnmpAgent;
 import org.waarp.snmp.interf.WaarpInterfaceMonitor;
 
-
 /**
  * This implementation show how to support SNMP.
  * 

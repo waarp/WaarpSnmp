@@ -40,7 +40,7 @@ public class MemoryGauge32 extends WaarpGauge32 {
     }
 
     /**
-     *  Runtime for Memory
+     * Runtime for Memory
      */
     protected Runtime runtime = Runtime.getRuntime();
     /**
@@ -49,7 +49,8 @@ public class MemoryGauge32 extends WaarpGauge32 {
     protected MemoryType type = null;
 
     protected void setInternalValue() {
-        if (type == null) return;
+        if (type == null)
+            return;
         long mem;
         switch (type) {
             case TotalMemory:
@@ -74,7 +75,8 @@ public class MemoryGauge32 extends WaarpGauge32 {
 
     /**
      * 
-     * @param type the type of MemoryType used
+     * @param type
+     *            the type of MemoryType used
      */
     public MemoryGauge32(MemoryType type) {
         this.type = type;

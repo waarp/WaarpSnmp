@@ -19,7 +19,6 @@
  */
 package org.waarp.snmp;
 
-
 import org.snmp4j.agent.MOAccess;
 import org.snmp4j.agent.mo.MOAccessImpl;
 import org.snmp4j.smi.Counter32;

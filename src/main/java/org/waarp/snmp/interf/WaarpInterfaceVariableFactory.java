@@ -31,10 +31,15 @@ import org.snmp4j.smi.Variable;
 public interface WaarpInterfaceVariableFactory {
     /**
      * Used to access MIB entry according to argument
-     * @param oid global OID
-     * @param type type of MIB
-     * @param mibLevel level entry
-     * @param entry entry rank
+     * 
+     * @param oid
+     *            global OID
+     * @param type
+     *            type of MIB
+     * @param mibLevel
+     *            level entry
+     * @param entry
+     *            entry rank
      * @return the Variable
      */
     public Variable getVariable(OID oid, int type, int mibLevel, int entry);

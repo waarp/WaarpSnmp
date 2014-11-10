@@ -42,7 +42,8 @@ public class WaarpUptime extends TimeTicks {
 
     /**
      * 
-     * @param type SysUpTime from SNMPV2
+     * @param type
+     *            SysUpTime from SNMPV2
      */
     public WaarpUptime(SysUpTime type) {
         this.type = type;
