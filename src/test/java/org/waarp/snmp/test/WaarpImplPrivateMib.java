@@ -68,11 +68,11 @@ public class WaarpImplPrivateMib extends WaarpPrivateMib {
             if (oid.equals(rootOIDWaarpGlobalUptime)) {
                 return;
             }
-            ((WaarpPrivateMonitor) agent.monitor).generalValuesUpdate();
+            ((WaarpPrivateMonitor) agent.getMonitor()).generalValuesUpdate();
         } else if (oid.startsWith(rootOIDWaarpDetailed)) {
-            ((WaarpPrivateMonitor) agent.monitor).detailedValuesUpdate();
+            ((WaarpPrivateMonitor) agent.getMonitor()).detailedValuesUpdate();
         } else if (oid.startsWith(rootOIDWaarpError)) {
-            ((WaarpPrivateMonitor) agent.monitor).errorValuesUpdate();
+            ((WaarpPrivateMonitor) agent.getMonitor()).errorValuesUpdate();
         }
     }
 
@@ -101,21 +101,16 @@ public class WaarpImplPrivateMib extends WaarpPrivateMib {
         logger.debug("General:" + okGeneral + " Detailed:" + okDetailed +
                 " Error:" + okError);
         if (okGeneral) {
-            ((WaarpPrivateMonitor) agent.monitor).generalValuesUpdate();
+            ((WaarpPrivateMonitor) agent.getMonitor()).generalValuesUpdate();
         }
         if (okDetailed) {
-            ((WaarpPrivateMonitor) agent.monitor).detailedValuesUpdate();
+            ((WaarpPrivateMonitor) agent.getMonitor()).detailedValuesUpdate();
         }
         if (okError) {
-            ((WaarpPrivateMonitor) agent.monitor).errorValuesUpdate();
+            ((WaarpPrivateMonitor) agent.getMonitor()).errorValuesUpdate();
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.waarp.snmp.GgPrivateMib#agentRegisterWaarpMib()
-     */
     @Override
     protected void agentRegisterWaarpMib()
             throws DuplicateRegistrationException {
@@ -130,7 +125,7 @@ public class WaarpImplPrivateMib extends WaarpPrivateMib {
      * @param number
      */
     public void notifyInfo(String message, String message2, int number) {
-        if (!TrapLevel.All.isLevelValid(agent.trapLevel))
+        if (!TrapLevel.All.isLevelValid(agent.getTrapLevel()))
             return;
         logger.warn("Notify: " + NotificationElements.InfoTask + ":" + message +
                 ":" + number);
@@ -169,7 +164,7 @@ public class WaarpImplPrivateMib extends WaarpPrivateMib {
      * @param number
      */
     public void notifyError(String message, String message2, int number) {
-        if (!TrapLevel.Alert.isLevelValid(agent.trapLevel))
+        if (!TrapLevel.Alert.isLevelValid(agent.getTrapLevel()))
             return;
         logger.warn("Notify: " + NotificationElements.TrapError + ":" +
                 message + ":" + number);

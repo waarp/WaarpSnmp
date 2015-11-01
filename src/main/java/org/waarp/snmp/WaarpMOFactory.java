@@ -47,7 +47,7 @@ public class WaarpMOFactory {
     /**
      * To be setup to default Factory to be used or kept as null for default one
      */
-    public static WaarpInterfaceVariableFactory factory = null;
+    private static WaarpInterfaceVariableFactory factory = null;
 
     /**
      * Default one
@@ -95,10 +95,10 @@ public class WaarpMOFactory {
             int mibLevel, int entry) {
         Variable var = null;
         WaarpInterfaceVariableFactory vf;
-        if (factory == null) {
+        if (getFactory() == null) {
             vf = defaultFactory;
         } else {
-            vf = factory;
+            vf = getFactory();
         }
         var = vf.getVariable(oid, type, mibLevel, entry);
         if (value != null) {
@@ -200,5 +200,19 @@ public class WaarpMOFactory {
                             value.getClass());
             }
         }
+    }
+
+    /**
+     * @return the factory
+     */
+    public static WaarpInterfaceVariableFactory getFactory() {
+        return factory;
+    }
+
+    /**
+     * @param factory the factory to set
+     */
+    public static void setFactory(WaarpInterfaceVariableFactory factory) {
+        WaarpMOFactory.factory = factory;
     }
 }

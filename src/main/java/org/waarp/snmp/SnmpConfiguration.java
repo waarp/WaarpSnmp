@@ -91,17 +91,17 @@ public class SnmpConfiguration {
     /**
      * Static String
      */
-    public static final String NOTIFY = "notify";
+    static final String NOTIFY = "notify";
 
     /**
      * Static String
      */
-    public static final String V3NOTIFY = "v3notify";
+    static final String V3NOTIFY = "v3notify";
 
     /**
      * Static String
      */
-    public static final String V2C = "v2c";
+    static final String V2C = "v2c";
 
     /*
      * addTargetAddress(org.snmp4j.smi.OctetString name, org.snmp4j.smi.OID
@@ -197,23 +197,23 @@ public class SnmpConfiguration {
     /**
      * Address from the configuration for the SNMP Agent listening port
      */
-    public static String[] address = null;
+    static String[] address = null;
     /**
      * Number of threads to use in SNMP agent
      */
-    public static int nbThread = 4;
+    static int nbThread = 4;
     /**
      * Do we filter on Targets for SNMP requests
      */
-    public static boolean isFilterAccessEnabled = false;
+    static boolean isFilterAccessEnabled = false;
     /**
      * Do we are using Trap or Inform
      */
-    public static boolean isUsingTrap = true;
+    static boolean isUsingTrap = true;
     /**
      * Level for Trap/Inform from 0 to 4
      */
-    public static int trapLevel = 0;
+    static int trapLevel = 0;
     /**
      * Default address: all in UDP port 161
      */
@@ -279,7 +279,7 @@ public class SnmpConfiguration {
     /**
      * List of all UsmUser
      */
-    public static final List<UsmUser> listUsmUser = new ArrayList<UsmUser>();
+    static final List<UsmUser> listUsmUser = new ArrayList<UsmUser>();
 
     /**
      * Protocols for Security
@@ -475,15 +475,15 @@ public class SnmpConfiguration {
     /**
      * List of Target Element
      */
-    public static final List<TargetElement> listTargetElements = new ArrayList<SnmpConfiguration.TargetElement>();
+    static final List<TargetElement> listTargetElements = new ArrayList<SnmpConfiguration.TargetElement>();
     /**
      * Do we use SNMP V2c
      */
-    public static boolean hasV2 = false;
+    static boolean hasV2 = false;
     /**
      * Do we use SNMP V3
      */
-    public static boolean hasV3 = false;
+    static boolean hasV3 = false;
 
     /**
      * 

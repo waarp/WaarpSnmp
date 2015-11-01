@@ -50,22 +50,12 @@ public class WaarpUptime extends TimeTicks {
         setInternalValue();
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.snmp4j.smi.TimeTicks#clone()
-     */
     @Override
     public Object clone() {
         setInternalValue();
         return super.clone();
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.snmp4j.smi.UnsignedInteger32#getValue()
-     */
     @Override
     public long getValue() {
         setInternalValue();

@@ -38,23 +38,23 @@ public class WaarpMORow implements MOGroup {
     /**
      * Row access
      */
-    public WaarpMOScalar[] row;
+    private WaarpMOScalar[] row;
     /**
      * Type access
      */
-    public int[] type;
+    int[] type;
     /**
      * Base OID
      */
-    public OID reference;
+    OID reference;
     /**
      * MIB from which this Row is issued
      */
-    public WaarpInterfaceMib mib;
+    WaarpInterfaceMib mib;
     /**
      * Mib Level entry identification
      */
-    public int mibLevel;
+    int mibLevel;
 
     /**
      * 
@@ -69,7 +69,7 @@ public class WaarpMORow implements MOGroup {
         this.mib = mib;
         this.reference = reference;
         this.mibLevel = mibLevel;
-        row = new WaarpMOScalar[entries.length];
+        setRow(new WaarpMOScalar[entries.length]);
         type = new int[entries.length];
         int[] ref = this.reference.getValue();
         int[] add = new int[2];
@@ -81,7 +81,7 @@ public class WaarpMORow implements MOGroup {
             OID oid = new OID(ref, add);
             // the value is null at the creation, meaning values have to be
             // setup once just after
-            row[i] = WaarpMOFactory.create(oid, null, entry.smiConstantsType,
+            getRow()[i] = WaarpMOFactory.create(oid, null, entry.smiConstantsType,
                     entry.access, this, mibLevel, i);
         }
     }
@@ -95,24 +95,38 @@ public class WaarpMORow implements MOGroup {
      */
     public void setValue(int index, Object value)
             throws IllegalArgumentException {
-        if (index >= row.length)
+        if (index >= getRow().length)
             throw new IllegalArgumentException("Index exceed Row size");
-        Variable var = row[index].getValue();
+        Variable var = getRow()[index].getValue();
         WaarpMOFactory.setVariable(var, value, type[index]);
     }
 
     public void registerMOs(MOServer server, OctetString context)
             throws DuplicateRegistrationException {
-        for (int i = 0; i < row.length; i++) {
-            WaarpMOScalar scalar = row[i];
+        for (int i = 0; i < getRow().length; i++) {
+            WaarpMOScalar scalar = getRow()[i];
             server.register(scalar, context);
         }
     }
 
     public void unregisterMOs(MOServer server, OctetString context) {
-        for (int i = 0; i < row.length; i++) {
-            WaarpMOScalar scalar = row[i];
+        for (int i = 0; i < getRow().length; i++) {
+            WaarpMOScalar scalar = getRow()[i];
             server.unregister(scalar, context);
         }
+    }
+
+    /**
+     * @return the row
+     */
+    public WaarpMOScalar[] getRow() {
+        return row;
+    }
+
+    /**
+     * @param row the row to set
+     */
+    void setRow(WaarpMOScalar[] row) {
+        this.row = row;
     }
 }
