@@ -72,7 +72,7 @@ public class WaarpTestSnmpClientAgent {
         test = new WaarpImplPrivateMib("Waarp Test SNMP", 6666, 66666, 66,
                 "F. Bregier", "Waarp Test SNMP V1.0", "Paris, France", 72);
         // Set the default VariableFactory
-        WaarpMOFactory.factory = new WaarpTestVariableFactory();
+        WaarpMOFactory.setFactory(new WaarpTestVariableFactory());
         // Create the agent associated with the monitor and Mib
         agent = new WaarpSnmpAgent(new File(file), monitor, test);
         agent.start();
@@ -105,7 +105,7 @@ public class WaarpTestSnmpClientAgent {
      * Verify that the table contents is ok.
      */
     public static void verifyTableContents() {
-        for (WaarpMOScalar scalar : test.rowInfo.row) {
+        for (WaarpMOScalar scalar : test.rowInfo.getRow()) {
             try {
                 System.out.println("Read " + scalar.getID() + ":" +
                         client.getAsString(scalar.getID()));

@@ -84,7 +84,7 @@ public class WaarpSnmpAgent extends BaseAgent {
 
     private boolean useTrap = true;
 
-    public int trapLevel = 0;
+    private int trapLevel = 0;
 
     private List<UsmUser> listUsmUser;
 
@@ -100,11 +100,11 @@ public class WaarpSnmpAgent extends BaseAgent {
     /**
      * The associated monitor with this Agent
      */
-    public WaarpInterfaceMonitor monitor;
+    private WaarpInterfaceMonitor monitor;
     /**
      * The associated MIB with this Agent
      */
-    public WaarpInterfaceMib mib;
+    private WaarpInterfaceMib mib;
 
     /**
      * 
@@ -150,7 +150,7 @@ public class WaarpSnmpAgent extends BaseAgent {
         this.nbThread = SnmpConfiguration.nbThread;
         this.isFilterAccessEnabled = SnmpConfiguration.isFilterAccessEnabled;
         this.useTrap = SnmpConfiguration.isUsingTrap;
-        this.trapLevel = SnmpConfiguration.trapLevel;
+        this.setTrapLevel(SnmpConfiguration.trapLevel);
         this.listUsmUser = SnmpConfiguration.listUsmUser;
         this.listTargetElements = SnmpConfiguration.listTargetElements;
         this.hasV2 = SnmpConfiguration.hasV2;
@@ -160,10 +160,10 @@ public class WaarpSnmpAgent extends BaseAgent {
                 this.nbThread);
         this.workerPool = ThreadPool.create("SnmpRequestPool", nbThread);
         agent.setWorkerPool(this.workerPool);
-        this.monitor = monitor;
-        this.monitor.setAgent(this);
-        this.mib = mib;
-        this.mib.setAgent(this);
+        this.setMonitor(monitor);
+        this.getMonitor().setAgent(this);
+        this.setMib(mib);
+        this.getMib().setAgent(this);
     }
 
     /**
@@ -196,32 +196,24 @@ public class WaarpSnmpAgent extends BaseAgent {
         return systemTimeStart;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.snmp4j.agent.BaseAgent#registerManagedObjects()
-     * 
+    /**
      * Register additional managed objects at the agent's server.
      */
     protected void registerManagedObjects() {
         logger.debug("Registers");
         try {
-            mib.registerMOs(server, null);
+            getMib().registerMOs(server, null);
         } catch (DuplicateRegistrationException e) {
             logger.error("Cannot register Mib", e);
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.snmp4j.agent.BaseAgent#unregisterManagedObjects()
-     * 
+    /**
      * Unregister the basic MIB modules from the agent's MOServer.
      */
     protected void unregisterManagedObjects() {
         logger.debug("Unregisters");
-        mib.unregisterMOs(server, null);
+        getMib().unregisterMOs(server, null);
     }
 
     /**
@@ -233,11 +225,7 @@ public class WaarpSnmpAgent extends BaseAgent {
         moGroup.unregisterMOs(server, getContext(moGroup));
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.snmp4j.agent.BaseAgent#addUsmUser(org.snmp4j.security.USM)
-     * 
+    /**
      * Adds all the necessary initial users to the USM. Only applicable to SNMP
      * V3
      */
@@ -294,13 +282,7 @@ public class WaarpSnmpAgent extends BaseAgent {
         usm.addUser(usernotify.getSecurityName(), null, usernotify);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * org.snmp4j.agent.BaseAgent#addNotificationTargets(org.snmp4j.agent.mo
-     * .snmp.SnmpTargetMIB, org.snmp4j.agent.mo.snmp.SnmpNotificationMIB)
-     * 
+    /**
      * Adds initial notification targets and filters.
      */
     protected void addNotificationTargets(SnmpTargetMIB targetMIB,
@@ -351,12 +333,7 @@ public class WaarpSnmpAgent extends BaseAgent {
                 StorageType.permanent);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * org.snmp4j.agent.BaseAgent#addViews(org.snmp4j.agent.mo.snmp.VacmMIB)
-     * 
+    /**
      * Minimal View based Access Control
      * 
      * http://www.faqs.org/rfcs/rfc2575.html
@@ -428,12 +405,7 @@ public class WaarpSnmpAgent extends BaseAgent {
                 VacmMIB.vacmViewIncluded, StorageType.nonVolatile);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.snmp4j.agent.BaseAgent#addCommunities(org.snmp4j.agent.mo.snmp.
-     * SnmpCommunityMIB)
-     * 
+    /**
      * The table of community strings configured in the SNMP engine's Local
      * Configuration Datastore (LCD).
      * 
@@ -457,11 +429,6 @@ public class WaarpSnmpAgent extends BaseAgent {
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.snmp4j.agent.BaseAgent#initTransportMappings()
-     */
     @Override
     protected void initTransportMappings() throws IOException {
         TransportMapping<?>[] testMappings = new TransportMapping[address.length];
@@ -519,25 +486,20 @@ public class WaarpSnmpAgent extends BaseAgent {
         getServer().addContext(new OctetString("public"));
         finishInit();
         run();
-        if (TrapLevel.StartStop.isLevelValid(trapLevel))
+        if (TrapLevel.StartStop.isLevelValid(getTrapLevel()))
             sendColdStartNotification();
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.snmp4j.agent.BaseAgent#sendColdStartNotification()
-     */
     @Override
     protected void sendColdStartNotification() {
         logger.debug("ColdStartNotification: {}",
-                mib.getBaseOidStartOrShutdown());
-        SNMPv2MIB snmpv2 = this.mib.getSNMPv2MIB();
+                getMib().getBaseOidStartOrShutdown());
+        SNMPv2MIB snmpv2 = this.getMib().getSNMPv2MIB();
         notificationOriginator.notify(
                 new OctetString("public"),
                 SnmpConstants.coldStart,
                 new VariableBinding[] {
-                        new VariableBinding(mib.getBaseOidStartOrShutdown(),
+                        new VariableBinding(getMib().getBaseOidStartOrShutdown(),
                                 new OctetString("Startup Service")),
                         new VariableBinding(SnmpConstants.sysDescr, snmpv2
                                 .getDescr()),
@@ -555,15 +517,15 @@ public class WaarpSnmpAgent extends BaseAgent {
      * Send a Notification just before Shutdown the SNMP service.
      */
     protected void sendShutdownNotification() {
-        if (this.mib == null || notificationOriginator == null) {
+        if (this.getMib() == null || notificationOriginator == null) {
             return;
         }
-        SNMPv2MIB snmpv2 = this.mib.getSNMPv2MIB();
+        SNMPv2MIB snmpv2 = this.getMib().getSNMPv2MIB();
         notificationOriginator.notify(
                 new OctetString("public"),
                 SnmpConstants.linkDown,
                 new VariableBinding[] {
-                        new VariableBinding(mib.getBaseOidStartOrShutdown(),
+                        new VariableBinding(getMib().getBaseOidStartOrShutdown(),
                                 new OctetString("Shutdown Service")),
                         new VariableBinding(SnmpConstants.sysDescr, snmpv2
                                 .getDescr()),
@@ -581,20 +543,15 @@ public class WaarpSnmpAgent extends BaseAgent {
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.snmp4j.agent.BaseAgent#stop()
-     */
     @Override
     public void stop() {
         logger.info("Stopping SNMP support");
-        if (TrapLevel.StartStop.isLevelValid(trapLevel)) {
+        if (TrapLevel.StartStop.isLevelValid(getTrapLevel())) {
             sendShutdownNotification();
         }
         super.stop();
-        if (monitor != null) {
-            monitor.releaseResources();
+        if (getMonitor() != null) {
+            getMonitor().releaseResources();
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
@@ -603,5 +560,33 @@ public class WaarpSnmpAgent extends BaseAgent {
                 this.workerPool.cancel();
             }
         }
+    }
+
+    /**
+     * @return the trapLevel
+     */
+    public int getTrapLevel() {
+        return trapLevel;
+    }
+
+    /**
+     * @param trapLevel the trapLevel to set
+     */
+    public void setTrapLevel(int trapLevel) {
+        this.trapLevel = trapLevel;
+    }
+
+    /**
+     * @param monitor the monitor to set
+     */
+    private void setMonitor(WaarpInterfaceMonitor monitor) {
+        this.monitor = monitor;
+    }
+
+    /**
+     * @param mib the mib to set
+     */
+    private void setMib(WaarpInterfaceMib mib) {
+        this.mib = mib;
     }
 }
