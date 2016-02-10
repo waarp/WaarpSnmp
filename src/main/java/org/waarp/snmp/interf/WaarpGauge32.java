@@ -49,33 +49,18 @@ public abstract class WaarpGauge32 extends Gauge32 {
         setInternalValue(value);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.snmp4j.smi.UnsignedInteger32#getValue()
-     */
     @Override
     public long getValue() {
         setInternalValue();
         return super.getValue();
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.snmp4j.smi.Gauge32#clone()
-     */
     @Override
     public Object clone() {
         setInternalValue();
         return super.clone();
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.snmp4j.smi.AbstractVariable#isDynamic()
-     */
     @Override
     public boolean isDynamic() {
         return true;

@@ -33,7 +33,7 @@ import org.snmp4j.smi.Variable;
  * 
  */
 public class WaarpMOScalar extends MOScalar<Variable> {
-    public WaarpMORow row;
+    WaarpMORow row;
 
     /**
      * @param id

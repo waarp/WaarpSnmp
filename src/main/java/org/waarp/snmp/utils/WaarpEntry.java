@@ -31,11 +31,11 @@ public class WaarpEntry {
     /**
      * ConstantsType as defined in SNMP4J
      */
-    public int smiConstantsType;
+    int smiConstantsType;
     /**
      * Access as defined in SNMP4J
      */
-    public MOAccess access;
+    MOAccess access;
 
     /**
      * 

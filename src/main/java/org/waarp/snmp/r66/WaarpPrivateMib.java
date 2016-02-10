@@ -292,18 +292,18 @@ public abstract class WaarpPrivateMib implements WaarpInterfaceMib {
         // register General info
         rowGlobal = new WaarpMORow(this, rootOIDWaarpGlobal,
                 WaarpGlobalValues, MibLevel.globalInfo.ordinal());
-        WaarpMOScalar memoryScalar = rowGlobal.row[WaarpGlobalValuesIndex.memoryTotal
+        WaarpMOScalar memoryScalar = rowGlobal.getRow()[WaarpGlobalValuesIndex.memoryTotal
                 .ordinal()];
         memoryScalar.setValue(new MemoryGauge32(MemoryType.TotalMemory));
-        memoryScalar = rowGlobal.row[WaarpGlobalValuesIndex.memoryFree
+        memoryScalar = rowGlobal.getRow()[WaarpGlobalValuesIndex.memoryFree
                 .ordinal()];
         memoryScalar.setValue(new MemoryGauge32(MemoryType.FreeMemory));
-        memoryScalar = rowGlobal.row[WaarpGlobalValuesIndex.memoryUsed
+        memoryScalar = rowGlobal.getRow()[WaarpGlobalValuesIndex.memoryUsed
                 .ordinal()];
         memoryScalar.setValue(new MemoryGauge32(MemoryType.UsedMemory));
         rowGlobal.registerMOs(agent.getServer(), null);
         // setup UpTime to SysUpTime and change status
-        scalarUptime = rowGlobal.row[WaarpGlobalValuesIndex.applUptime
+        scalarUptime = rowGlobal.getRow()[WaarpGlobalValuesIndex.applUptime
                 .ordinal()];
         scalarUptime.setValue(new WaarpUptime(upTime));
         changeStatus(OperStatus.restarting);
@@ -353,12 +353,12 @@ public abstract class WaarpPrivateMib implements WaarpInterfaceMib {
      * @param status
      */
     public void changeStatus(OperStatus status) {
-        WaarpMOScalar statusScalar = rowGlobal.row[WaarpGlobalValuesIndex.applOperStatus
+        WaarpMOScalar statusScalar = rowGlobal.getRow()[WaarpGlobalValuesIndex.applOperStatus
                 .ordinal()];
         Integer32 var = (Integer32) statusScalar.getValue();
         if (var.getValue() != status.status) {
             var.setValue(status.status);
-            WaarpMOScalar lastTimeScalar = rowGlobal.row[WaarpGlobalValuesIndex.applLastChange
+            WaarpMOScalar lastTimeScalar = rowGlobal.getRow()[WaarpGlobalValuesIndex.applLastChange
                     .ordinal()];
             TimeTicks time = (TimeTicks) lastTimeScalar.getValue();
             time.setValue(upTime.get().getValue());
