@@ -80,7 +80,7 @@
 <a class="jxr_linenumber" name="L72" href="#L72">72</a>          test = <strong class="jxr_keyword">new</strong> <a href="../../../../org/waarp/snmp/test/WaarpImplPrivateMib.html">WaarpImplPrivateMib</a>(<span class="jxr_string">"Waarp Test SNMP"</span>, 6666, 66666, 66,
 <a class="jxr_linenumber" name="L73" href="#L73">73</a>                  <span class="jxr_string">"F. Bregier"</span>, <span class="jxr_string">"Waarp Test SNMP V1.0"</span>, <span class="jxr_string">"Paris, France"</span>, 72);
 <a class="jxr_linenumber" name="L74" href="#L74">74</a>          <em class="jxr_comment">// Set the default VariableFactory</em>
-<a class="jxr_linenumber" name="L75" href="#L75">75</a>          WaarpMOFactory.factory = <strong class="jxr_keyword">new</strong> <a href="../../../../org/waarp/snmp/test/WaarpTestVariableFactory.html">WaarpTestVariableFactory</a>();
+<a class="jxr_linenumber" name="L75" href="#L75">75</a>          WaarpMOFactory.setFactory(<strong class="jxr_keyword">new</strong> <a href="../../../../org/waarp/snmp/test/WaarpTestVariableFactory.html">WaarpTestVariableFactory</a>());
 <a class="jxr_linenumber" name="L76" href="#L76">76</a>          <em class="jxr_comment">// Create the agent associated with the monitor and Mib</em>
 <a class="jxr_linenumber" name="L77" href="#L77">77</a>          agent = <strong class="jxr_keyword">new</strong> WaarpSnmpAgent(<strong class="jxr_keyword">new</strong> File(file), monitor, test);
 <a class="jxr_linenumber" name="L78" href="#L78">78</a>          agent.start();
@@ -113,7 +113,7 @@
 <a class="jxr_linenumber" name="L105" href="#L105">105</a> <em class="jxr_javadoccomment">     * Verify that the table contents is ok.</em>
 <a class="jxr_linenumber" name="L106" href="#L106">106</a> <em class="jxr_javadoccomment">     */</em>
 <a class="jxr_linenumber" name="L107" href="#L107">107</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">void</strong> verifyTableContents() {
-<a class="jxr_linenumber" name="L108" href="#L108">108</a>         <strong class="jxr_keyword">for</strong> (WaarpMOScalar scalar : test.rowInfo.row) {
+<a class="jxr_linenumber" name="L108" href="#L108">108</a>         <strong class="jxr_keyword">for</strong> (WaarpMOScalar scalar : test.rowInfo.getRow()) {
 <a class="jxr_linenumber" name="L109" href="#L109">109</a>             <strong class="jxr_keyword">try</strong> {
 <a class="jxr_linenumber" name="L110" href="#L110">110</a>                 System.out.println(<span class="jxr_string">"Read "</span> + scalar.getID() + <span class="jxr_string">":"</span> +
 <a class="jxr_linenumber" name="L111" href="#L111">111</a>                         client.getAsString(scalar.getID()));
@@ -150,6 +150,6 @@
 <a class="jxr_linenumber" name="L142" href="#L142">142</a> }
 </pre>
 <hr/>
-<div id="footer">Copyright &#169; 2009&#x2013;2015 <a href="http://www.waarp.it">Waarp</a>. All rights reserved.</div>
+<div id="footer">Copyright &#169; 2009&#x2013;2016 <a href="http://www.waarp.it">Waarp</a>. All rights reserved.</div>
 </body>
 </html>

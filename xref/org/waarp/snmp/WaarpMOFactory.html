@@ -55,7 +55,7 @@
 <a class="jxr_linenumber" name="L47" href="#L47">47</a>      <em class="jxr_javadoccomment">/**</em>
 <a class="jxr_linenumber" name="L48" href="#L48">48</a>  <em class="jxr_javadoccomment">     * To be setup to default Factory to be used or kept as null for default one</em>
 <a class="jxr_linenumber" name="L49" href="#L49">49</a>  <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L50" href="#L50">50</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <a href="../../../org/waarp/snmp/interf/WaarpInterfaceVariableFactory.html">WaarpInterfaceVariableFactory</a> factory = <strong class="jxr_keyword">null</strong>;
+<a class="jxr_linenumber" name="L50" href="#L50">50</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <a href="../../../org/waarp/snmp/interf/WaarpInterfaceVariableFactory.html">WaarpInterfaceVariableFactory</a> factory = <strong class="jxr_keyword">null</strong>;
 <a class="jxr_linenumber" name="L51" href="#L51">51</a>  
 <a class="jxr_linenumber" name="L52" href="#L52">52</a>      <em class="jxr_javadoccomment">/**</em>
 <a class="jxr_linenumber" name="L53" href="#L53">53</a>  <em class="jxr_javadoccomment">     * Default one</em>
@@ -103,10 +103,10 @@
 <a class="jxr_linenumber" name="L95" href="#L95">95</a>              <strong class="jxr_keyword">int</strong> mibLevel, <strong class="jxr_keyword">int</strong> entry) {
 <a class="jxr_linenumber" name="L96" href="#L96">96</a>          Variable <strong class="jxr_keyword">var</strong> = <strong class="jxr_keyword">null</strong>;
 <a class="jxr_linenumber" name="L97" href="#L97">97</a>          <a href="../../../org/waarp/snmp/interf/WaarpInterfaceVariableFactory.html">WaarpInterfaceVariableFactory</a> vf;
-<a class="jxr_linenumber" name="L98" href="#L98">98</a>          <strong class="jxr_keyword">if</strong> (factory == <strong class="jxr_keyword">null</strong>) {
+<a class="jxr_linenumber" name="L98" href="#L98">98</a>          <strong class="jxr_keyword">if</strong> (getFactory() == <strong class="jxr_keyword">null</strong>) {
 <a class="jxr_linenumber" name="L99" href="#L99">99</a>              vf = defaultFactory;
 <a class="jxr_linenumber" name="L100" href="#L100">100</a>         } <strong class="jxr_keyword">else</strong> {
-<a class="jxr_linenumber" name="L101" href="#L101">101</a>             vf = factory;
+<a class="jxr_linenumber" name="L101" href="#L101">101</a>             vf = getFactory();
 <a class="jxr_linenumber" name="L102" href="#L102">102</a>         }
 <a class="jxr_linenumber" name="L103" href="#L103">103</a>         <strong class="jxr_keyword">var</strong> = vf.getVariable(oid, type, mibLevel, entry);
 <a class="jxr_linenumber" name="L104" href="#L104">104</a>         <strong class="jxr_keyword">if</strong> (value != <strong class="jxr_keyword">null</strong>) {
@@ -209,9 +209,23 @@
 <a class="jxr_linenumber" name="L201" href="#L201">201</a>             }
 <a class="jxr_linenumber" name="L202" href="#L202">202</a>         }
 <a class="jxr_linenumber" name="L203" href="#L203">203</a>     }
-<a class="jxr_linenumber" name="L204" href="#L204">204</a> }
+<a class="jxr_linenumber" name="L204" href="#L204">204</a> 
+<a class="jxr_linenumber" name="L205" href="#L205">205</a>     <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L206" href="#L206">206</a> <em class="jxr_javadoccomment">     * @return the factory</em>
+<a class="jxr_linenumber" name="L207" href="#L207">207</a> <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="L208" href="#L208">208</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <a href="../../../org/waarp/snmp/interf/WaarpInterfaceVariableFactory.html">WaarpInterfaceVariableFactory</a> getFactory() {
+<a class="jxr_linenumber" name="L209" href="#L209">209</a>         <strong class="jxr_keyword">return</strong> factory;
+<a class="jxr_linenumber" name="L210" href="#L210">210</a>     }
+<a class="jxr_linenumber" name="L211" href="#L211">211</a> 
+<a class="jxr_linenumber" name="L212" href="#L212">212</a>     <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L213" href="#L213">213</a> <em class="jxr_javadoccomment">     * @param factory the factory to set</em>
+<a class="jxr_linenumber" name="L214" href="#L214">214</a> <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="L215" href="#L215">215</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">void</strong> setFactory(<a href="../../../org/waarp/snmp/interf/WaarpInterfaceVariableFactory.html">WaarpInterfaceVariableFactory</a> factory) {
+<a class="jxr_linenumber" name="L216" href="#L216">216</a>         WaarpMOFactory.factory = factory;
+<a class="jxr_linenumber" name="L217" href="#L217">217</a>     }
+<a class="jxr_linenumber" name="L218" href="#L218">218</a> }
 </pre>
 <hr/>
-<div id="footer">Copyright &#169; 2009&#x2013;2015 <a href="http://www.waarp.it">Waarp</a>. All rights reserved.</div>
+<div id="footer">Copyright &#169; 2009&#x2013;2016 <a href="http://www.waarp.it">Waarp</a>. All rights reserved.</div>
 </body>
 </html>
