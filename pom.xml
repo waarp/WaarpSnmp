@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <artifactId>WaarpSnmp</artifactId>
-  <version>3.0.5</version>
+  <version>3.0.6</version>
   <name>WaarpSnmp</name>
   <description>Waarp SNMP support through SNMP4J</description>
   <url>http://waarp.github.com/WaarpSnmp</url>
@@ -51,7 +51,7 @@
     <dependency>
         <groupId>Waarp</groupId>
         <artifactId>WaarpCommon</artifactId>
-        <version>3.0.10</version>
+        <version>3.0.11</version>
     </dependency>
     <dependency>
       <groupId>ch.qos.logback</groupId>
