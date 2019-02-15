@@ -28,6 +28,12 @@
         <ignoreVersion type="regex">2\.6\..+</ignoreVersion>
       </ignoreVersions>
     </rule>
+    <rule groupId="org.snmp4j" artifactId="*">
+      <ignoreVersions>
+        <ignoreVersion type="regex">2\.7\..+</ignoreVersion>
+        <ignoreVersion type="regex">3\.0\..+</ignoreVersion>
+      </ignoreVersions>
+    </rule>
     <rule groupId="org.mariadb.jdbc" artifactId="*">
       <ignoreVersions>
         <ignoreVersion type="regex">1\.2\..+</ignoreVersion>
