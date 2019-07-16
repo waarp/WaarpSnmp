@@ -31,7 +31,7 @@
     <rule groupId="org.snmp4j" artifactId="*">
       <ignoreVersions>
         <ignoreVersion type="regex">2\.7\..+</ignoreVersion>
-        <ignoreVersion type="regex">3\.0\..+</ignoreVersion>
+        <ignoreVersion type="regex">3\..+</ignoreVersion>
       </ignoreVersions>
     </rule>
     <rule groupId="org.mariadb.jdbc" artifactId="*">
