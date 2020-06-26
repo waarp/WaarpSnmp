@@ -20,7 +20,7 @@
 package org.waarp.snmp.test;
 
 import org.snmp4j.smi.OID;
-import org.waarp.snmp.interf.WaarpGauge32;
+import org.waarp.snmp.interf.WaarpCounter32;
 
 /**
  * Example of WaarpGauge32 Usage
@@ -28,7 +28,7 @@ import org.waarp.snmp.interf.WaarpGauge32;
  * @author Frederic Bregier
  */
 @SuppressWarnings("serial")
-public class ExampleImplGauge32 extends WaarpGauge32 {
+public class ExampleImplCounter32 extends WaarpCounter32 {
   public static final long STARTUP = 42;
 
   public OID oid;
@@ -38,7 +38,7 @@ public class ExampleImplGauge32 extends WaarpGauge32 {
   /**
    *
    */
-  public ExampleImplGauge32(OID oid) {
+  public ExampleImplCounter32(OID oid) {
     super();
     this.oid = oid;
   }
@@ -46,7 +46,7 @@ public class ExampleImplGauge32 extends WaarpGauge32 {
   /**
    *
    */
-  public ExampleImplGauge32(OID oid, long value) {
+  public ExampleImplCounter32(OID oid, long value) {
     super(value);
     this.oid = oid;
   }
